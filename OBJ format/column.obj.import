@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bviyf3oemt65y"
+path="res://.godot/imported/column.obj-c695f1982a6b2fb8c9fc3775f0be8c2d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/column.obj-c695f1982a6b2fb8c9fc3775f0be8c2d.mesh"]
+
+source_file="res://OBJ format/column.obj"
+dest_files=["res://.godot/imported/column.obj-c695f1982a6b2fb8c9fc3775f0be8c2d.mesh", "res://.godot/imported/column.obj-c695f1982a6b2fb8c9fc3775f0be8c2d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
