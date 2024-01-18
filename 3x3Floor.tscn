@@ -15,7 +15,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 shape = SubResource("BoxShape3D_21cex")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0028, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 mesh = ExtResource("1_7a86s")
 
 [node name="Floor2" type="MeshInstance3D" parent="."]

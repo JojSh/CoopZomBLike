@@ -16,43 +16,42 @@ background_color = Color(0.8, 0.729412, 0.964706, 1)
 [node name="Floor" type="Node3D" parent="."]
 
 [node name="3x3floor" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.00091, 0.00526023, 0.993395)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, 1)
 
 [node name="3x3floor2" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.999095, 0.00526023, 3.99339)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
 
 [node name="3x3floor3" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.0009, 0.00526023, -1.00661)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -1)
 
 [node name="3x3floor4" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-3.89278e-07, 0.00139309, 0.999999, -0.000248059, 0.999999, -0.00139309, -1, -0.000248059, -4.37113e-08, 4.0009, 0.00526023, 3.99339)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 4)
 
 [node name="3x3floor5" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.999095, 0.00526023, -4.00661)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, -4)
 
 [node name="3x3floor6" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0009, 0.00526023, -2.00661)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
 [node name="3x3floor7" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.00091, 0.00526023, 0.993395)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 1)
 
 [node name="3x3floor8" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.00091, 0.00526023, 1.99339)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 2)
 
 [node name="3x3floor9" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.0009, 0.00526023, -1.00661)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, -1)
 
 [node name="3x3floor10" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0009, 0.00526023, 3.99339)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
 
 [node name="3x3floor11" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00091, 0.00526023, -2.00661)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
 
 [node name="3x3floor12" parent="Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.0009, 0.00526023, -2.00661)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, -2)
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.357988, 0.389413, 0)
 script = ExtResource("2_qcnwt")
 
 [node name="Model" type="MeshInstance3D" parent="Player"]
@@ -63,7 +62,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, 0)
 shape = SubResource("BoxShape3D_2hl1u")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 3.82137e-15, -3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0.194119, 2.63719, -0.128494)
+transform = Transform3D(1, 1.67037e-22, 3.82137e-15, -3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0.194119, 2.63719, -0.128494)
 fov = 110.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
