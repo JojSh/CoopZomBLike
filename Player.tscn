@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwnpajm11fj01"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
+[ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_213eg"]
+[ext_resource type="ArrayMesh" uid="uid://cbwqb27evsvvj" path="res://knife_sharp.obj" id="3_gp2fg"]
+
+[sub_resource type="Animation" id="Animation_ixa7a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnifeSharp:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KnifeSharp:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.401426)]
+}
+
+[sub_resource type="Animation" id="Animation_y1y5t"]
+resource_name = "Slash"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KnifeSharp:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.1, 0, 0), Vector3(-0.103362, -0.151148, 0.0993156), Vector3(0.144297, -0.151148, 0.238471), Vector3(0.402077, -0.151148, 0.238471), Vector3(0.556856, -0.151148, 0.155708), Vector3(0.734473, -0.151148, 0.0595158)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KnifeSharp:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.401426), Vector3(-0.0497833, 1.0079, 1.40882), Vector3(-0.0497834, 1.45642, 1.40882), Vector3(-0.0497833, 1.93123, 1.40882), Vector3(-0.0497834, 2.16556, 1.40882), Vector3(-0.0497833, 2.35126, 1.40882)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5n7te"]
+_data = {
+"RESET": SubResource("Animation_ixa7a"),
+"Slash": SubResource("Animation_y1y5t")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
+size = Vector3(0.753491, 0.633039, 0.438799)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_q3yjm")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_213eg")
+
+[node name="WeaponHolder" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
+
+[node name="KnifeSharp" type="MeshInstance3D" parent="Model/WeaponHolder"]
+transform = Transform3D(9.20504, -3.90731, 0, 3.90731, 9.20505, 0, 0, 0, 10, 0, 0, 0)
+mesh = ExtResource("3_gp2fg")
+skeleton = NodePath("../../..")
+
+[node name="WeaponAnimator" type="AnimationPlayer" parent="Model/WeaponHolder"]
+libraries = {
+"": SubResource("AnimationLibrary_5n7te")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, 0)
+shape = SubResource("BoxShape3D_2hl1u")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 1.67037e-22, 3.82137e-15, -3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0.194119, 2.63719, -0.128494)
+fov = 110.0

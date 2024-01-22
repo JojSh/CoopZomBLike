@@ -1,19 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=6 format=3 uid="uid://wumlc1eyja2s"]
 
+[ext_resource type="PackedScene" uid="uid://dwnpajm11fj01" path="res://Player.tscn" id="1_4xt2p"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
-[ext_resource type="Script" path="res://Player.gd" id="2_qcnwt"]
-[ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="3_t1bj2"]
 [ext_resource type="PackedScene" uid="uid://dwixkm3sa7y25" path="res://WallCorner.tscn" id="4_r0see"]
 [ext_resource type="PackedScene" uid="uid://58fq0875qtau" path="res://Wall.tscn" id="5_ojn1r"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
-size = Vector3(0.753491, 0.633039, 0.438799)
 
 [sub_resource type="Environment" id="Environment_x1nbh"]
 background_mode = 1
 background_color = Color(0.8, 0.729412, 0.964706, 1)
 
 [node name="Main" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_4xt2p")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x1nbh")
 
 [node name="Floor" type="Node3D" parent="."]
 
@@ -52,23 +53,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
 
 [node name="3x3floor12" parent="Floor" instance=ExtResource("1_pm7yx")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, -2)
-
-[node name="Player" type="CharacterBody3D" parent="."]
-script = ExtResource("2_qcnwt")
-
-[node name="Model" type="MeshInstance3D" parent="Player"]
-mesh = ExtResource("3_t1bj2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, 0)
-shape = SubResource("BoxShape3D_2hl1u")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 1.67037e-22, 3.82137e-15, -3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 0.194119, 2.63719, -0.128494)
-fov = 110.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_x1nbh")
 
 [node name="Walls" type="Node3D" parent="."]
 
