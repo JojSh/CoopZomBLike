@@ -221,3 +221,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 skeleton = NodePath("../../..")
 
 [node name="OrcZomb" parent="." instance=ExtResource("5_il8pt")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 4.5, 6, 3)
