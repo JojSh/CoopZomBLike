@@ -1,18 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=7 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="PackedScene" uid="uid://dwnpajm11fj01" path="res://Player.tscn" id="1_4xt2p"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
 [ext_resource type="PackedScene" uid="uid://dwixkm3sa7y25" path="res://WallCorner.tscn" id="4_r0see"]
-[ext_resource type="Script" path="res://OrcZomb.gd" id="5_ejuvf"]
-[ext_resource type="ArrayMesh" uid="uid://df446x4xr7t7t" path="res://OBJ format/character-orc.obj" id="5_jhjux"]
+[ext_resource type="PackedScene" uid="uid://c4otta7ct55tq" path="res://OrcZomb.tscn" id="5_il8pt"]
 [ext_resource type="PackedScene" uid="uid://58fq0875qtau" path="res://Wall.tscn" id="5_ojn1r"]
 
 [sub_resource type="Environment" id="Environment_x1nbh"]
 background_mode = 1
 background_color = Color(0.8, 0.729412, 0.964706, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dw3ie"]
-size = Vector3(0.52109, 0.742128, 0.308016)
 
 [node name="Main" type="Node3D"]
 
@@ -224,14 +220,4 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 skeleton = NodePath("../../..")
 
-[node name="OrcZomb" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53954, 0, 0)
-script = ExtResource("5_ejuvf")
-
-[node name="Model" type="MeshInstance3D" parent="OrcZomb"]
-mesh = ExtResource("5_jhjux")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="OrcZomb"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00528955, 0.361817, 0.00880022)
-shape = SubResource("BoxShape3D_dw3ie")
+[node name="OrcZomb" parent="." instance=ExtResource("5_il8pt")]
