@@ -1,22 +1,28 @@
 extends CharacterBody3D
 
-var attackDistance : float = 2
-var attackRate : float = 1.0
+var attackDistance : float = 1.0
+var awarenessRadius : float = 5.0
 var moveSpeed : float = 2.0
 var gravity : float = 15.0
+var knockback = Vector3.ZERO
 
 @onready var player = get_node("/root/Main/Player")
 
 func _physics_process(delta):
 	var distanceToPlayer = position.distance_to(player.position)
+	var shouldFollowPlayer = distanceToPlayer < awarenessRadius # && distanceToPlayer > attackDistance
 
-	if distanceToPlayer > attackDistance:
+	if shouldFollowPlayer:
 		var direction = (player.position - position).normalized()
-		velocity.x = direction.x * moveSpeed
-		velocity.z = direction.z * moveSpeed
+		velocity.x = direction.x * moveSpeed + knockback.y
+		velocity.z = direction.z * moveSpeed + knockback.x
 
-		# Gravity
-		# add downward velocity equal to gravity * time since last _physics_process call
-		velocity.y -= gravity * delta
+	# Gravity
+	# add downward velocity equal to gravity * time since last _physics_process call
+	velocity.y -= gravity * delta
 
 	move_and_slide()
+	knockback = lerp(knockback, Vector3.ZERO, 0.1)
+
+func receive_shove (force, shove_direction):
+	knockback = shove_direction * force

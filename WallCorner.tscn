@@ -6,7 +6,6 @@
 size = Vector3(1, 2, 1)
 
 [node name="WallCorner" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
 mesh = ExtResource("1_avrqr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

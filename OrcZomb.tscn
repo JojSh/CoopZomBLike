@@ -4,10 +4,9 @@
 [ext_resource type="ArrayMesh" uid="uid://df446x4xr7t7t" path="res://OBJ format/character-orc.obj" id="2_74ri7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dw3ie"]
-size = Vector3(0.52109, 0.742128, 0.308016)
+size = Vector3(0.757033, 0.742128, 0.308016)
 
 [node name="OrcZomb" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53954, 0, 0)
 script = ExtResource("1_t5o8h")
 
 [node name="Model" type="MeshInstance3D" parent="."]

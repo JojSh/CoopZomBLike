@@ -13,6 +13,7 @@ background_color = Color(0.8, 0.729412, 0.964706, 1)
 [node name="Main" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_4xt2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.90405)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_x1nbh")
@@ -66,6 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4)
 skeleton = NodePath("../..")
 
 [node name="WallSWCorner" parent="Walls" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
 skeleton = NodePath("../..")
 
 [node name="WallSECorner" parent="Walls" instance=ExtResource("4_r0see")]
@@ -221,6 +223,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 skeleton = NodePath("../../..")
 
 [node name="OrcZomb" parent="." instance=ExtResource("5_il8pt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.90432, 0.000402927, 2.82105)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 4.5, 6, 3)
