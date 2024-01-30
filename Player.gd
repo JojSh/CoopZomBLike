@@ -53,5 +53,9 @@ func try_attack ():
 
 	weaponAnimation.play("Slash")
 
-	if attackRayCast.is_colliding() and attackRayCast.get_collider().has_method("receive_shove"):
-		attackRayCast.get_collider().receive_shove(shove_force, facing_vector3)
+	if attackRayCast.is_colliding():
+		var target = attackRayCast.get_collider()
+		if target.has_method("receive_shove"):
+			target.receive_shove(shove_force, facing_vector3)
+		if target.has_method("receive_damage"):
+			target.receive_damage(1)

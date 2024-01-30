@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var health : int = 3
 var attackDistance : float = 1.0
 var awarenessRadius : float = 5.0
 var moveSpeed : float = 2.0
@@ -28,6 +29,10 @@ func _physics_process(delta):
 
 	move_and_slide()
 	knockback = lerp(knockback, Vector3.ZERO, 0.1)
+
+func receive_damage (damage):
+	health -= damage
+	if health <= 0: queue_free()
 
 func receive_shove (force, shove_direction):
 	knockback = shove_direction * force
