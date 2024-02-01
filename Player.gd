@@ -5,6 +5,7 @@ const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var health_points : int = 3
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = 10.0
@@ -46,11 +47,6 @@ func _physics_process(delta):
 		model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
 
 func try_attack ():
-#	if Time.get_ticks_msec() - lastAttackTime < attackRate * 1000: # 1000ms in 1s
-#		return
-#	lastAttackTime = Time.get_ticks_msec()
-#	weaponAnimation.stop()
-
 	weaponAnimation.play("Slash")
 
 	if attackRayCast.is_colliding():
@@ -59,3 +55,8 @@ func try_attack ():
 			target.receive_shove(shove_force, facing_vector3)
 		if target.has_method("receive_damage"):
 			target.receive_damage(1)
+
+func receive_damage (damage):
+	health_points -= damage
+	print("Ouch. I have ", health_points, " HP left now!")
+	if health_points <= 0: get_tree().reload_current_scene()

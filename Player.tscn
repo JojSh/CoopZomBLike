@@ -79,7 +79,7 @@ mesh = ExtResource("2_213eg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
 
 [node name="KnifeSharp" type="MeshInstance3D" parent="Model/WeaponHolder"]
-transform = Transform3D(9.20504, -3.90731, 0, 3.90731, 9.20505, 0, 0, 0, 10, 0, 0, -0.110477)
+transform = Transform3D(9.99999, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -0.1)
 mesh = ExtResource("3_gp2fg")
 skeleton = NodePath("../../..")
 

@@ -1,15 +1,24 @@
 extends CharacterBody3D
 
-var health : int = 3
+var health_points : int = 3
 var attackDistance : float = 1.0
 var awarenessRadius : float = 5.0
 var moveSpeed : float = 2.0
 var gravity : float = 15.0
 var knockback = Vector3.ZERO
 
+var attackRate : float = 1.0
+
+@onready var timer = get_node("Timer")
 @onready var player = get_node("/root/Main/Player")
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
+@onready var attackRayCast = get_node("Model/AttackRayCast")
+
+func _ready () :
+	#set the timer wait time
+	timer.wait_time = attackRate # see if this can be timer.set_wait_time(attackRate)
+	timer.start()
 
 func _physics_process(delta):
 	var distanceToPlayer = position.distance_to(player.position)
@@ -23,10 +32,6 @@ func _physics_process(delta):
 		
 		var facing_angle = Vector2(direction.z, direction.x).angle()
 		model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
-		
-		if distanceToPlayer < attackDistance:
-			print("Im going to atack!")
-			weaponAnimation.play("Slash")
 
 	# Gravity
 	# add downward velocity equal to gravity * time since last _physics_process call
@@ -36,8 +41,15 @@ func _physics_process(delta):
 	knockback = lerp(knockback, Vector3.ZERO, 0.1)
 
 func receive_damage (damage):
-	health -= damage
-	if health <= 0: queue_free()
+	health_points -= damage
+	print("Enemy has ", health_points, " HP left now.")
+	if health_points <= 0: queue_free()
 
 func receive_shove (force, shove_direction):
 	knockback = shove_direction * force
+
+func _on_timer_timeout():
+	if position.distance_to(player.position) <= attackDistance:
+		weaponAnimation.stop()
+		weaponAnimation.play("Slash")
+		player.receive_damage(1)

@@ -95,3 +95,7 @@ transform = Transform3D(40, 0, 0, 0, -4.37114e-08, 10, 0, -1, -4.37114e-07, 0, 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00528955, 0.361817, 0.00880022)
 shape = SubResource("BoxShape3D_dw3ie")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
