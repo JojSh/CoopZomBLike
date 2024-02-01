@@ -9,6 +9,7 @@ var knockback = Vector3.ZERO
 
 @onready var player = get_node("/root/Main/Player")
 @onready var model : MeshInstance3D = get_node("Model")
+@onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
 
 func _physics_process(delta):
 	var distanceToPlayer = position.distance_to(player.position)
@@ -22,6 +23,10 @@ func _physics_process(delta):
 		
 		var facing_angle = Vector2(direction.z, direction.x).angle()
 		model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
+		
+		if distanceToPlayer < attackDistance:
+			print("Im going to atack!")
+			weaponAnimation.play("Slash")
 
 	# Gravity
 	# add downward velocity equal to gravity * time since last _physics_process call
