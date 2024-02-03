@@ -5,7 +5,8 @@ const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var health_points : int = 3
+var current_hp : int = 10
+var max_hp : int = 10
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = 10.0
@@ -13,6 +14,10 @@ var shove_force : float = 10.0
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
 @onready var attackRayCast = get_node("Model/AttackRayCast")
 @onready var model : MeshInstance3D = get_node("Model")
+@onready var ui = get_node("/root/Main/CanvasLayer/UI")
+
+func _ready():
+	ui.update_health_bar(current_hp, max_hp)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -57,6 +62,7 @@ func try_attack ():
 			target.receive_damage(1)
 
 func receive_damage (damage):
-	health_points -= damage
-	print("Ouch. I have ", health_points, " HP left now!")
-	if health_points <= 0: get_tree().reload_current_scene()
+	current_hp -= damage
+	print("Ouch. I have ", current_hp, " HP left now!")
+	ui.update_health_bar(current_hp, max_hp)
+	if current_hp <= 0: get_tree().reload_current_scene()
