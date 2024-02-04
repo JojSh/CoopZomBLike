@@ -1,12 +1,12 @@
 extends CharacterBody3D
 
 var health_points : int = 3
+var max_health : int = 3
 var attackDistance : float = 1.0
 var awarenessRadius : float = 5.0
 var moveSpeed : float = 2.0
 var gravity : float = 15.0
 var knockback = Vector3.ZERO
-
 var attackRate : float = 1.0
 
 @onready var timer = get_node("Timer")
@@ -17,6 +17,7 @@ var attackRate : float = 1.0
 
 func _ready () :
 	#set the timer wait time
+	$HealthBar3D.update_health_bar(health_points, max_health)
 	timer.wait_time = attackRate # see if this can be timer.set_wait_time(attackRate)
 	timer.start()
 
@@ -43,6 +44,7 @@ func _physics_process(delta):
 func receive_damage (damage):
 	health_points -= damage
 	print("Enemy has ", health_points, " HP left now.")
+	$HealthBar3D.update_health_bar(health_points, max_health)
 	if health_points <= 0: queue_free()
 
 func receive_shove (force, shove_direction):

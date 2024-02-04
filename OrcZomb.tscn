@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4otta7ct55tq"]
+[gd_scene load_steps=11 format=3 uid="uid://c4otta7ct55tq"]
 
 [ext_resource type="Script" path="res://OrcZomb.gd" id="1_t5o8h"]
 [ext_resource type="ArrayMesh" uid="uid://df446x4xr7t7t" path="res://OBJ format/character-orc.obj" id="2_74ri7"]
 [ext_resource type="ArrayMesh" uid="uid://cexhyqewatpn3" path="res://chopstick.obj" id="3_qwdqt"]
+[ext_resource type="PackedScene" uid="uid://ctdrx78dnbnlv" path="res://UIHealthBar.tscn" id="4_r660k"]
+[ext_resource type="Script" path="res://HealthBar3D.gd" id="4_tgf0f"]
 
 [sub_resource type="Animation" id="Animation_ixa7a"]
 length = 0.001
@@ -69,6 +71,8 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_dw3ie"]
 size = Vector3(0.757033, 0.742128, 0.308016)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_6fcd1"]
+
 [node name="OrcZomb" type="CharacterBody3D"]
 script = ExtResource("1_t5o8h")
 
@@ -97,5 +101,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00528955, 0.361817, 0.00880
 shape = SubResource("BoxShape3D_dw3ie")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="HealthBar3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.2, -0.4)
+billboard = 1
+texture = SubResource("ViewportTexture_6fcd1")
+script = ExtResource("4_tgf0f")
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar3D"]
+transparent_bg = true
+size = Vector2i(212, 36)
+
+[node name="Background" parent="HealthBar3D/SubViewport" instance=ExtResource("4_r660k")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

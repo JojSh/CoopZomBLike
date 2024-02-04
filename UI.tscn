@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmh14ogsdbhgt"]
 
 [ext_resource type="Script" path="res://UI.gd" id="1_jb7tr"]
-[ext_resource type="Texture2D" uid="uid://cncex1snh6vfw" path="res://UI_Square.png" id="2_q83aj"]
+[ext_resource type="PackedScene" uid="uid://ctdrx78dnbnlv" path="res://UIHealthBar.tscn" id="2_5spns"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -10,23 +10,9 @@ offset_right = 212.0
 offset_bottom = 32.0
 script = ExtResource("1_jb7tr")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" parent="." instance=ExtResource("2_5spns")]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 208.0
-offset_bottom = 32.0
-color = Color(0.196078, 0.196078, 0.196078, 1)
-
-[node name="HealthBar" type="TextureProgressBar" parent="Background"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 202.0
-offset_bottom = 26.0
-value = 50.0
-nine_patch_stretch = true
-texture_under = ExtResource("2_q83aj")
-texture_progress = ExtResource("2_q83aj")
-tint_under = Color(0.380392, 0.380392, 0.380392, 1)
-tint_progress = Color(0.0117647, 0.788235, 0, 1)
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 204.0
+offset_bottom = 28.0
