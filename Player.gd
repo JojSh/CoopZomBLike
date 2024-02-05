@@ -12,6 +12,7 @@ var facing_vector3 : Vector3
 var shove_force : float = 10.0
 
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
+@onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
 @onready var attackRayCast = get_node("Model/AttackRayCast")
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var ui = get_node("/root/Main/CanvasLayer/UI")
@@ -64,5 +65,7 @@ func try_attack ():
 func receive_damage (damage):
 	current_hp -= damage
 	print("Ouch. I have ", current_hp, " HP left now!")
+	showDamageAnimation.stop()
+	showDamageAnimation.play("show_damage")
 	ui.update_health_bar(current_hp, max_hp)
 	if current_hp <= 0: get_tree().reload_current_scene()
