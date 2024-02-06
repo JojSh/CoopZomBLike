@@ -123,8 +123,9 @@ libraries = {
 [node name="WeaponHolder" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
 
-[node name="KnifeSharp" type="MeshInstance3D" parent="Model/WeaponHolder"]
+[node name="Knife" type="MeshInstance3D" parent="Model/WeaponHolder"]
 transform = Transform3D(9.99999, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -0.1)
+visible = false
 mesh = ExtResource("3_gp2fg")
 skeleton = NodePath("../../..")
 

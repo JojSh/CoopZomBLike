@@ -11,5 +11,5 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.has_method("equip_item"):
-		body.equip_item("knife")
+		body.equip_item("Knife")
 		queue_free()

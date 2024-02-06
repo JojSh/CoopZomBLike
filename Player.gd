@@ -10,7 +10,10 @@ var max_hp : int = 10
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = 10.0
+var attack_power : int = 0
+var equipped : String
 
+@onready var weaponHolder = get_node("Model/WeaponHolder")
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
 @onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
 @onready var attackRayCast = get_node("Model/AttackRayCast")
@@ -59,8 +62,8 @@ func try_attack ():
 		var target = attackRayCast.get_collider()
 		if target.has_method("receive_shove"):
 			target.receive_shove(shove_force, facing_vector3)
-		if target.has_method("receive_damage"):
-			target.receive_damage(1)
+		if not equipped.is_empty() and target.has_method("receive_damage"):
+			target.receive_damage(attack_power)
 
 func receive_damage (damage):
 	current_hp -= damage
@@ -71,3 +74,11 @@ func receive_damage (damage):
 	
 func equip_item (item):
 	print("Ive found a ", item)
+# should be a node with .name property, as well as .shove_force and .damage ?
+	equipped = item
+	weaponHolder.get_node(item).visible = true
+#hard coded for now
+	shove_force = 5.0
+	attack_power = 1
+	
+	
