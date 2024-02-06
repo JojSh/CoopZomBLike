@@ -68,3 +68,6 @@ func receive_damage (damage):
 	showDamageAnimation.play("show_damage")
 	ui.update_health_bar(current_hp, max_hp)
 	if current_hp <= 0: get_tree().reload_current_scene()
+	
+func equip_item (item):
+	print("Ive found a ", item)
