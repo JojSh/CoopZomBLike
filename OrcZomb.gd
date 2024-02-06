@@ -13,6 +13,7 @@ var attackRate : float = 1.0
 @onready var player = get_node("/root/Main/Player")
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
+@onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
 @onready var attackRayCast = get_node("Model/AttackRayCast")
 
 func _ready () :
@@ -43,7 +44,8 @@ func _physics_process(delta):
 
 func receive_damage (damage):
 	health_points -= damage
-	print("Enemy has ", health_points, " HP left now.")
+	showDamageAnimation.stop()
+	showDamageAnimation.play("show_damage")
 	$HealthBar3D.update_health_bar(health_points, max_health)
 	if health_points <= 0: queue_free()
 

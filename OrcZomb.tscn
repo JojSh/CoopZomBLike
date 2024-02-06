@@ -1,10 +1,50 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4otta7ct55tq"]
+[gd_scene load_steps=15 format=3 uid="uid://c4otta7ct55tq"]
 
 [ext_resource type="Script" path="res://OrcZomb.gd" id="1_t5o8h"]
 [ext_resource type="ArrayMesh" uid="uid://df446x4xr7t7t" path="res://OBJ format/character-orc.obj" id="2_74ri7"]
 [ext_resource type="ArrayMesh" uid="uid://cexhyqewatpn3" path="res://chopstick.obj" id="3_qwdqt"]
 [ext_resource type="PackedScene" uid="uid://ctdrx78dnbnlv" path="res://UIHealthBar.tscn" id="4_r660k"]
 [ext_resource type="Script" path="res://HealthBar3D.gd" id="4_tgf0f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbcbc"]
+albedo_color = Color(0.588235, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_xn0am"]
+resource_name = "show_damage"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, SubResource("StandardMaterial3D_wbcbc"), null, SubResource("StandardMaterial3D_wbcbc"), null]
+}
+
+[sub_resource type="Animation" id="Animation_2er0k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2moqt"]
+_data = {
+"RESET": SubResource("Animation_2er0k"),
+"show_damage": SubResource("Animation_xn0am")
+}
 
 [sub_resource type="Animation" id="Animation_ixa7a"]
 length = 0.001
@@ -79,6 +119,11 @@ script = ExtResource("1_t5o8h")
 [node name="Model" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_74ri7")
 skeleton = NodePath("../..")
+
+[node name="ShowDamageAnimator" type="AnimationPlayer" parent="Model"]
+libraries = {
+"": SubResource("AnimationLibrary_2moqt")
+}
 
 [node name="WeaponHolder" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)

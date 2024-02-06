@@ -64,7 +64,6 @@ func try_attack ():
 
 func receive_damage (damage):
 	current_hp -= damage
-	print("Ouch. I have ", current_hp, " HP left now!")
 	showDamageAnimation.stop()
 	showDamageAnimation.play("show_damage")
 	ui.update_health_bar(current_hp, max_hp)
