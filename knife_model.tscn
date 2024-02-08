@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6ytqcc418x26"]
+
+[ext_resource type="ArrayMesh" uid="uid://cbwqb27evsvvj" path="res://knife_sharp.obj" id="1_oy6nw"]
+
+[node name="KnifeModel" type="MeshInstance3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = ExtResource("1_oy6nw")
+skeleton = NodePath("../..")

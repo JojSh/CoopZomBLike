@@ -1,9 +1,8 @@
 extends Area3D
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
+@export var item_name : String = "Knife"
+@export var attack_power : float = 1.0
+@export var shove_force : float = 5.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -11,5 +10,5 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.has_method("equip_item"):
-		body.equip_item("Knife")
+		body.equip_item(self)
 		queue_free()

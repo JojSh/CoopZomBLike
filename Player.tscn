@@ -4,6 +4,21 @@
 [ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_213eg"]
 [ext_resource type="ArrayMesh" uid="uid://cbwqb27evsvvj" path="res://knife_sharp.obj" id="3_gp2fg"]
 
+[sub_resource type="Animation" id="Animation_2er0k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbcbc"]
 albedo_color = Color(0.588235, 0, 0, 1)
 
@@ -21,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [null, SubResource("StandardMaterial3D_wbcbc"), null, SubResource("StandardMaterial3D_wbcbc"), null]
-}
-
-[sub_resource type="Animation" id="Animation_2er0k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material_overlay")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2moqt"]
@@ -123,12 +123,6 @@ libraries = {
 [node name="WeaponHolder" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
 
-[node name="Knife" type="MeshInstance3D" parent="Model/WeaponHolder"]
-transform = Transform3D(9.99999, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -0.1)
-visible = false
-mesh = ExtResource("3_gp2fg")
-skeleton = NodePath("../../..")
-
 [node name="WeaponAnimator" type="AnimationPlayer" parent="Model/WeaponHolder"]
 libraries = {
 "": SubResource("AnimationLibrary_5n7te")
@@ -140,3 +134,11 @@ transform = Transform3D(35, 0, 0, 0, -3.0598e-08, 2, 0, -0.7, -8.74228e-08, 0, 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, 0)
 shape = SubResource("BoxShape3D_2hl1u")
+
+[node name="CollectibleBank" type="Node3D" parent="."]
+
+[node name="KnifeTest" type="MeshInstance3D" parent="CollectibleBank"]
+transform = Transform3D(9.99999, 0, 0, 0, 10, 0, 0, 0, 10, -0.303229, 0.461609, 0.03322)
+visible = false
+mesh = ExtResource("3_gp2fg")
+skeleton = NodePath("../..")

@@ -18,7 +18,8 @@ var equipped : String
 @onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
 @onready var attackRayCast = get_node("Model/AttackRayCast")
 @onready var model : MeshInstance3D = get_node("Model")
-@onready var ui = get_node("/root/Main/CanvasLayer/UI")
+@onready var ui = get_node("/root/Main/UICanvasLayer/UI")
+@onready var knife_model = load("res://knife_model.tscn")
 
 func _ready():
 	ui.update_health_bar(current_hp, max_hp)
@@ -60,8 +61,10 @@ func try_attack ():
 
 	if attackRayCast.is_colliding():
 		var target = attackRayCast.get_collider()
+
 		if target.has_method("receive_shove"):
 			target.receive_shove(shove_force, facing_vector3)
+
 		if not equipped.is_empty() and target.has_method("receive_damage"):
 			target.receive_damage(attack_power)
 
@@ -70,15 +73,11 @@ func receive_damage (damage):
 	showDamageAnimation.stop()
 	showDamageAnimation.play("show_damage")
 	ui.update_health_bar(current_hp, max_hp)
+
 	if current_hp <= 0: get_tree().reload_current_scene()
 	
 func equip_item (item):
-	print("Ive found a ", item)
-# should be a node with .name property, as well as .shove_force and .damage ?
-	equipped = item
-	weaponHolder.get_node(item).visible = true
-#hard coded for now
-	shove_force = 5.0
-	attack_power = 1
-	
-	
+	equipped = item.item_name
+	weaponHolder.add_child(knife_model.instantiate())
+	shove_force = item.shove_force
+	attack_power = item.attack_power
