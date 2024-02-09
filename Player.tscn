@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwnpajm11fj01"]
+[gd_scene load_steps=17 format=3 uid="uid://dwnpajm11fj01"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
 [ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_213eg"]
-[ext_resource type="ArrayMesh" uid="uid://cbwqb27evsvvj" path="res://knife_sharp.obj" id="3_gp2fg"]
 
 [sub_resource type="Animation" id="Animation_2er0k"]
 length = 0.001
@@ -42,6 +41,72 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_2er0k"),
 "show_damage": SubResource("Animation_xn0am")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_qo1qq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4yoq"]
+albedo_color = Color(0.776471, 0.541176, 0.392157, 1)
+
+[sub_resource type="Animation" id="Animation_nr4da"]
+resource_name = "Shove"
+step = 0.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShovingHandsModel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.01, 0.24, 0.27),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.35, -0.1), Vector3(0, 0.35, -0.05), Vector3(0, 0.35, 0), Vector3(0, 0.35, 0.05), Vector3(0, 0.35, 0.1), Vector3(0, 0.35, 0.15), Vector3(0, 0.35, 0.1), Vector3(0, 0.35, 0.05), Vector3(0, 0.35, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1d47q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShovingHandsModel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.35, -0.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x8fn7"]
+_data = {
+"RESET": SubResource("Animation_1d47q"),
+"Shove": SubResource("Animation_nr4da")
 }
 
 [sub_resource type="Animation" id="Animation_ixa7a"]
@@ -106,6 +171,9 @@ _data = {
 "Slash": SubResource("Animation_y1y5t")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0osj6"]
+height = 1.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
 size = Vector3(0.753491, 0.633039, 0.438799)
 
@@ -120,6 +188,20 @@ libraries = {
 "": SubResource("AnimationLibrary_2moqt")
 }
 
+[node name="ShovingHands" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.1)
+
+[node name="ShovingHandsModel" type="MeshInstance3D" parent="Model/ShovingHands"]
+transform = Transform3D(0.385, 0, 0, 0, 0.105, 0, 0, 0, 0.12, 0, 0, 0.221)
+visible = false
+mesh = SubResource("BoxMesh_qo1qq")
+surface_material_override/0 = SubResource("StandardMaterial3D_v4yoq")
+
+[node name="ShoveAnimator" type="AnimationPlayer" parent="Model/ShovingHands"]
+libraries = {
+"": SubResource("AnimationLibrary_x8fn7")
+}
+
 [node name="WeaponHolder" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
 
@@ -128,17 +210,10 @@ libraries = {
 "": SubResource("AnimationLibrary_5n7te")
 }
 
-[node name="AttackRayCast" type="RayCast3D" parent="Model"]
-transform = Transform3D(35, 0, 0, 0, -3.0598e-08, 2, 0, -0.7, -8.74228e-08, 0, 0.3, 0.05)
+[node name="AttackShapeCast" type="ShapeCast3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.383518, 1.28274)
+shape = SubResource("CapsuleShape3D_0osj6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, 0)
 shape = SubResource("BoxShape3D_2hl1u")
-
-[node name="CollectibleBank" type="Node3D" parent="."]
-
-[node name="KnifeTest" type="MeshInstance3D" parent="CollectibleBank"]
-transform = Transform3D(9.99999, 0, 0, 0, 10, 0, 0, 0, 10, -0.303229, 0.461609, 0.03322)
-visible = false
-mesh = ExtResource("3_gp2fg")
-skeleton = NodePath("../..")

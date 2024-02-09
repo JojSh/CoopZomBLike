@@ -11,12 +11,13 @@ var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = 10.0
 var attack_power : int = 0
-var equipped : String
+var weapon_equipped : bool = false
 
 @onready var weaponHolder = get_node("Model/WeaponHolder")
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
+@onready var shoveAnimation = get_node("Model/ShovingHands/ShoveAnimator")
 @onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
-@onready var attackRayCast = get_node("Model/AttackRayCast")
+@onready var attackRayCast = get_node("Model/AttackShapeCast")
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var ui = get_node("/root/Main/UICanvasLayer/UI")
 @onready var knife_model = load("res://knife_model.tscn")
@@ -57,15 +58,21 @@ func _physics_process(delta):
 		model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
 
 func try_attack ():
-	weaponAnimation.play("Slash")
+	if weapon_equipped:
+		weaponAnimation.stop()
+		weaponAnimation.play("Slash")
+	else:
+		shoveAnimation.stop()
+		shoveAnimation.play("Shove")
+		
 
 	if attackRayCast.is_colliding():
-		var target = attackRayCast.get_collider()
+		var target = attackRayCast.get_collider(0)
 
 		if target.has_method("receive_shove"):
 			target.receive_shove(shove_force, facing_vector3)
 
-		if not equipped.is_empty() and target.has_method("receive_damage"):
+		if weapon_equipped and target.has_method("receive_damage"):
 			target.receive_damage(attack_power)
 
 func receive_damage (damage):
@@ -77,7 +84,7 @@ func receive_damage (damage):
 	if current_hp <= 0: get_tree().reload_current_scene()
 	
 func equip_item (item):
-	equipped = item.item_name
+	weapon_equipped = true
 	weaponHolder.add_child(knife_model.instantiate())
 	shove_force = item.shove_force
 	attack_power = item.attack_power
