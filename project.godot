@@ -15,6 +15,11 @@ run/main_scene="res://Area1.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=2304
+window/size/viewport_height=1296
+
 [filesystem]
 
 import/fbx/enabled=false

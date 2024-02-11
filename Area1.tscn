@@ -1,12 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=12 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="PackedScene" uid="uid://dwnpajm11fj01" path="res://Player.tscn" id="1_4xt2p"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
+[ext_resource type="Script" path="res://GameMenu.gd" id="2_avs84"]
+[ext_resource type="Script" path="res://GameOverMenu.gd" id="3_3rwnw"]
 [ext_resource type="PackedScene" uid="uid://dwixkm3sa7y25" path="res://WallCorner.tscn" id="4_r0see"]
 [ext_resource type="PackedScene" uid="uid://c4otta7ct55tq" path="res://OrcZomb.tscn" id="5_il8pt"]
 [ext_resource type="PackedScene" uid="uid://58fq0875qtau" path="res://Wall.tscn" id="5_ojn1r"]
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://UI.tscn" id="6_e6gqo"]
 [ext_resource type="PackedScene" uid="uid://dq6fppujtmwki" path="res://knife_collectible.tscn" id="7_1k1lv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i4qa8"]
+font_size = 48
 
 [sub_resource type="Environment" id="Environment_x1nbh"]
 background_mode = 1
@@ -16,11 +21,117 @@ background_color = Color(0.8, 0.729412, 0.964706, 1)
 
 [node name="UICanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="UICanvasLayer" instance=ExtResource("6_e6gqo")]
+[node name="HUD" parent="UICanvasLayer" instance=ExtResource("6_e6gqo")]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 232.0
 offset_bottom = 52.0
+
+[node name="GameStartMenu" type="Control" parent="UICanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_avs84")
+
+[node name="Background" type="ColorRect" parent="UICanvasLayer/GameStartMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.160784, 0, 0.8, 1)
+
+[node name="TitleLabel" type="Label" parent="UICanvasLayer/GameStartMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -641.0
+offset_right = 158.0
+offset_bottom = -455.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OrC ZoMbZ"
+label_settings = SubResource("LabelSettings_i4qa8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="UICanvasLayer/GameStartMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -15.5
+offset_right = 23.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Start"
+
+[node name="GameOverMenu" type="Control" parent="UICanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_3rwnw")
+
+[node name="Background" type="ColorRect" parent="UICanvasLayer/GameOverMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341176, 0.137255, 0.145098, 1)
+
+[node name="TitleLabel" type="Label" parent="UICanvasLayer/GameOverMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -641.0
+offset_right = 158.0
+offset_bottom = -455.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game over.
+Cri evri tim :'("
+label_settings = SubResource("LabelSettings_i4qa8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMainMenuButton" type="Button" parent="UICanvasLayer/GameOverMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -15.5
+offset_right = 23.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Return to main menu"
 
 [node name="Player" parent="." instance=ExtResource("1_4xt2p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.90405)
@@ -239,3 +350,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.90432, 0.000402927, 2.82105
 transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 4.5, 6, 3)
 
 [node name="KnifeCollectible" parent="." instance=ExtResource("7_1k1lv")]
+
+[connection signal="pressed" from="UICanvasLayer/GameStartMenu/StartButton" to="UICanvasLayer/GameStartMenu" method="_on_start_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/GameOverMenu/BackToMainMenuButton" to="UICanvasLayer/GameOverMenu" method="_on_start_button_pressed"]
+[connection signal="game_over" from="Player" to="UICanvasLayer/GameOverMenu" method="_on_player_game_over"]
