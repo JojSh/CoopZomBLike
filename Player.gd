@@ -5,7 +5,7 @@ const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 2
+var current_hp : int = 10
 var max_hp : int = 10
 var facing_angle : float
 var facing_vector3 : Vector3

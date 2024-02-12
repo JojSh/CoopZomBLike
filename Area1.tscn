@@ -117,7 +117,7 @@ label_settings = SubResource("LabelSettings_i4qa8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackToMainMenuButton" type="Button" parent="UICanvasLayer/GameOverMenu"]
+[node name="BackToMenuButton" type="Button" parent="UICanvasLayer/GameOverMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -352,5 +352,5 @@ transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 4.
 [node name="KnifeCollectible" parent="." instance=ExtResource("7_1k1lv")]
 
 [connection signal="pressed" from="UICanvasLayer/GameStartMenu/StartButton" to="UICanvasLayer/GameStartMenu" method="_on_start_button_pressed"]
-[connection signal="pressed" from="UICanvasLayer/GameOverMenu/BackToMainMenuButton" to="UICanvasLayer/GameOverMenu" method="_on_start_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/GameOverMenu/BackToMenuButton" to="UICanvasLayer/GameOverMenu" method="_on_start_button_pressed"]
 [connection signal="game_over" from="Player" to="UICanvasLayer/GameOverMenu" method="_on_player_game_over"]

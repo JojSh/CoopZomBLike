@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://OrcZomb.gd" id="1_t5o8h"]
 [ext_resource type="ArrayMesh" uid="uid://df446x4xr7t7t" path="res://OBJ format/character-orc.obj" id="2_74ri7"]
 [ext_resource type="ArrayMesh" uid="uid://cexhyqewatpn3" path="res://chopstick.obj" id="3_qwdqt"]
+[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="3_v0feu"]
 [ext_resource type="PackedScene" uid="uid://ctdrx78dnbnlv" path="res://UIHealthBar.tscn" id="4_r660k"]
 [ext_resource type="Script" path="res://HealthBar3D.gd" id="4_tgf0f"]
 
@@ -11,7 +12,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:material_overlay")
+tracks/0/path = NodePath(".:material_override")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,23 +22,20 @@ tracks/0/keys = {
 "values": [null]
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbcbc"]
-albedo_color = Color(0.588235, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_xn0am"]
 resource_name = "show_damage"
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:material_overlay")
+tracks/0/path = NodePath(".:material_override")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [null, SubResource("StandardMaterial3D_wbcbc"), null, SubResource("StandardMaterial3D_wbcbc"), null]
+"values": [null, ExtResource("3_v0feu"), null, ExtResource("3_v0feu"), null]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2moqt"]
