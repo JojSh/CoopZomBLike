@@ -33,7 +33,7 @@ func _physics_process(delta):
 		velocity.z = direction.z * moveSpeed + knockback.x
 		
 		var facing_angle = Vector2(direction.z, direction.x).angle()
-		model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
+		self.rotation.y = lerp_angle(self.rotation.y, facing_angle, 0.5)
 
 	# Gravity
 	# add downward velocity equal to gravity * time since last _physics_process call
