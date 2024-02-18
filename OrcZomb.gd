@@ -33,6 +33,8 @@ func _ready () :
 	call_deferred("actor_setup")
 
 func _physics_process(delta):
+	#	if navigation_agent.is_navigation_finished():
+#		return
 	var distanceToPlayer = position.distance_to(player.position)
 	var shouldFollowPlayer = distanceToPlayer < awarenessRadius # && distanceToPlayer > attack_distance
 
