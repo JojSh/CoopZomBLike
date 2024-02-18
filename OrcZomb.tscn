@@ -157,4 +157,6 @@ size = Vector2i(212, 36)
 
 [node name="Background" parent="HealthBar3D/SubViewport" instance=ExtResource("4_r660k")]
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
