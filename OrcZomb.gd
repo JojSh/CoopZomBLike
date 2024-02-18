@@ -45,14 +45,19 @@ func _physics_process(delta):
 		set_movement_target(player.global_position)
 
 		velocity = current_agent_position.direction_to(next_path_position) * move_speed
-		
+		velocity.x += knockback.y
+		velocity.z += knockback.x
+	
 		var direction = (next_path_position - position).normalized()
-
 		var facing_angle = Vector2(direction.z, direction.x).angle()
+
 		self.rotation.y = lerp_angle(self.rotation.y, facing_angle, 0.5)
 
 	# Gravity
 	# add downward velocity equal to gravity * time since last _physics_process call
+	
+
+
 	velocity.y -= gravity * delta
 
 	move_and_slide()

@@ -158,6 +158,15 @@ transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 4.
 [node name="OrcZomb" parent="Enemies" instance=ExtResource("5_il8pt")]
 transform = Transform3D(-0.0604039, 0, -0.998174, 0, 1, 0, 0.998174, 0, -0.0604039, 12.6957, 0.000402927, -2.22418)
 
+[node name="OrcZomb2" parent="Enemies" instance=ExtResource("5_il8pt")]
+transform = Transform3D(-0.0604039, 0, -0.998174, 0, 1, 0, 0.998174, 0, -0.0604039, 12.7414, -0.00474215, 4.25007)
+
+[node name="OrcZomb3" parent="Enemies" instance=ExtResource("5_il8pt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.14244, -0.000151158, -2.4924)
+
+[node name="OrcZomb4" parent="Enemies" instance=ExtResource("5_il8pt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.15987, -0.00612116, 5.01784)
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_wtsvp")
 
@@ -372,10 +381,6 @@ skeleton = NodePath("../../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 skeleton = NodePath("../../../..")
 
-[node name="Wall5" parent="NavigationRegion3D/Walls/WestWall" instance=ExtResource("5_ojn1r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-skeleton = NodePath("../../../..")
-
 [node name="Wall6" parent="NavigationRegion3D/Walls/WestWall" instance=ExtResource("5_ojn1r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 skeleton = NodePath("../../../..")
@@ -393,10 +398,6 @@ skeleton = NodePath("../../../..")
 
 [node name="Wall2" parent="NavigationRegion3D/Walls/EastWall" instance=ExtResource("5_ojn1r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-skeleton = NodePath("../../../..")
-
-[node name="Wall3" parent="NavigationRegion3D/Walls/EastWall" instance=ExtResource("5_ojn1r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 skeleton = NodePath("../../../..")
 
 [node name="Wall5" parent="NavigationRegion3D/Walls/EastWall" instance=ExtResource("5_ojn1r")]
