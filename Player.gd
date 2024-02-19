@@ -12,6 +12,8 @@ var facing_vector3 : Vector3
 var shove_force : float = 10.0
 var attack_power : int = 0
 var weapon_equipped : bool = false
+var invincible : bool = false
+
 
 signal game_over
 
@@ -23,9 +25,11 @@ signal game_over
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var hud = get_node("/root/Main/UICanvasLayer/HUD")
 @onready var knife_model = load("res://knife_model.tscn")
+@onready var timer = get_node("InvincibilityTimer")
 
 func _ready():
 	hud.update_health_bar(current_hp, max_hp)
+	timer.wait_time = 0.45 # see if this can be timer.set_wait_time(attackRate)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -77,10 +81,15 @@ func try_attack ():
 			target.receive_damage(attack_power)
 
 func receive_damage (damage):
-	current_hp -= damage
-	showDamageAnimation.stop()
-	showDamageAnimation.play("show_damage")
-	hud.update_health_bar(current_hp, max_hp)
+	if invincible == true:
+		return
+	else:
+		current_hp -= damage
+		showDamageAnimation.stop()
+		timer.start()
+		invincible = true
+		showDamageAnimation.play("show_damage")
+		hud.update_health_bar(current_hp, max_hp)
 
 	if current_hp <= 0:
 		emit_signal("game_over")
@@ -90,3 +99,6 @@ func equip_item (item):
 	weaponHolder.add_child(knife_model.instantiate())
 	shove_force = item.shove_force
 	attack_power = item.attack_power
+
+func _on_invincibility_timer_timeout():
+	invincible = false

@@ -55,9 +55,6 @@ func _physics_process(delta):
 
 	# Gravity
 	# add downward velocity equal to gravity * time since last _physics_process call
-	
-
-
 	velocity.y -= gravity * delta
 
 	move_and_slide()
