@@ -169,11 +169,11 @@ _data = {
 "Slash": SubResource("Animation_y1y5t")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_erx83"]
-size = Vector3(1, 0.6, 0.4)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
 size = Vector3(0.753491, 0.633039, 0.438799)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_erx83"]
+size = Vector3(1, 0.6, 0.4)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_q3yjm")
@@ -202,24 +202,23 @@ libraries = {
 
 [node name="WeaponHolder" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
-visible = false
 
 [node name="WeaponAnimator" type="AnimationPlayer" parent="Model/WeaponHolder"]
 libraries = {
 "": SubResource("AnimationLibrary_5n7te")
 }
 
-[node name="AttackShapeCast" type="ShapeCast3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.383518, 1.28274)
-shape = SubResource("BoxShape3D_erx83")
-debug_shape_custom_color = Color(1, 0, 0, 1)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, 0)
-shape = SubResource("BoxShape3D_2hl1u")
-
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 0.45
 one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, -0.0500631)
+shape = SubResource("BoxShape3D_2hl1u")
+
+[node name="AttackShapeCast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 0, 0.293345, 1.33214)
+shape = SubResource("BoxShape3D_erx83")
+debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

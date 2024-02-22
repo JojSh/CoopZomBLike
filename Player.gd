@@ -5,8 +5,8 @@ const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 10
-var max_hp : int = 10
+var current_hp : int = 100
+var max_hp : int = 100
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = 10.0
@@ -14,17 +14,18 @@ var attack_power : int = 0
 var weapon_equipped : bool = false
 var invincible : bool = false
 
-
 signal game_over
 
 @onready var weaponHolder = get_node("Model/WeaponHolder")
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
 @onready var shoveAnimation = get_node("Model/ShovingHands/ShoveAnimator")
 @onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
-@onready var attackRayCast = get_node("Model/AttackShapeCast")
+@onready var attackRayCast = get_node("AttackShapeCast")
 @onready var model : MeshInstance3D = get_node("Model")
+@onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UICanvasLayer/HUD")
 @onready var knife_model = load("res://knife_model.tscn")
+@onready var knife_collectible_scene = load("res://knife_collectible.tscn")
 @onready var timer = get_node("InvincibilityTimer")
 
 func _ready():
@@ -44,6 +45,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Attack"):
 		try_attack()
 
+	# Drop item
+	if Input.is_action_just_pressed("Drop Item"):
+		drop_item()
+
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -57,6 +62,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
 
 	if input_dir.length() > 0:
 		facing_angle = Vector2(input_dir.y, input_dir.x).angle()
@@ -73,6 +79,7 @@ func try_attack ():
 
 	if attackRayCast.is_colliding():
 		var target = attackRayCast.get_collider(0)
+		print(target)
 
 		if target.has_method("receive_shove"):
 			target.receive_shove(shove_force, facing_vector3)
@@ -99,6 +106,21 @@ func equip_item (item):
 	weaponHolder.add_child(knife_model.instantiate())
 	shove_force = item.shove_force
 	attack_power = item.attack_power
+
+func drop_item ():
+	if weapon_equipped == true:
+		weapon_equipped = false
+#		change this to always get the thing in a given slot, i.e. weaponHolder/Model/[the model]
+		var the_knife = weaponHolder.get_node("KnifeModel")
+		weaponHolder.remove_child(the_knife)
+		shove_force = 10
+		attack_power = 0
+		
+		var dropped_knife = knife_collectible_scene.instantiate()
+		dropped_knife.position = Vector3(position.x - facing_vector3.y, 0.5, position.z - facing_vector3.x)
+		print("position: ", position)
+		print("facing_vector3: ", facing_vector3)
+		main.add_child(dropped_knife)
 
 func _on_invincibility_timer_timeout():
 	invincible = false

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://iwxxwushkxns"
+path="res://.godot/imported/shieldRed.obj-e0fb269dedde7d6957111b9032831c9e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/shieldRed.obj-e0fb269dedde7d6957111b9032831c9e.mesh"]
+
+source_file="res://shieldRed.obj"
+dest_files=["res://.godot/imported/shieldRed.obj-e0fb269dedde7d6957111b9032831c9e.mesh", "res://.godot/imported/shieldRed.obj-e0fb269dedde7d6957111b9032831c9e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
