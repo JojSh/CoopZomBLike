@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwnpajm11fj01"]
+[gd_scene load_steps=19 format=3 uid="uid://dwnpajm11fj01"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
 [ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_213eg"]
 [ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="3_1at48"]
+[ext_resource type="Material" uid="uid://cpkefmx35v2yy" path="res://shiny_flash.tres" id="5_olct4"]
 
 [sub_resource type="Animation" id="Animation_2er0k"]
 length = 0.001
@@ -107,6 +108,22 @@ _data = {
 "Shove": SubResource("Animation_nr4da")
 }
 
+[sub_resource type="Animation" id="Animation_e8pe3"]
+resource_name = "Flash"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/ShieldModel:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.075, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("5_olct4"), ExtResource("5_olct4"), null]
+}
+
 [sub_resource type="Animation" id="Animation_ixa7a"]
 length = 0.001
 tracks/0/type = "value"
@@ -132,6 +149,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/ShieldModel:material_override")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_olct4")]
 }
 
 [sub_resource type="Animation" id="Animation_y1y5t"]
@@ -165,15 +194,16 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5n7te"]
 _data = {
+"Flash": SubResource("Animation_e8pe3"),
 "RESET": SubResource("Animation_ixa7a"),
 "Slash": SubResource("Animation_y1y5t")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
-size = Vector3(0.753491, 0.633039, 0.438799)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_erx83"]
 size = Vector3(1, 0.6, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
+size = Vector3(0.753491, 0.633039, 0.438799)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_q3yjm")
@@ -203,10 +233,17 @@ libraries = {
 [node name="WeaponHolder" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
 
+[node name="Model" type="Node3D" parent="Model/WeaponHolder"]
+
 [node name="WeaponAnimator" type="AnimationPlayer" parent="Model/WeaponHolder"]
 libraries = {
 "": SubResource("AnimationLibrary_5n7te")
 }
+
+[node name="AttackShapeCast" type="ShapeCast3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 0, 0.446727, 1.33214)
+shape = SubResource("BoxShape3D_erx83")
+debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 0.45
@@ -215,10 +252,5 @@ one_shot = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, -0.0500631)
 shape = SubResource("BoxShape3D_2hl1u")
-
-[node name="AttackShapeCast" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 0, 0.293345, 1.33214)
-shape = SubResource("BoxShape3D_erx83")
-debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

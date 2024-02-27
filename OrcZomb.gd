@@ -84,4 +84,4 @@ func _on_timer_timeout():
 	if position.distance_to(player.position) <= attack_distance:
 		weaponAnimation.stop()
 		weaponAnimation.play("Slash")
-		player.receive_damage(1)
+		player.receive_damage(1, self)

@@ -3,6 +3,8 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+signal game_over
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var current_hp : int = 100
@@ -11,22 +13,23 @@ var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = 10.0
 var attack_power : int = 0
-var weapon_equipped : bool = false
+var slashing_weapon_equipped : bool = false
+var deflector_equipped : bool = false
 var invincible : bool = false
+var currently_held_collectible_name : String
 
-signal game_over
+@export var item_equipped : bool = false
 
-@onready var weaponHolder = get_node("Model/WeaponHolder")
+@onready var weaponModel = get_node("Model/WeaponHolder/Model")
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
 @onready var shoveAnimation = get_node("Model/ShovingHands/ShoveAnimator")
 @onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
-@onready var attackRayCast = get_node("AttackShapeCast")
+@onready var attackRayCast = get_node("Model/AttackShapeCast")
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UICanvasLayer/HUD")
-@onready var knife_model = load("res://knife_model.tscn")
-@onready var knife_collectible_scene = load("res://knife_collectible.tscn")
 @onready var timer = get_node("InvincibilityTimer")
+#@onready var knife_collectible_scene = load("res://knife_collectible.tscn")
 
 func _ready():
 	hud.update_health_bar(current_hp, max_hp)
@@ -62,7 +65,6 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-	
 
 	if input_dir.length() > 0:
 		facing_angle = Vector2(input_dir.y, input_dir.x).angle()
@@ -70,7 +72,7 @@ func _physics_process(delta):
 		model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
 
 func try_attack ():
-	if weapon_equipped:
+	if slashing_weapon_equipped:
 		weaponAnimation.stop()
 		weaponAnimation.play("Slash")
 	else:
@@ -79,17 +81,20 @@ func try_attack ():
 
 	if attackRayCast.is_colliding():
 		var target = attackRayCast.get_collider(0)
-		print(target)
 
 		if target.has_method("receive_shove"):
 			target.receive_shove(shove_force, facing_vector3)
 
-		if weapon_equipped and target.has_method("receive_damage"):
+		if slashing_weapon_equipped and target.has_method("receive_damage"):
 			target.receive_damage(attack_power)
 
-func receive_damage (damage):
+func receive_damage (damage, attacker):
 	if invincible == true:
 		return
+	elif deflector_equipped and attackRayCast.is_colliding() and attackRayCast.get_collider(0) == attacker:
+		weaponAnimation.stop()
+		weaponAnimation.play("Flash")
+		print("Attacker has hit the shiel;d!")
 	else:
 		current_hp -= damage
 		showDamageAnimation.stop()
@@ -102,25 +107,39 @@ func receive_damage (damage):
 		emit_signal("game_over")
 	
 func equip_item (item):
-	weapon_equipped = true
-	weaponHolder.add_child(knife_model.instantiate())
+	item_equipped = true
+	slashing_weapon_equipped = item.is_slashing_weapon
+	deflector_equipped = item.is_deflector
+
+#	place instance of item model in player's hand
+	weaponModel.add_child(item.item_model.instantiate())
+
+#	set up weapon's config stats
 	shove_force = item.shove_force
 	attack_power = item.attack_power
 
+#	store the item's name to make available to drop later
+	currently_held_collectible_name = item.item_name
+
 func drop_item ():
-	if weapon_equipped == true:
-		weapon_equipped = false
-#		change this to always get the thing in a given slot, i.e. weaponHolder/Model/[the model]
-		var the_knife = weaponHolder.get_node("KnifeModel")
-		weaponHolder.remove_child(the_knife)
+	if item_equipped:
+		item_equipped = false
+		if slashing_weapon_equipped == true:
+			slashing_weapon_equipped = false
+
+	#	remove model from weapon holder
+		var item_model = weaponModel.get_child(0)
+		weaponModel.remove_child(item_model)
+
+	#	reset to default "shove" config
 		shove_force = 10
 		attack_power = 0
-		
-		var dropped_knife = knife_collectible_scene.instantiate()
-		dropped_knife.position = Vector3(position.x - facing_vector3.y, 0.5, position.z - facing_vector3.x)
-		print("position: ", position)
-		print("facing_vector3: ", facing_vector3)
-		main.add_child(dropped_knife)
+
+	#	create collectible instance of dropped item in the world
+		var currently_held_collectible_scene = load("res://" + currently_held_collectible_name + "_collectible.tscn")
+		var dropped_item = currently_held_collectible_scene.instantiate()
+		dropped_item.position = Vector3(position.x - facing_vector3.y, 0.5, position.z - facing_vector3.x)
+		main.add_child(dropped_item)
 
 func _on_invincibility_timer_timeout():
 	invincible = false

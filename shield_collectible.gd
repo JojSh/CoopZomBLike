@@ -1,11 +1,11 @@
 extends Area3D
 
-@export var item_name : String = "knife"
-@export var attack_power : float = 1.0
-@export var shove_force : float = 5.0
-@export var is_slashing_weapon : bool = true
-@export var is_deflector : bool = false
-@export var item_model = load("res://knife_model.tscn")
+@export var item_name : String = "shield"
+@export var attack_power : float = 0.0
+@export var shove_force : float = 10.0
+@export var is_slashing_weapon : bool = false
+@export var is_deflector : bool = true
+@export var item_model = load("res://shield_model.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

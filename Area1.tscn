@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=15 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="PackedScene" uid="uid://dwnpajm11fj01" path="res://Player.tscn" id="1_4xt2p"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://58fq0875qtau" path="res://Wall.tscn" id="5_ojn1r"]
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://UI.tscn" id="6_e6gqo"]
 [ext_resource type="PackedScene" uid="uid://dq6fppujtmwki" path="res://knife_collectible.tscn" id="7_1k1lv"]
+[ext_resource type="PackedScene" uid="uid://bp5jjsjua0pog" path="res://shield_collectible.tscn" id="10_adhbl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i4qa8"]
 font_size = 48
@@ -151,22 +152,10 @@ environment = SubResource("Environment_x1nbh")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 4.5, 8, 3)
 
-[node name="KnifeCollectible" parent="." instance=ExtResource("7_1k1lv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.31448, 0.5, -2.48222)
-
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="OrcZomb" parent="Enemies" instance=ExtResource("5_il8pt")]
 transform = Transform3D(-0.0604039, 0, -0.998174, 0, 1, 0, 0.998174, 0, -0.0604039, 12.6957, 0.000402927, -2.22418)
-
-[node name="OrcZomb2" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-0.0604039, 0, -0.998174, 0, 1, 0, 0.998174, 0, -0.0604039, 12.7414, -0.00474215, 4.25007)
-
-[node name="OrcZomb3" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.14244, -0.000151158, -2.4924)
-
-[node name="OrcZomb4" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.15987, -0.00612116, 5.01784)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_wtsvp")
@@ -427,6 +416,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99522e-08, 0, 0.685226)
 
 [node name="BoxShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/EastWall/AccessPassage/AccessExit"]
 shape = SubResource("BoxShape3D_kcpj6")
+
+[node name="KnifeCollectible" parent="." instance=ExtResource("7_1k1lv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.31448, 0.5, -2.48222)
+
+[node name="ShieldCollectible" parent="." instance=ExtResource("10_adhbl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.22506, 0.00751495, -0.991365)
 
 [connection signal="pressed" from="UICanvasLayer/GameStartMenu/StartButton" to="UICanvasLayer/GameStartMenu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="UICanvasLayer/GameOverMenu/BackToMenuButton" to="UICanvasLayer/GameOverMenu" method="_on_start_button_pressed"]
