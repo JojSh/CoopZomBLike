@@ -33,21 +33,23 @@ func _ready () :
 	call_deferred("actor_setup")
 
 func _physics_process(delta):
-	#	if navigation_agent.is_navigation_finished():
-#		return
 	var distanceToPlayer = position.distance_to(player.position)
 	var shouldFollowPlayer = distanceToPlayer < awarenessRadius # && distanceToPlayer > attack_distance
 
 	if shouldFollowPlayer:
 		var current_agent_position: Vector3 = global_position
 		var next_path_position: Vector3 = navigation_agent.get_next_path_position()
-		
+
 		set_movement_target(player.global_position)
 
-		velocity = current_agent_position.direction_to(next_path_position) * move_speed
+		# specifying x and y as we don't want to affect y (vertical)
+		velocity.x = current_agent_position.direction_to(next_path_position).x * move_speed
+		velocity.z = current_agent_position.direction_to(next_path_position).z * move_speed
+		
+		# adjust for any knockback
 		velocity.x += knockback.y
 		velocity.z += knockback.x
-	
+
 		var direction = (next_path_position - position).normalized()
 		var facing_angle = Vector2(direction.z, direction.x).angle()
 
