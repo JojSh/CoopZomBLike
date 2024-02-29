@@ -3,6 +3,6 @@
 [ext_resource type="ArrayMesh" uid="uid://iwxxwushkxns" path="res://shieldRed.obj" id="1_w5wnm"]
 
 [node name="ShieldModel" type="MeshInstance3D"]
-transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0.2, 0.1, 0.16)
+transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0.16, -0.1, 0.16)
 mesh = ExtResource("1_w5wnm")
 skeleton = NodePath("../..")

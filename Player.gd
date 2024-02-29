@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const DEFAULT_SHOVE_FORCE = 15.0
 
 signal game_over
 
@@ -11,7 +12,7 @@ var current_hp : int = 100
 var max_hp : int = 100
 var facing_angle : float
 var facing_vector3 : Vector3
-var shove_force : float = 10.0
+var shove_force : float = DEFAULT_SHOVE_FORCE
 var attack_power : int = 0
 var slashing_weapon_equipped : bool = false
 var deflector_equipped : bool = false
@@ -24,7 +25,7 @@ var currently_held_collectible_name : String
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
 @onready var shoveAnimation = get_node("Model/ShovingHands/ShoveAnimator")
 @onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
-@onready var attackRayCast = get_node("Model/AttackShapeCast")
+@onready var attackShapeCast = get_node("Model/AttackShapeCast")
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UICanvasLayer/HUD")
@@ -75,12 +76,17 @@ func try_attack ():
 	if slashing_weapon_equipped:
 		weaponAnimation.stop()
 		weaponAnimation.play("Slash")
+	elif deflector_equipped:
+		weaponAnimation.stop()
+		weaponAnimation.play("ShieldShove")
 	else:
 		shoveAnimation.stop()
 		shoveAnimation.play("Shove")
 
-	if attackRayCast.is_colliding():
-		var target = attackRayCast.get_collider(0)
+	if attackShapeCast.is_colliding():
+		var target = attackShapeCast.get_collider(0)
+		
+		if target == self: return
 
 		if target.has_method("receive_shove"):
 			target.receive_shove(shove_force, facing_vector3)
@@ -91,10 +97,9 @@ func try_attack ():
 func receive_damage (damage, attacker):
 	if invincible == true:
 		return
-	elif deflector_equipped and attackRayCast.is_colliding() and attackRayCast.get_collider(0) == attacker:
+	elif deflector_equipped and attackShapeCast.is_colliding() and attackShapeCast.get_collider(0) == attacker:
 		weaponAnimation.stop()
 		weaponAnimation.play("Flash")
-		print("Attacker has hit the shiel;d!")
 	else:
 		current_hp -= damage
 		showDamageAnimation.stop()
@@ -132,7 +137,7 @@ func drop_item ():
 		weaponModel.remove_child(item_model)
 
 	#	reset to default "shove" config
-		shove_force = 10
+		shove_force = DEFAULT_SHOVE_FORCE
 		attack_power = 0
 
 	#	create collectible instance of dropped item in the world

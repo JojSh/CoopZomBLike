@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
 [ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_213eg"]
 [ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="3_1at48"]
-[ext_resource type="Material" uid="uid://cpkefmx35v2yy" path="res://shiny_flash.tres" id="5_olct4"]
 
 [sub_resource type="Animation" id="Animation_2er0k"]
 length = 0.001
@@ -111,18 +110,6 @@ _data = {
 [sub_resource type="Animation" id="Animation_e8pe3"]
 resource_name = "Flash"
 step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model/ShieldModel:material_override")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.025, 0.075, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("5_olct4"), ExtResource("5_olct4"), null]
-}
 
 [sub_resource type="Animation" id="Animation_ixa7a"]
 length = 0.001
@@ -153,14 +140,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Model/ShieldModel:material_override")
+tracks/2/path = NodePath("Model/ShieldModel:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_olct4")]
+"update": 0,
+"values": [Vector3(0.16, -0.1, 0.16)]
 }
 
 [sub_resource type="Animation" id="Animation_y1y5t"]
@@ -192,10 +179,27 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.401426), Vector3(-0.0523599, 1.01229, 1.41372), Vector3(-0.0523599, 1.45735, 1.41372), Vector3(-0.0523599, 1.93732, 1.41372), Vector3(-0.0523599, 2.16421, 1.41372), Vector3(-0.0523599, 2.35619, 1.41372)]
 }
 
+[sub_resource type="Animation" id="Animation_rpyri"]
+resource_name = "ShieldShove"
+step = 0.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/ShieldModel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.16, -0.1, 0.15), Vector3(0.16, -0.1, 0.2), Vector3(0.16, -0.1, 0.25), Vector3(0.16, -0.1, 0.3), Vector3(0.16, -0.1, 0.35), Vector3(0.16, -0.1, 0.3), Vector3(0.16, -0.1, 0.25), Vector3(0.16, -0.1, 0.2), Vector3(0.16, -0.1, 0.15)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5n7te"]
 _data = {
 "Flash": SubResource("Animation_e8pe3"),
 "RESET": SubResource("Animation_ixa7a"),
+"ShieldShove": SubResource("Animation_rpyri"),
 "Slash": SubResource("Animation_y1y5t")
 }
 
