@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4otta7ct55tq"]
+[gd_scene load_steps=16 format=3 uid="uid://c4otta7ct55tq"]
 
 [ext_resource type="Script" path="res://OrcZomb.gd" id="1_t5o8h"]
 [ext_resource type="ArrayMesh" uid="uid://df446x4xr7t7t" path="res://OBJ format/character-orc.obj" id="2_74ri7"]
@@ -106,8 +106,12 @@ _data = {
 "Slash": SubResource("Animation_y1y5t")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dw3ie"]
-size = Vector3(0.757033, 0.742128, 0.308016)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fwwsm"]
+size = Vector3(0.562874, 0.545938, 0.389595)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ajnae"]
+radius = 0.3
+height = 0.8
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_6fcd1"]
 
@@ -139,9 +143,14 @@ libraries = {
 [node name="AttackRayCast" type="RayCast3D" parent="Model"]
 transform = Transform3D(30, 0, 0, 0, -3.0598e-08, 1, 0, -0.7, -4.37114e-08, 0, 0.3, 0.05)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00528955, 0.361817, 0.00880022)
-shape = SubResource("BoxShape3D_dw3ie")
+[node name="CollisionShape3D-box" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("BoxShape3D_fwwsm")
+
+[node name="CollisionShape3D-capsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_ajnae")
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -158,5 +167,9 @@ size = Vector2i(212, 36)
 [node name="Background" parent="HealthBar3D/SubViewport" instance=ExtResource("4_r660k")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+radius = 0.6
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0.968627, 1)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
