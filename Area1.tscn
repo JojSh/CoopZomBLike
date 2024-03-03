@@ -153,16 +153,16 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="OrcZomb" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-0.0604039, 0, -0.998174, 0, 1, 0, 0.998174, 0, -0.0604039, 16.0304, 0.000402927, -2.22418)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16, 0, -2)
 
 [node name="OrcZomb2" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.91532, 0.000402927, -9.96288)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.5, 0, -7)
 
 [node name="OrcZomb3" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-0.0604039, 0, -0.998174, 0, 1, 0, 0.998174, 0, -0.0604039, 16.0304, 0.000402927, 9.86301)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16, 0, 10)
 
 [node name="OrcZomb4" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.91532, 0.000402927, 7.59524)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 7.5)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_wtsvp")
@@ -1378,10 +1378,10 @@ transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0,
 transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, -6.94979)
 
 [node name="KnifeCollectible" parent="." instance=ExtResource("7_1k1lv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.31448, 0.5, -2.48222)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0.5, -2.5)
 
 [node name="ShieldCollectible" parent="." instance=ExtResource("10_adhbl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.22506, 0.00751495, -0.991365)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -1)
 
 [connection signal="pressed" from="UICanvasLayer/GameStartMenu/StartButton" to="UICanvasLayer/GameStartMenu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="UICanvasLayer/GameOverMenu/BackToMenuButton" to="UICanvasLayer/GameOverMenu" method="_on_start_button_pressed"]

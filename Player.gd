@@ -84,7 +84,8 @@ func try_attack ():
 		shoveAnimation.play("Shove")
 
 	if attackShapeCast.is_colliding():
-		var target = attackShapeCast.get_collider(0)
+		var nearest_collider_index = attackShapeCast.get_collision_count() - 1
+		var target = attackShapeCast.get_collider(nearest_collider_index)
 		
 		if target == self: return
 
