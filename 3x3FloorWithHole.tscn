@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnkdrsvetyx8l"]
+[gd_scene load_steps=6 format=3 uid="uid://behl6ytr7tsln"]
 
-[ext_resource type="ArrayMesh" uid="uid://cyngsxsukn3oe" path="res://OBJ format/floor.obj" id="1_7a86s"]
-[ext_resource type="ArrayMesh" uid="uid://dqhmqh06nkwr7" path="res://OBJ format/floor-detail.obj" id="2_7ke01"]
+[ext_resource type="ArrayMesh" uid="uid://cyngsxsukn3oe" path="res://OBJ format/floor.obj" id="1_3wvoc"]
+[ext_resource type="ArrayMesh" uid="uid://dqhmqh06nkwr7" path="res://OBJ format/floor-detail.obj" id="2_neeaq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_21cex"]
-size = Vector3(3, 0, 3)
+size = Vector3(1, 0.015, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_12qeo"]
+size = Vector3(1, 0.015, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_by645"]
+size = Vector3(1, 0.015, 3)
 
 [node name="3x3floor" type="Node3D"]
 
@@ -12,40 +18,50 @@ size = Vector3(3, 0, 3)
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shape = SubResource("BoxShape3D_21cex")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+shape = SubResource("BoxShape3D_12qeo")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+shape = SubResource("BoxShape3D_by645")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-mesh = ExtResource("1_7a86s")
+mesh = ExtResource("1_3wvoc")
 
 [node name="Floor2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
-mesh = ExtResource("1_7a86s")
+mesh = ExtResource("1_3wvoc")
 
 [node name="Floor3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
-mesh = ExtResource("1_7a86s")
+visible = false
+mesh = ExtResource("1_3wvoc")
 
 [node name="Floor4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-mesh = ExtResource("1_7a86s")
+visible = false
+mesh = ExtResource("1_3wvoc")
 
 [node name="Floor5" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-mesh = ExtResource("1_7a86s")
+mesh = ExtResource("1_3wvoc")
 
 [node name="Floor6" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-mesh = ExtResource("1_7a86s")
+mesh = ExtResource("1_3wvoc")
 
 [node name="Floor-detail" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, -1)
-mesh = ExtResource("2_7ke01")
+mesh = ExtResource("2_neeaq")
 
 [node name="Floor-detail2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 0, -2)
-mesh = ExtResource("2_7ke01")
+mesh = ExtResource("2_neeaq")
 
 [node name="Floor-detail3" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_7ke01")
+mesh = ExtResource("2_neeaq")

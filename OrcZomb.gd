@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
-var health_points : int = 3
-var max_health : int = 3
+var health_points : int = 5
+var max_health : int = 5
 var attack_distance : float = 1.0
 var awarenessRadius : float = 500.0
-var move_speed : float = 2.0
+var move_speed : float = 2.0 # 0.0
 var movement_target_position: Vector3
 var gravity : float = 15.0
 var knockback = Vector3.ZERO

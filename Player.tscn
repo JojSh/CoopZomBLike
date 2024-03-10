@@ -207,7 +207,7 @@ _data = {
 size = Vector3(1, 0.6, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
-size = Vector3(0.753491, 0.633039, 0.438799)
+size = Vector3(0.645788, 0.633039, 0.438799)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_q3yjm")
@@ -254,7 +254,7 @@ wait_time = 0.45
 one_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.334996, -0.0500631)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.335, -0.05)
 shape = SubResource("BoxShape3D_2hl1u")
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
