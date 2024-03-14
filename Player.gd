@@ -18,6 +18,7 @@ var slashing_weapon_equipped : bool = false
 var deflector_equipped : bool = false
 var invincible : bool = false
 var currently_held_collectible_name : String
+var terminal_depth: float = -10.0
 
 @export var item_equipped : bool = false
 
@@ -40,6 +41,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		kill_if_below_terminal_altitude()
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -71,6 +73,10 @@ func _physics_process(delta):
 		facing_angle = Vector2(input_dir.y, input_dir.x).angle()
 		facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
 		model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
+	
+func kill_if_below_terminal_altitude ():
+	if (position.y <= terminal_depth):
+		emit_signal("game_over")
 
 func try_attack ():
 	if slashing_weapon_equipped:

@@ -11,6 +11,8 @@ var movement_target_position: Vector3
 var gravity : float = 15.0
 var knockback = Vector3.ZERO
 var attackRate : float = 1.0
+var current_position: Vector3
+var terminal_depth: float = -10.0
 
 @onready var timer = get_node("Timer")
 @onready var player = get_node("/root/Main/Player")
@@ -35,18 +37,19 @@ func _ready () :
 	call_deferred("actor_setup")
 
 func _physics_process(delta):
+	kill_if_below_terminal_altitude()
 	var distanceToPlayer = position.distance_to(player.position)
 	var shouldFollowPlayer = distanceToPlayer < awarenessRadius # && distanceToPlayer > attack_distance
 
 	if shouldFollowPlayer:
-		var current_agent_position: Vector3 = global_position
+		current_position = global_position
 		var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 
 		set_movement_target(player.global_position)
 
 		# specifying x and y as we don't want to affect y (vertical)
-		velocity.x = current_agent_position.direction_to(next_path_position).x * move_speed
-		velocity.z = current_agent_position.direction_to(next_path_position).z * move_speed
+		velocity.x = current_position.direction_to(next_path_position).x * move_speed
+		velocity.z = current_position.direction_to(next_path_position).z * move_speed
 		
 		# adjust for any knockback
 		velocity.x += knockback.y
@@ -64,6 +67,9 @@ func _physics_process(delta):
 	move_and_slide()
 	knockback = lerp(knockback, Vector3.ZERO, 0.1)
 
+func kill_if_below_terminal_altitude ():
+	if (current_position.y <= terminal_depth): die()
+
 func actor_setup():
 	# Wait for the first physics frame so the NavigationServer can sync.
 	await get_tree().physics_frame
@@ -80,10 +86,8 @@ func receive_damage (damage):
 	showDamageAnimation.play("show_damage")
 	$HealthBar3D.update_health_bar(health_points, max_health)
 
-	if health_points <= 0:
-		queue_free()
-		emit_signal("enemy_death")
-
+	if health_points <= 0: die()
+	
 func receive_shove (force, shove_direction):
 	knockback = shove_direction * force
 
@@ -92,3 +96,7 @@ func _on_timer_timeout():
 		weaponAnimation.stop()
 		weaponAnimation.play("Slash")
 		player.receive_damage(1, self)
+
+func die ():
+	queue_free()
+	emit_signal("enemy_death")
