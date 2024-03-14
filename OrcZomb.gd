@@ -1,7 +1,9 @@
 extends CharacterBody3D
 
-var health_points : int = 5
-var max_health : int = 5
+signal enemy_death
+
+var health_points : int = 3
+var max_health : int = 3
 var attack_distance : float = 1.0
 var awarenessRadius : float = 500.0
 var move_speed : float = 2.0 # 0.0
@@ -77,7 +79,10 @@ func receive_damage (damage):
 	showDamageAnimation.stop()
 	showDamageAnimation.play("show_damage")
 	$HealthBar3D.update_health_bar(health_points, max_health)
-	if health_points <= 0: queue_free()
+
+	if health_points <= 0:
+		queue_free()
+		emit_signal("enemy_death")
 
 func receive_shove (force, shove_direction):
 	knockback = shove_direction * force

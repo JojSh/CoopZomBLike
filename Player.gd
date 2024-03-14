@@ -8,8 +8,8 @@ signal game_over
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 3
-var max_hp : int = 3
+var current_hp : int = 50
+var max_hp : int = 50
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = DEFAULT_SHOVE_FORCE
@@ -28,7 +28,7 @@ var currently_held_collectible_name : String
 @onready var attackShapeCast = get_node("Model/AttackShapeCast")
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var main = get_node("/root/Main")
-@onready var hud = get_node("/root/Main/UICanvasLayer/HUD")
+@onready var hud = get_node("/root/Main/UI/HUD")
 @onready var timer = get_node("InvincibilityTimer")
 #@onready var knife_collectible_scene = load("res://knife_collectible.tscn")
 
