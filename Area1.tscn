@@ -1,14 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=19 format=3 uid="uid://wumlc1eyja2s"]
 
+[ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="PackedScene" uid="uid://dwnpajm11fj01" path="res://Player.tscn" id="1_4xt2p"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
 [ext_resource type="Script" path="res://GameMenu.gd" id="2_avs84"]
 [ext_resource type="Script" path="res://GameOverMenu.gd" id="3_3rwnw"]
 [ext_resource type="PackedScene" uid="uid://dwixkm3sa7y25" path="res://WallCorner.tscn" id="4_r0see"]
-[ext_resource type="PackedScene" uid="uid://c4otta7ct55tq" path="res://OrcZomb.tscn" id="5_il8pt"]
 [ext_resource type="PackedScene" uid="uid://58fq0875qtau" path="res://Wall.tscn" id="5_ojn1r"]
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://UI.tscn" id="6_e6gqo"]
 [ext_resource type="PackedScene" uid="uid://dq6fppujtmwki" path="res://knife_collectible.tscn" id="7_1k1lv"]
+[ext_resource type="PackedScene" uid="uid://dwkuqpc1kyu36" path="res://3x_3_wall.tscn" id="9_bldd1"]
 [ext_resource type="PackedScene" uid="uid://bp5jjsjua0pog" path="res://shield_collectible.tscn" id="10_adhbl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i4qa8"]
@@ -28,7 +29,6 @@ sky_material = SubResource("PanoramaSkyMaterial_calph")
 
 [sub_resource type="Environment" id="Environment_x1nbh"]
 background_mode = 2
-background_color = Color(1, 1, 1, 1)
 background_energy_multiplier = 1.7
 sky = SubResource("Sky_5xoj3")
 
@@ -40,16 +40,13 @@ agent_height = 0.4
 agent_radius = 0.1
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_4pfci")
 
-[node name="UICanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="UICanvasLayer" instance=ExtResource("6_e6gqo")]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 232.0
-offset_bottom = 52.0
+[node name="HUD" parent="UI" instance=ExtResource("6_e6gqo")]
 
-[node name="GameStartMenu" type="Control" parent="UICanvasLayer"]
+[node name="GameStartMenu" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_avs84")
 
-[node name="Background" type="ColorRect" parent="UICanvasLayer/GameStartMenu"]
+[node name="Background" type="ColorRect" parent="UI/GameStartMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,7 +64,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.160784, 0, 0.8, 1)
 
-[node name="TitleLabel" type="Label" parent="UICanvasLayer/GameStartMenu"]
+[node name="TitleLabel" type="Label" parent="UI/GameStartMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -85,7 +82,7 @@ label_settings = SubResource("LabelSettings_i4qa8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartButton" type="Button" parent="UICanvasLayer/GameStartMenu"]
+[node name="StartButton" type="Button" parent="UI/GameStartMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,7 +98,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Start"
 
-[node name="GameOverMenu" type="Control" parent="UICanvasLayer"]
+[node name="GameOverMenu" type="Control" parent="UI"]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -111,7 +108,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_3rwnw")
 
-[node name="Background" type="ColorRect" parent="UICanvasLayer/GameOverMenu"]
+[node name="Background" type="ColorRect" parent="UI/GameOverMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,7 +117,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.341176, 0.137255, 0.145098, 1)
 
-[node name="TitleLabel" type="Label" parent="UICanvasLayer/GameOverMenu"]
+[node name="TitleLabel" type="Label" parent="UI/GameOverMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -139,7 +136,7 @@ label_settings = SubResource("LabelSettings_i4qa8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackToMenuButton" type="Button" parent="UICanvasLayer/GameOverMenu"]
+[node name="BackToMenuButton" type="Button" parent="UI/GameOverMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -155,6 +152,63 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Return to main menu"
 
+[node name="WaveCompleteScreen" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_3rwnw")
+
+[node name="Background" type="ColorRect" parent="UI/WaveCompleteScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.811765, 0.592157, 0.32549, 1)
+
+[node name="TitleLabel" type="Label" parent="UI/WaveCompleteScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -641.0
+offset_right = 158.0
+offset_bottom = -455.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Well done!
+
+Click below to advance to the next wave..."
+label_settings = SubResource("LabelSettings_i4qa8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMenuButton" type="Button" parent="UI/WaveCompleteScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -15.5
+offset_right = 23.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Advance!"
+
+[node name="Enemies" type="Node3D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("1_4xt2p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.26936, 0, -2.90405)
 
@@ -163,14 +217,6 @@ environment = SubResource("Environment_x1nbh")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 4.5, 12, 4.5)
-
-[node name="Enemies" type="Node3D" parent="."]
-
-[node name="OrcZomb" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.3481, 0, -7.07215)
-
-[node name="OrcZomb4" parent="Enemies" instance=ExtResource("5_il8pt")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 7.5)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_wtsvp")
@@ -728,6 +774,42 @@ transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0,
 [node name="3x3floor30" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("1_pm7yx")]
 transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, -6.94979)
 
+[node name="3x3wall" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 1.5, -2.5, -1)
+
+[node name="3x3wall2" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 1.5, -5.5, -1)
+
+[node name="3x3wall3" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 1.5, -2.5, -4)
+
+[node name="3x3wall4" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 1.5, -5.5, -4)
+
+[node name="3x3wall5" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1, -2.5, -4.44979)
+
+[node name="3x3wall6" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1, -5.5, -4.44979)
+
+[node name="3x3wall7" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 1, -2.5, 1.5)
+
+[node name="3x3wall8" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 1, -5.5, 1.5)
+
+[node name="3x3wall9" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-5.96046e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -5.96046e-08, 1.77636e-15, -1.5, -2.5, -2)
+
+[node name="3x3wall10" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-5.96046e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -5.96046e-08, 1.77636e-15, -1.5, -5.5, -2)
+
+[node name="3x3wall11" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-5.96046e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -5.96046e-08, 1.77636e-15, -1.5, -2.5, 1)
+
+[node name="3x3wall12" parent="NavigationRegion3D/Ground/Floor2" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-5.96046e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -5.96046e-08, 1.77636e-15, -1.5, -5.5, 1)
+
 [node name="Floor3" type="Node3D" parent="NavigationRegion3D/Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0)
 
@@ -814,6 +896,42 @@ transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0,
 
 [node name="3x3floor30" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("1_pm7yx")]
 transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, -6.94979)
+
+[node name="3x3wall" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 10.5, -2.5, -1)
+
+[node name="3x3wall2" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 10.5, -5.5, -1)
+
+[node name="3x3wall3" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 10.5, -2.5, -4)
+
+[node name="3x3wall4" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 10.5, -5.5, -4)
+
+[node name="3x3wall5" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 8, -2.5, -4.44979)
+
+[node name="3x3wall6" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 8, -5.5, -4.44979)
+
+[node name="3x3wall7" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 10, -2.5, 1.5)
+
+[node name="3x3wall8" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 10, -5.5, 1.5)
+
+[node name="3x3wall9" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-5.96046e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -5.96046e-08, 1.77636e-15, 7.5, -2.5, -2)
+
+[node name="3x3wall10" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-5.96046e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -5.96046e-08, 1.77636e-15, 7.5, -5.5, -2)
+
+[node name="3x3wall11" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-5.96046e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -5.96046e-08, 1.77636e-15, 7.5, -2.5, 1)
+
+[node name="3x3wall12" parent="NavigationRegion3D/Ground/Floor3" instance=ExtResource("9_bldd1")]
+transform = Transform3D(-5.96046e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -5.96046e-08, 1.77636e-15, 7.5, -5.5, 1)
 
 [node name="Floor4" type="Node3D" parent="NavigationRegion3D/Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.2299)
@@ -1374,12 +1492,23 @@ transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0,
 transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, -6.94979)
 
 [node name="KnifeCollectible" parent="." instance=ExtResource("7_1k1lv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51336, 0.5, -14.3774)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51336, 0.5, -1.74716)
 visible = false
 
 [node name="ShieldCollectible" parent="." instance=ExtResource("10_adhbl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55144, 0.5, -8.29429)
 
-[connection signal="pressed" from="UICanvasLayer/GameStartMenu/StartButton" to="UICanvasLayer/GameStartMenu" method="_on_start_button_pressed"]
-[connection signal="pressed" from="UICanvasLayer/GameOverMenu/BackToMenuButton" to="UICanvasLayer/GameOverMenu" method="_on_start_button_pressed"]
-[connection signal="game_over" from="Player" to="UICanvasLayer/GameOverMenu" method="_on_player_game_over"]
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.24649, 11.8679, 1.30055)
+light_energy = 6.0
+light_indirect_energy = 0.0
+light_size = 0.228
+shadow_enabled = true
+shadow_bias = 2.0
+shadow_reverse_cull_face = true
+omni_range = 4096.61
+
+[connection signal="pressed" from="UI/GameStartMenu/StartButton" to="UI/GameStartMenu" method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/GameOverMenu/BackToMenuButton" to="UI/GameOverMenu" method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/WaveCompleteScreen/BackToMenuButton" to="UI/WaveCompleteScreen" method="_on_start_button_pressed"]
+[connection signal="game_over" from="Player" to="UI/GameOverMenu" method="_on_player_game_over"]
