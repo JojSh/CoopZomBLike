@@ -1,18 +1,22 @@
 extends Node3D
 
+signal wave_complete
+
 @export var enemy_count : int
 
 @onready var OrcZombScene = load("res://OrcZomb.tscn")
 @onready var enemies = get_node("Enemies")
 @onready var hud = get_node("UI/HUD")
 
+var wave_count : int = 0
+var enemy_wave_sequence : Array = [
+	[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
+	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
+	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }]
+]
+
 func _ready():
-	
-	spawn_enemy_at(18, -6)
-	spawn_enemy_at(18, 6)
-	spawn_enemy_at(-10, 5)
-	
-	update_enemy_counter()
+	generate_enemy_wave()
 
 func _process(delta):
 	if Input.is_action_just_pressed("debug_test"):
@@ -33,4 +37,20 @@ func update_enemy_counter ():
 	enemy_count = enemies.get_children().size()
 	hud.update_enemy_counter(enemy_count)
 
-	#if (enemy_count <= 0):
+	if (enemy_count <= 0):
+		print('wave_count:', wave_count)
+		print('enemy_wave_sequence.size():', enemy_wave_sequence.size())
+		if (wave_count + 1 == enemy_wave_sequence.size()):
+			print("Show game complete screen!")
+		else:
+			emit_signal("wave_complete")
+
+func generate_enemy_wave ():
+	for i in enemy_wave_sequence[wave_count]:
+		spawn_enemy_at(i.x, i.z)
+
+	update_enemy_counter()
+
+func _on_advance_button_pressed():
+	wave_count += 1
+	generate_enemy_wave ()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=20 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="PackedScene" uid="uid://dwnpajm11fj01" path="res://Player.tscn" id="1_4xt2p"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://GameMenu.gd" id="2_avs84"]
 [ext_resource type="Script" path="res://GameOverMenu.gd" id="3_3rwnw"]
 [ext_resource type="PackedScene" uid="uid://dwixkm3sa7y25" path="res://WallCorner.tscn" id="4_r0see"]
+[ext_resource type="Script" path="res://WaveCompleteScreen.gd" id="5_5tbhd"]
 [ext_resource type="PackedScene" uid="uid://58fq0875qtau" path="res://Wall.tscn" id="5_ojn1r"]
-[ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://UI.tscn" id="6_e6gqo"]
+[ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://HUD.tscn" id="6_e6gqo"]
 [ext_resource type="PackedScene" uid="uid://dq6fppujtmwki" path="res://knife_collectible.tscn" id="7_1k1lv"]
 [ext_resource type="PackedScene" uid="uid://dwkuqpc1kyu36" path="res://3x_3_wall.tscn" id="9_bldd1"]
 [ext_resource type="PackedScene" uid="uid://bp5jjsjua0pog" path="res://shield_collectible.tscn" id="10_adhbl"]
@@ -160,7 +161,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_3rwnw")
+script = ExtResource("5_5tbhd")
 
 [node name="Background" type="ColorRect" parent="UI/WaveCompleteScreen"]
 layout_mode = 1
@@ -191,7 +192,7 @@ label_settings = SubResource("LabelSettings_i4qa8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackToMenuButton" type="Button" parent="UI/WaveCompleteScreen"]
+[node name="AdvanceButton" type="Button" parent="UI/WaveCompleteScreen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1508,7 +1509,9 @@ shadow_bias = 2.0
 shadow_reverse_cull_face = true
 omni_range = 4096.61
 
+[connection signal="wave_complete" from="." to="UI/WaveCompleteScreen" method="_on_main_wave_complete"]
 [connection signal="pressed" from="UI/GameStartMenu/StartButton" to="UI/GameStartMenu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="UI/GameOverMenu/BackToMenuButton" to="UI/GameOverMenu" method="_on_start_button_pressed"]
-[connection signal="pressed" from="UI/WaveCompleteScreen/BackToMenuButton" to="UI/WaveCompleteScreen" method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/WaveCompleteScreen/AdvanceButton" to="." method="_on_advance_button_pressed"]
+[connection signal="pressed" from="UI/WaveCompleteScreen/AdvanceButton" to="UI/WaveCompleteScreen" method="_on_advance_button_pressed"]
 [connection signal="game_over" from="Player" to="UI/GameOverMenu" method="_on_player_game_over"]
