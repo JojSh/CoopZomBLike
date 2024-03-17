@@ -28,7 +28,7 @@ sky_material = SubResource("PanoramaSkyMaterial_calph")
 
 [sub_resource type="Environment" id="Environment_x1nbh"]
 background_mode = 2
-background_energy_multiplier = 1.2
+background_energy_multiplier = 1.5
 sky = SubResource("Sky_5xoj3")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_wtsvp"]
@@ -207,7 +207,7 @@ theme_override_font_sizes/font_size = 40
 text = "Advance!"
 
 [node name="Player" parent="." instance=ExtResource("1_4xt2p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.26936, 0, -2.90405)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3)
 
 [node name="Enemies" type="Node3D" parent="."]
 
@@ -1526,6 +1526,7 @@ shadow_reverse_cull_face = true
 omni_range = 20.0
 
 [connection signal="wave_complete" from="." to="UI/WaveCompleteScreen" method="_on_main_wave_complete"]
+[connection signal="pressed" from="UI/GameStartMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UI/GameStartMenu/StartButton" to="UI/GameStartMenu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="UI/GameOverMenu/BackToMenuButton" to="UI/GameOverMenu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="UI/WaveCompleteScreen/AdvanceButton" to="." method="_on_advance_button_pressed"]

@@ -23,8 +23,8 @@ var item_wave_sequence : Array = [
 	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "health", "x": 0, "z": 0 }],
 ]
 
-func _ready():
-	generate_wave()
+#func _ready():
+	#generate_wave()
 
 func _process(delta):
 	if Input.is_action_just_pressed("debug_test"):
@@ -63,8 +63,12 @@ func generate_wave ():
 	for j in item_wave_sequence[wave_count]:
 		spawn_item_at(j.item_name, j.x, j.z)
 
+	player.reset_position()
 	update_enemy_counter()
 
 func _on_advance_button_pressed():
 	wave_count += 1
 	generate_wave ()
+
+func _on_start_button_pressed():
+	generate_wave()
