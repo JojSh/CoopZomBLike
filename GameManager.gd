@@ -1,6 +1,7 @@
 extends Node3D
 
 signal wave_complete
+signal game_complete
 
 @export var enemy_count : int
 
@@ -23,15 +24,7 @@ var item_wave_sequence : Array = [
 	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "health", "x": 0, "z": 0 }],
 ]
 
-#func _ready():
-	#generate_wave()
-
-func _process(delta):
-	if Input.is_action_just_pressed("debug_test"):
-		print(enemies.get_children())
-
 func _on_orc_zomb_enemy_death():
-	print(enemies.get_children())
 	update_enemy_counter()
 
 func spawn_enemy_at (x, z):
@@ -43,7 +36,7 @@ func spawn_enemy_at (x, z):
 func spawn_item_at (item_name, x, z):
 	var item = load("res://" + item_name + "_collectible.tscn").instantiate()
 	item.global_position = Vector3(x, 0.5, z)
-	enemies.add_child(item)
+	items.add_child(item)
 
 func update_enemy_counter ():
 	await get_tree().create_timer(0).timeout # waiting for even 0 sec seems to allow for the enemy to be deleted and the count to be correct
@@ -52,7 +45,7 @@ func update_enemy_counter ():
 
 	if (enemy_count <= 0):
 		if (wave_count + 1 == enemy_wave_sequence.size()):
-			print("Show game complete screen!")
+			emit_signal("game_complete")
 		else:
 			emit_signal("wave_complete")
 
@@ -66,9 +59,9 @@ func generate_wave ():
 	player.reset_position()
 	update_enemy_counter()
 
-func _on_advance_button_pressed():
-	wave_count += 1
-	generate_wave ()
+func _on_game_start_menu_game_start():
+	generate_wave()
 
-func _on_start_button_pressed():
+func _on_wave_complete_screen_wave_advance():
+	wave_count += 1
 	generate_wave()
