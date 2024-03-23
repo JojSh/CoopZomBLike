@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4otta7ct55tq"]
+[gd_scene load_steps=17 format=3 uid="uid://c4otta7ct55tq"]
 
 [ext_resource type="Script" path="res://OrcZomb.gd" id="1_t5o8h"]
 [ext_resource type="ArrayMesh" uid="uid://df446x4xr7t7t" path="res://OBJ format/character-orc.obj" id="2_74ri7"]
@@ -106,6 +106,9 @@ _data = {
 "Slash": SubResource("Animation_y1y5t")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mujcu"]
+size = Vector3(1, 0.6, 0.4)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_fwwsm"]
 size = Vector3(0.562874, 0.545938, 0.389595)
 
@@ -142,6 +145,11 @@ libraries = {
 
 [node name="AttackRayCast" type="RayCast3D" parent="Model"]
 transform = Transform3D(30, 0, 0, 0, -3.0598e-08, 1, 0, -0.7, -4.37114e-08, 0, 0.3, 0.05)
+
+[node name="AttackShapeCast" type="ShapeCast3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 0, 0.446727, 1.33214)
+shape = SubResource("BoxShape3D_mujcu")
+debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape3D-box" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)

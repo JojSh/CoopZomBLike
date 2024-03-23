@@ -19,7 +19,7 @@ var terminal_depth: float = -10.0
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
 @onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
-@onready var attackRayCast = get_node("Model/AttackRayCast")
+@onready var attackShapeCast = get_node("Model/AttackShapeCast")
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 
 func _ready () :
@@ -93,9 +93,20 @@ func receive_shove (force, shove_direction):
 
 func _on_timer_timeout():
 	if position.distance_to(player.position) <= attack_distance:
-		weaponAnimation.stop()
-		weaponAnimation.play("Slash")
-		player.receive_damage(1, self)
+		try_attack() 
+
+func try_attack ():
+	weaponAnimation.stop()
+	weaponAnimation.play("Slash")
+	
+	await get_tree().create_timer(0.15).timeout
+	if attackShapeCast.is_colliding():
+		var nearest_collider_index = attackShapeCast.get_collision_count() - 1
+		var target = attackShapeCast.get_collider(nearest_collider_index)
+		
+		if target == self: return
+		if target.has_method("receive_damage"):
+			target.receive_damage(1, self)
 
 func die ():
 	queue_free()
