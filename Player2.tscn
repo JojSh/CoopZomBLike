@@ -1,9 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dwnpajm11fj01"]
+[gd_scene load_steps=20 format=3 uid="uid://sp2fsbdfi3kd"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
-[ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_213eg"]
-[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="3_1at48"]
-[ext_resource type="Material" uid="uid://cpkefmx35v2yy" path="res://shiny_flash.tres" id="5_nksg0"]
+[ext_resource type="Script" path="res://Player2.gd" id="1_uo82u"]
+[ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_meu12"]
+[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="3_rr6bk"]
+[ext_resource type="Material" uid="uid://cpkefmx35v2yy" path="res://shiny_flash.tres" id="4_14thx"]
 
 [sub_resource type="Animation" id="Animation_2er0k"]
 length = 0.001
@@ -33,7 +33,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3, 0.375),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("3_1at48"), null, ExtResource("3_1at48"), null, ExtResource("3_1at48"), null]
+"values": [ExtResource("3_rr6bk"), null, ExtResource("3_rr6bk"), null, ExtResource("3_rr6bk"), null]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2moqt"]
@@ -121,7 +121,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [null, ExtResource("5_nksg0"), null, ExtResource("5_nksg0"), null]
+"values": [null, ExtResource("4_14thx"), null, ExtResource("4_14thx"), null]
 }
 
 [sub_resource type="Animation" id="Animation_ixa7a"]
@@ -222,12 +222,12 @@ size = Vector3(1, 0.6, 0.4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
 size = Vector3(0.645788, 0.633039, 0.438799)
 
-[node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_q3yjm")
-starting_position = Vector3(6, 0, -3)
+[node name="Player2" type="CharacterBody3D"]
+script = ExtResource("1_uo82u")
+starting_position = Vector3(7, 0, 2)
 
 [node name="Model" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_213eg")
+mesh = ExtResource("2_meu12")
 
 [node name="ShowDamageAnimator" type="AnimationPlayer" parent="Model"]
 libraries = {

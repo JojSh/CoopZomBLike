@@ -14,8 +14,10 @@ var attackRate : float = 1.0
 var current_position: Vector3
 var terminal_depth: float = -10.0
 
+var nearestPlayer
+
 @onready var timer = get_node("Timer")
-@onready var player = get_node("/root/Main/Player")
+@onready var players = get_node("/root/Main/Players").get_children()
 @onready var model : MeshInstance3D = get_node("Model")
 @onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
 @onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
@@ -33,19 +35,30 @@ func _ready () :
 	navigation_agent.path_desired_distance = 0.5
 	navigation_agent.target_desired_distance = 0.5
 
+	update_nearest_player()
 	# Make sure to not await during _ready.
 	call_deferred("actor_setup")
 
+func update_nearest_player ():
+	players.sort_custom(sort_nearest)
+	nearestPlayer = players[0]
+
+func sort_nearest (a, b):
+	if position.distance_to(a.position) < position.distance_to(b.position):
+		return true
+	return false
+
 func _physics_process(delta):
-	kill_if_below_terminal_altitude()
-	var distanceToPlayer = position.distance_to(player.position)
+	die_if_below_terminal_altitude()
+	update_nearest_player()
+	var distanceToPlayer = position.distance_to(nearestPlayer.position)
 	var shouldFollowPlayer = distanceToPlayer < awarenessRadius # && distanceToPlayer > attack_distance
 
 	if shouldFollowPlayer:
 		current_position = global_position
 		var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 
-		set_movement_target(player.global_position)
+		set_movement_target(nearestPlayer.global_position)
 
 		# specifying x and y as we don't want to affect y (vertical)
 		velocity.x = current_position.direction_to(next_path_position).x * move_speed
@@ -67,7 +80,7 @@ func _physics_process(delta):
 	move_and_slide()
 	knockback = lerp(knockback, Vector3.ZERO, 0.1)
 
-func kill_if_below_terminal_altitude ():
+func die_if_below_terminal_altitude ():
 	if (current_position.y <= terminal_depth): die()
 
 func actor_setup():
@@ -75,7 +88,7 @@ func actor_setup():
 	await get_tree().physics_frame
 
 	# Now that the navigation map is no longer empty, set the movement target.
-	set_movement_target(player.global_position)
+	set_movement_target(nearestPlayer.global_position)
 
 func set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
@@ -92,7 +105,7 @@ func receive_shove (force, shove_direction):
 	knockback = shove_direction * force
 
 func _on_timer_timeout():
-	if position.distance_to(player.position) <= attack_distance:
+	if position.distance_to(nearestPlayer.position) <= attack_distance:
 		try_attack() 
 
 func try_attack ():

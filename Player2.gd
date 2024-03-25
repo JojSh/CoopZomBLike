@@ -48,16 +48,16 @@ func _physics_process(delta):
 		#velocity.y = JUMP_VELOCITY
 
 	# Handle attack
-	if Input.is_action_just_pressed("p1_attack"):
+	if Input.is_action_just_pressed("p2_attack"):
 		try_attack()
 
 	# Drop item
-	if Input.is_action_just_pressed("p1_drop_item"):
+	if Input.is_action_just_pressed("p2_drop_item"):
 		drop_item()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("p1_left", "p1_right", "p1_up", "p1_down")
+	var input_dir = Input.get_vector("p2_left", "p2_right", "p2_up", "p2_down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
@@ -162,4 +162,5 @@ func restore_hp (healing_power):
 	hud.update_health_bar(current_hp, max_hp)
 
 func reset_position ():
+	var default_position = Vector3(6, 0, -3)
 	position = starting_position

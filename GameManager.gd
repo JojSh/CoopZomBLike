@@ -6,13 +6,14 @@ signal game_complete
 @export var enemy_count : int
 
 @onready var OrcZombScene = load("res://OrcZomb.tscn")
-@onready var player = get_node("Player")
+@onready var players = get_node("Players").get_children()
 @onready var enemies = get_node("Enemies")
 @onready var items = get_node("Items")
 @onready var hud = get_node("UI/HUD")
 
 var wave_count : int = 0
 var enemy_wave_sequence : Array = [
+	[{ "x": 18, "z": -6 }],
 	[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }]
@@ -56,7 +57,8 @@ func generate_wave ():
 	for j in item_wave_sequence[wave_count]:
 		spawn_item_at(j.item_name, j.x, j.z)
 
-	player.reset_position()
+	for player in players:
+		player.reset_position()
 	update_enemy_counter()
 
 func _on_game_start_menu_game_start():
