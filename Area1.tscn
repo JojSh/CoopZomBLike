@@ -321,12 +321,11 @@ vertical_alignment = 1
 [node name="Players" type="Node3D" parent="."]
 
 [node name="Player1" parent="Players" instance=ExtResource("1_4xt2p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3)
 player_number = 1
 
 [node name="Player2" parent="Players" instance=ExtResource("1_4xt2p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 player_number = 2
+starting_position = Vector3(8, 0, 2)
 
 [node name="Enemies" type="Node3D" parent="."]
 
