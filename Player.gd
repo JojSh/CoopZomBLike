@@ -20,6 +20,7 @@ var invincible : bool = false
 var currently_held_collectible_name : String
 var terminal_depth: float = -10.0
 
+@export var player_number : int
 @export var item_equipped : bool = false
 @export var starting_position : Vector3
 
@@ -48,16 +49,21 @@ func _physics_process(delta):
 		#velocity.y = JUMP_VELOCITY
 
 	# Handle attack
-	if Input.is_action_just_pressed("p1_attack"):
+	if Input.is_action_just_pressed(str("p", player_number, "_attack")):
 		try_attack()
 
 	# Drop item
-	if Input.is_action_just_pressed("p1_drop_item"):
+	if Input.is_action_just_pressed(str("p", player_number, "_drop_item")):
 		drop_item()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("p1_left", "p1_right", "p1_up", "p1_down")
+	var input_dir = Input.get_vector(
+		str("p", player_number, "_left"),
+		str("p", player_number, "_right"),
+		str("p", player_number, "_up"),
+		str("p", player_number, "_down")
+	)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:

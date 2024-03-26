@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=21 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="PackedScene" uid="uid://dwnpajm11fj01" path="res://Player.tscn" id="1_4xt2p"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://HUD.tscn" id="6_e6gqo"]
 [ext_resource type="PackedScene" uid="uid://dwkuqpc1kyu36" path="res://3x_3_wall.tscn" id="9_bldd1"]
 [ext_resource type="PackedScene" uid="uid://bp5jjsjua0pog" path="res://shield_collectible.tscn" id="10_resk0"]
-[ext_resource type="PackedScene" uid="uid://sp2fsbdfi3kd" path="res://Player2.tscn" id="13_y0hvn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i4qa8"]
 font_size = 48
@@ -321,11 +320,13 @@ vertical_alignment = 1
 
 [node name="Players" type="Node3D" parent="."]
 
-[node name="Player" parent="Players" instance=ExtResource("1_4xt2p")]
+[node name="Player1" parent="Players" instance=ExtResource("1_4xt2p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3)
+player_number = 1
 
-[node name="Player2" parent="Players" instance=ExtResource("13_y0hvn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+[node name="Player2" parent="Players" instance=ExtResource("1_4xt2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+player_number = 2
 
 [node name="Enemies" type="Node3D" parent="."]
 
@@ -1225,4 +1226,4 @@ omni_range = 20.0
 [connection signal="wave_complete" from="." to="UI/WaveCompleteScreen" method="_on_main_wave_complete"]
 [connection signal="game_start" from="UI/GameStartMenu" to="." method="_on_game_start_menu_game_start"]
 [connection signal="wave_advance" from="UI/WaveCompleteScreen" to="." method="_on_wave_complete_screen_wave_advance"]
-[connection signal="game_over" from="Players/Player" to="UI/GameOverMenu" method="_on_player_game_over"]
+[connection signal="game_over" from="Players/Player1" to="UI/GameOverMenu" method="_on_player_game_over"]
