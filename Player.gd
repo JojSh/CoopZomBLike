@@ -35,7 +35,9 @@ var terminal_depth: float = -10.0
 @onready var timer = get_node("InvincibilityTimer")
 
 func _ready():
-	hud.update_health_bar(current_hp, max_hp)
+	print('current_hp', current_hp)
+	print('max_hp', max_hp)
+	hud.update_health_bar(player_number, current_hp, max_hp)
 	timer.wait_time = 0.45 # see if this can be timer.set_wait_time(attackRate)
 
 func _physics_process(delta):
@@ -119,7 +121,7 @@ func receive_damage (damage, attacker):
 		timer.start()
 		invincible = true
 		showDamageAnimation.play("show_damage")
-		hud.update_health_bar(current_hp, max_hp)
+		hud.update_health_bar(player_number, current_hp, max_hp)
 
 	if current_hp <= 0:
 		emit_signal("game_over")
