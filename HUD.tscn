@@ -21,6 +21,18 @@ offset_top = 20.0
 offset_right = 464.0
 offset_bottom = 48.0
 
+[node name="P3HealthBar" parent="HealthBars" instance=ExtResource("2_5spns")]
+offset_left = 500.0
+offset_top = 20.0
+offset_right = 704.0
+offset_bottom = 48.0
+
+[node name="P4HealthBar" parent="HealthBars" instance=ExtResource("2_5spns")]
+offset_left = 740.0
+offset_top = 20.0
+offset_right = 944.0
+offset_bottom = 48.0
+
 [node name="EnemyCounter" type="Label" parent="."]
 layout_direction = 1
 anchors_preset = 1

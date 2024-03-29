@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=19 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
-[ext_resource type="PackedScene" uid="uid://dwnpajm11fj01" path="res://Player.tscn" id="1_4xt2p"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
 [ext_resource type="Script" path="res://GameOverMenu.gd" id="3_3rwnw"]
 [ext_resource type="Script" path="res://GameStartMenu.gd" id="3_r2jor"]
@@ -318,15 +317,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Players" type="Node3D" parent="."]
-
-[node name="Player1" parent="Players" instance=ExtResource("1_4xt2p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.26535, 0, 0)
-player_number = 1
-
-[node name="Player2" parent="Players" instance=ExtResource("1_4xt2p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.09217, 0, 0)
-player_number = 2
-starting_position = Vector3(8, 0, 2)
 
 [node name="Enemies" type="Node3D" parent="."]
 
@@ -1224,4 +1214,3 @@ omni_range = 20.0
 [connection signal="wave_complete" from="." to="UI/WaveCompleteScreen" method="_on_main_wave_complete"]
 [connection signal="game_start" from="UI/GameStartMenu" to="." method="_on_game_start_menu_game_start"]
 [connection signal="wave_advance" from="UI/WaveCompleteScreen" to="." method="_on_wave_complete_screen_wave_advance"]
-[connection signal="game_over" from="Players/Player1" to="UI/GameOverMenu" method="_on_player_game_over"]
