@@ -4,12 +4,13 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const DEFAULT_SHOVE_FORCE = 15.0
 
-signal game_over
+signal player_death
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 5
+var current_hp : int = 1
 var max_hp : int = 5
+@export var is_dead : bool = false
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = DEFAULT_SHOVE_FORCE
@@ -35,56 +36,55 @@ var terminal_depth: float = -10.0
 @onready var timer = get_node("InvincibilityTimer")
 
 func _ready():
-	print('current_hp', current_hp)
-	print('max_hp', max_hp)
 	hud.update_health_bar(player_number, current_hp, max_hp)
 	timer.wait_time = 0.45 # see if this can be timer.set_wait_time(attackRate)
 
 func _physics_process(delta):
 	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-		kill_if_below_terminal_altitude()
+	if not is_dead:
+		if not is_on_floor():
+			velocity.y -= gravity * delta
+			kill_if_below_terminal_altitude()
 
-	# Handle Jump.
-	#if Input.is_action_just_pressed("jump") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
+		# Handle Jump.
+		#if Input.is_action_just_pressed("jump") and is_on_floor():
+			#velocity.y = JUMP_VELOCITY
 
-	# Handle attack
-	if Input.is_action_just_pressed(str("p", player_number, "_attack")):
-		try_attack()
+		# Handle attack
+		if Input.is_action_just_pressed(str("p", player_number, "_attack")):
+			try_attack()
 
-	# Drop item
-	if Input.is_action_just_pressed(str("p", player_number, "_drop_item")):
-		drop_item()
+		# Drop item
+		if Input.is_action_just_pressed(str("p", player_number, "_drop_item")):
+			drop_item()
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector(
-		str("p", player_number, "_left"),
-		str("p", player_number, "_right"),
-		str("p", player_number, "_up"),
-		str("p", player_number, "_down")
-	)
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var input_dir = Input.get_vector(
+			str("p", player_number, "_left"),
+			str("p", player_number, "_right"),
+			str("p", player_number, "_up"),
+			str("p", player_number, "_down")
+		)
+		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z *  SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		if direction:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z *  SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	move_and_slide()
+		move_and_slide()
 
-	if input_dir.length() > 0:
-		facing_angle = Vector2(input_dir.y, input_dir.x).angle()
-		facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
-		model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
+		if input_dir.length() > 0:
+			facing_angle = Vector2(input_dir.y, input_dir.x).angle()
+			facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
+			model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
 	
 func kill_if_below_terminal_altitude ():
 	if (position.y <= terminal_depth):
-		emit_signal("game_over")
+		emit_signal("player_death")
 
 func try_attack ():
 	if slashing_weapon_equipped:
@@ -124,8 +124,13 @@ func receive_damage (damage, attacker):
 		hud.update_health_bar(player_number, current_hp, max_hp)
 
 	if current_hp <= 0:
-		emit_signal("game_over")
-	
+		die()
+
+func die ():
+	showDamageAnimation.play("die")
+	is_dead = true
+	emit_signal("player_death")
+
 func equip_item (item):
 	item_equipped = true
 	slashing_weapon_equipped = item.is_slashing_weapon

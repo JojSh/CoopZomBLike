@@ -1211,6 +1211,7 @@ shadow_reverse_cull_face = true
 omni_range = 20.0
 
 [connection signal="game_complete" from="." to="UI/GameCompleteMenu" method="_on_main_game_complete"]
+[connection signal="game_over" from="." to="UI/GameOverMenu" method="_on_main_game_over"]
 [connection signal="wave_complete" from="." to="UI/WaveCompleteScreen" method="_on_main_wave_complete"]
 [connection signal="game_start" from="UI/GameStartMenu" to="." method="_on_game_start_menu_game_start"]
 [connection signal="wave_advance" from="UI/WaveCompleteScreen" to="." method="_on_wave_complete_screen_wave_advance"]

@@ -40,8 +40,14 @@ func _ready () :
 	call_deferred("actor_setup")
 
 func update_nearest_player ():
-	players.sort_custom(sort_nearest)
-	nearestPlayer = players[0]
+	#should fetch alive players from GameManager somehow?
+	var alive_players = players.filter(func(player):
+		return player.is_dead == false
+	)
+
+	alive_players.sort_custom(sort_nearest)
+	if alive_players:
+		nearestPlayer = alive_players[0]
 
 func sort_nearest (a, b):
 	if position.distance_to(a.position) < position.distance_to(b.position):

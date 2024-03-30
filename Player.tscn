@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dwnpajm11fj01"]
+[gd_scene load_steps=21 format=3 uid="uid://dwnpajm11fj01"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
 [ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_213eg"]
@@ -18,6 +18,33 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f5up6"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.5708, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_xn0am"]
@@ -39,6 +66,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2moqt"]
 _data = {
 "RESET": SubResource("Animation_2er0k"),
+"die": SubResource("Animation_f5up6"),
 "show_damage": SubResource("Animation_xn0am")
 }
 
