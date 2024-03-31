@@ -5,8 +5,7 @@ extends CanvasLayer
 @onready var fps_display : Label = get_node("FPSDisplay")
 
 func _process (delta):
-	pass
-	#update_fps_counter() off for now
+	update_fps_counter() #off for now
 
 func update_health_bar (player_number, currentHp, maxHp):
 	var p_num_as_index = player_number - 1

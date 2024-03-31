@@ -8,9 +8,8 @@ signal player_death
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 1
+var current_hp : int = 5
 var max_hp : int = 5
-@export var is_dead : bool = false
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = DEFAULT_SHOVE_FORCE
@@ -21,6 +20,7 @@ var invincible : bool = false
 var currently_held_collectible_name : String
 var terminal_depth: float = -10.0
 
+@export var is_dead : bool = false
 @export var player_number : int
 @export var item_equipped : bool = false
 @export var starting_position : Vector3

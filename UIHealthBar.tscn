@@ -15,7 +15,6 @@ offset_left = 2.0
 offset_top = 2.0
 offset_right = 202.0
 offset_bottom = 26.0
-value = 50.0
 nine_patch_stretch = true
 texture_under = ExtResource("1_br5cf")
 texture_progress = ExtResource("1_br5cf")

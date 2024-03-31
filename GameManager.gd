@@ -6,7 +6,7 @@ signal game_over
 
 @export var enemy_count : int
 
-@onready var OrcZombScene = load("res://OrcZomb.tscn")
+@onready var orc_zomb_scene = load("res://OrcZomb.tscn")
 @onready var player_scene = load("res://Player.tscn")
 @onready var players_container = get_node("Players")
 @onready var enemies = get_node("Enemies")
@@ -14,10 +14,10 @@ signal game_over
 @onready var hud = get_node("UI/HUD")
 
 var wave_count : int = 0
-var player_count : int = 1
+var player_count : int = 2
 
 var enemy_wave_sequence : Array = [
-	[{ "x": 18, "z": -6 }],
+	#[{ "x": 18, "z": -6 }],
 	[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }]
@@ -54,7 +54,7 @@ func spawn_player (index):
 	player.connect('player_death', _on_player_player_death)
 
 func spawn_enemy_at (x, z):
-	var orc_zomb = OrcZombScene.instantiate()
+	var orc_zomb = orc_zomb_scene.instantiate()
 	orc_zomb.global_position = Vector3(x, 0.5, z)
 	enemies.add_child(orc_zomb)
 	orc_zomb.connect('enemy_death', _on_orc_zomb_enemy_death)
