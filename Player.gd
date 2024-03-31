@@ -84,7 +84,9 @@ func _physics_process(delta):
 	
 func kill_if_below_terminal_altitude ():
 	if (position.y <= terminal_depth):
-		emit_signal("player_death")
+		current_hp = 0
+		hud.update_health_bar(player_number, current_hp, max_hp)
+		die()
 
 func try_attack ():
 	if slashing_weapon_equipped:
@@ -172,7 +174,7 @@ func _on_invincibility_timer_timeout():
 func restore_hp (healing_power):
 	current_hp += healing_power
 	if current_hp > max_hp: current_hp = max_hp
-	hud.update_health_bar(current_hp, max_hp)
+	hud.update_health_bar(player_number, current_hp, max_hp)
 
 func reset_position ():
 	position = starting_position
