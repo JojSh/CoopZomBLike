@@ -15,6 +15,7 @@ var facing_vector3 : Vector3
 var shove_force : float = DEFAULT_SHOVE_FORCE
 var attack_power : int = 0
 var slashing_weapon_equipped : bool = false
+var throwing_weapon_equipped : bool = false
 var deflector_equipped : bool = false
 var invincible : bool = false
 var currently_held_collectible_name : String
@@ -92,6 +93,9 @@ func try_attack ():
 	if slashing_weapon_equipped:
 		weaponAnimation.stop()
 		weaponAnimation.play("Slash")
+	elif throwing_weapon_equipped:
+		weaponAnimation.stop()
+		throw_item()
 	elif deflector_equipped:
 		weaponAnimation.stop()
 		weaponAnimation.play("ShieldShove")
@@ -136,8 +140,9 @@ func die ():
 func equip_item (item):
 	item_equipped = true
 	slashing_weapon_equipped = item.is_slashing_weapon
+	throwing_weapon_equipped = item.is_throwing_weapon
 	deflector_equipped = item.is_deflector
-
+	
 #	place instance of item model in player's hand
 	weaponModel.add_child(item.item_model.instantiate())
 
@@ -148,11 +153,36 @@ func equip_item (item):
 #	store the item's name to make available to drop later
 	currently_held_collectible_name = item.item_name
 
+func throw_item ():
+	if throwing_weapon_equipped == true:
+		throwing_weapon_equipped = false
+		
+		#	remove model from weapon holder
+		var item_model = weaponModel.get_child(0)
+		weaponModel.remove_child(item_model)
+
+		var projectile = load("res://spear_projectile.tscn")
+		var thrown_projectile = projectile.instantiate()
+		thrown_projectile.position = Vector3(position.x + facing_vector3.y, 0.3, position.z + facing_vector3.x)
+		thrown_projectile.rotation = Vector3(0, facing_angle, 0)
+		main.add_child(thrown_projectile)
+		#thrown_projectile.apply_force(Vector3(position.x + facing_vector3.y, 10, position.z + facing_vector3.x), facing_vector3)
+		thrown_projectile.apply_impulse(Vector3(facing_vector3.y * 20, 0, facing_vector3.x * 20))
+		
+		
+
+	#	reset to default "shove" config
+		shove_force = DEFAULT_SHOVE_FORCE
+		attack_power = 0
+
 func drop_item ():
 	if item_equipped:
 		item_equipped = false
 		if slashing_weapon_equipped == true:
 			slashing_weapon_equipped = false
+		
+		if throwing_weapon_equipped == true:
+			throwing_weapon_equipped = false
 
 	#	remove model from weapon holder
 		var item_model = weaponModel.get_child(0)

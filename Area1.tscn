@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=20 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://GameCompleteMenu.gd" id="6_cryiv"]
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://HUD.tscn" id="6_e6gqo"]
 [ext_resource type="PackedScene" uid="uid://dwkuqpc1kyu36" path="res://3x_3_wall.tscn" id="9_bldd1"]
+[ext_resource type="PackedScene" uid="uid://cd8qpgfldjcj5" path="res://spear_collectible.tscn" id="12_xngjh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i4qa8"]
 font_size = 48
@@ -1209,6 +1210,9 @@ shadow_enabled = true
 shadow_bias = 2.0
 shadow_reverse_cull_face = true
 omni_range = 20.0
+
+[node name="SpearCollectible" parent="." instance=ExtResource("12_xngjh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.80696, 0, -0.49471)
 
 [connection signal="game_complete" from="." to="UI/GameCompleteMenu" method="_on_main_game_complete"]
 [connection signal="game_over" from="." to="UI/GameOverMenu" method="_on_main_game_over"]

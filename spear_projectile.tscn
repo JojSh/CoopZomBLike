@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwrxbvfggw675"]
+
+[ext_resource type="PackedScene" uid="uid://c7gk3faq1w5qb" path="res://spear_model.tscn" id="1_pmoho"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t8jdh"]
+radius = 0.2
+
+[node name="RigidBody3D" type="RigidBody3D"]
+
+[node name="Model" parent="." instance=ExtResource("1_pmoho")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, -0.8, 0, 0.8, -3.49691e-08, 0, 0, 0.1)
+shape = SubResource("CapsuleShape3D_t8jdh")
