@@ -119,6 +119,7 @@ height = 0.8
 [sub_resource type="ViewportTexture" id="ViewportTexture_6fcd1"]
 
 [node name="OrcZomb" type="CharacterBody3D"]
+collision_layer = 3
 script = ExtResource("1_t5o8h")
 
 [node name="Model" type="MeshInstance3D" parent="."]
