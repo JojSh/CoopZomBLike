@@ -323,6 +323,8 @@ vertical_alignment = 1
 
 [node name="Items" type="Node3D" parent="."]
 
+[node name="Projectiles" type="Node3D" parent="."]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_x1nbh")
 

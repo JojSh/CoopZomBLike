@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+signal create_collectible
+
 @onready var shapecast = get_node("ShapeCast3D")
 
 const attack_power : int = 10
@@ -12,3 +14,7 @@ func _process(delta):
 
 		if target.has_method("receive_damage"):
 			target.receive_damage(attack_power)
+			var target_position = Vector2(target.position.x, target.position.y)
+			print("target_position: ", target_position)
+			create_collectible.emit("spear", target_position)
+			queue_free()

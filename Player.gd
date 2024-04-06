@@ -3,8 +3,11 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const DEFAULT_SHOVE_FORCE = 15.0
+const DEFAULT_THROW_FORCE = 20.0
 
 signal player_death
+signal create_collectible
+signal create_projectile
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -159,16 +162,10 @@ func throw_item ():
 		#	remove model from weapon holder
 		var item_model = weaponModel.get_child(0)
 		weaponModel.remove_child(item_model)
-
-		var projectile = load("res://spear_projectile.tscn")
-		var thrown_projectile = projectile.instantiate()
-		thrown_projectile.position = Vector3(position.x + facing_vector3.y, 0.3, position.z + facing_vector3.x)
-		thrown_projectile.rotation = Vector3(0, facing_angle, 0)
-		main.add_child(thrown_projectile)
-		#thrown_projectile.apply_force(Vector3(position.x + facing_vector3.y, 10, position.z + facing_vector3.x), facing_vector3)
-		thrown_projectile.apply_impulse(Vector3(facing_vector3.y * 20, 0, facing_vector3.x * 20))
 		
-		
+		var projectile_location = Vector3(position.x + facing_vector3.y, 0.3, position.z + facing_vector3.x)
+		var impulse = Vector3(facing_vector3.y * DEFAULT_THROW_FORCE, 0, facing_vector3.x * DEFAULT_THROW_FORCE)
+		create_projectile.emit("spear", projectile_location, facing_angle, impulse)
 
 	#	reset to default "shove" config
 		shove_force = DEFAULT_SHOVE_FORCE
@@ -191,11 +188,14 @@ func drop_item ():
 		shove_force = DEFAULT_SHOVE_FORCE
 		attack_power = 0
 
-	#	create collectible instance of dropped item in the world
-		var currently_held_collectible_scene = load("res://" + currently_held_collectible_name + "_collectible.tscn")
-		var dropped_item = currently_held_collectible_scene.instantiate()
-		dropped_item.position = Vector3(position.x - facing_vector3.y, 0.5, position.z - facing_vector3.x)
-		main.add_child(dropped_item)
+	##	create collectible instance of dropped item in the world
+		#var currently_held_collectible_scene = load("res://" + currently_held_collectible_name + "_collectible.tscn")
+		#var dropped_item = currently_held_collectible_scene.instantiate()
+		#dropped_item.position = Vector3(position.x - facing_vector3.y, 0.5, position.z - facing_vector3.x)
+		#main.add_child(dropped_item)
+		
+		var location = Vector2(position.x - facing_vector3.y, position.z - facing_vector3.x)
+		create_collectible.emit(currently_held_collectible_name, location)
 
 func _on_invincibility_timer_timeout():
 	invincible = false

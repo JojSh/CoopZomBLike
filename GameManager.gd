@@ -11,6 +11,7 @@ signal game_over
 @onready var players_container = get_node("Players")
 @onready var enemies = get_node("Enemies")
 @onready var items = get_node("Items")
+@onready var projectiles = get_node("Projectiles")
 @onready var hud = get_node("UI/HUD")
 
 var wave_count : int = 0
@@ -52,6 +53,8 @@ func spawn_player (index):
 	player.starting_position = Vector3(index * 3, 0.5, -3)
 	players_container.add_child(player)
 	player.connect('player_death', _on_player_player_death)
+	player.connect('create_collectible', _on_create_collectible)
+	player.connect('create_projectile', _on_create_projectile)
 
 func spawn_enemy_at (x, z):
 	var orc_zomb = orc_zomb_scene.instantiate()
@@ -63,6 +66,17 @@ func spawn_item_at (item_name, x, z):
 	var item = load("res://" + item_name + "_collectible.tscn").instantiate()
 	item.global_position = Vector3(x, 0.5, z)
 	items.add_child(item)
+
+func _on_create_collectible (item_name, location):
+	spawn_item_at(item_name, location.x, location.y)
+	
+func _on_create_projectile (name, location, facing_angle, impulse):
+	var projectile = load("res://" + name + "_projectile.tscn")
+	var thrown_projectile = projectile.instantiate()
+	thrown_projectile.position = location
+	thrown_projectile.rotation = Vector3(0, facing_angle, 0)
+	projectiles.add_child(thrown_projectile)
+	thrown_projectile.apply_impulse(impulse)
 
 func update_enemy_counter ():
 	await get_tree().create_timer(0).timeout # waiting for even 0 sec seems to allow for the enemy to be deleted and the count to be correct
