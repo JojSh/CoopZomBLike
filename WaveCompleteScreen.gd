@@ -8,7 +8,7 @@ var open_to_dismissal: bool = false
 
 func _process(delta):
 	if open_to_dismissal and Input.is_anything_pressed():
-		emit_signal("wave_advance")
+		wave_advance.emit()
 		reset_menu_on_dismiss()
 
 func _on_main_wave_complete ():

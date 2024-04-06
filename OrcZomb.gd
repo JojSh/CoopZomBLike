@@ -13,8 +13,9 @@ var knockback = Vector3.ZERO
 var attackRate : float = 1.0
 var current_position: Vector3
 var terminal_depth: float = -10.0
-
 var nearestPlayer
+
+@export var is_dead : bool = false
 
 @onready var timer = get_node("Timer")
 @onready var players = get_node("/root/Main/Players").get_children()
@@ -55,6 +56,8 @@ func sort_nearest (a, b):
 	return false
 
 func _physics_process(delta):
+	if is_dead: return
+
 	die_if_below_terminal_altitude()
 	update_nearest_player()
 	var distanceToPlayer = position.distance_to(nearestPlayer.position)
@@ -115,6 +118,8 @@ func _on_timer_timeout():
 		try_attack() 
 
 func try_attack ():
+	if is_dead: return
+
 	weaponAnimation.stop()
 	weaponAnimation.play("Slash")
 	
@@ -128,5 +133,6 @@ func try_attack ():
 			target.receive_damage(1, self)
 
 func die ():
-	queue_free()
-	emit_signal("enemy_death")
+	showDamageAnimation.play("die")
+	is_dead = true
+	enemy_death.emit()

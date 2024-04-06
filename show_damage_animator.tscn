@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl2hr4ytqqx3o"]
+
+[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="1_2jb43"]
+
+[sub_resource type="Animation" id="Animation_2er0k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f5up6"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xn0am"]
+resource_name = "show_damage"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_2jb43"), null, ExtResource("1_2jb43"), null, ExtResource("1_2jb43"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2moqt"]
+_data = {
+"RESET": SubResource("Animation_2er0k"),
+"die": SubResource("Animation_f5up6"),
+"show_damage": SubResource("Animation_xn0am")
+}
+
+[node name="ShowDamageAnimator" type="AnimationPlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_2moqt")
+}

@@ -40,7 +40,7 @@ func _on_player_player_death ():
 		return player.is_dead == false
 	)
 	if alive_players.size() < 1:
-		emit_signal("game_over")
+		game_over.emit()
 
 func spawn_all_players ():
 	for i in player_count:
@@ -66,14 +66,18 @@ func spawn_item_at (item_name, x, z):
 
 func update_enemy_counter ():
 	await get_tree().create_timer(0).timeout # waiting for even 0 sec seems to allow for the enemy to be deleted and the count to be correct
-	enemy_count = enemies.get_children().size()
+	var alive_enemies = enemies.get_children().filter(func(enemy):
+		return enemy.is_dead == false
+	)
+	enemy_count = alive_enemies.size()
+	
 	hud.update_enemy_counter(enemy_count)
 
 	if (enemy_count <= 0):
 		if (wave_count + 1 == enemy_wave_sequence.size()):
-			emit_signal("game_complete")
+			game_complete.emit()
 		else:
-			emit_signal("wave_complete")
+			wave_complete.emit()
 
 func generate_wave ():
 	for i in enemy_wave_sequence[wave_count]:

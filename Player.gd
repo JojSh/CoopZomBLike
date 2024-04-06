@@ -134,8 +134,7 @@ func receive_damage (damage, attacker):
 
 func die ():
 	showDamageAnimation.play("die")
-	is_dead = true
-	emit_signal("player_death")
+	player_death.emit()
 
 func equip_item (item):
 	item_equipped = true
