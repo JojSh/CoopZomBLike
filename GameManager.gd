@@ -76,6 +76,7 @@ func _on_create_projectile (name, location, facing_angle, impulse):
 	thrown_projectile.position = location
 	thrown_projectile.rotation = Vector3(0, facing_angle, 0)
 	projectiles.add_child(thrown_projectile)
+	thrown_projectile.connect('create_collectible', _on_create_collectible)
 	thrown_projectile.apply_impulse(impulse)
 
 func update_enemy_counter ():
@@ -93,7 +94,12 @@ func update_enemy_counter ():
 		else:
 			wave_complete.emit()
 
+func cleanup_wave ():
+	for enemy in enemies.get_children():
+		enemy.queue_free()
+
 func generate_wave ():
+	cleanup_wave()
 	for i in enemy_wave_sequence[wave_count]:
 		spawn_enemy_at(i.x, i.z)
 	

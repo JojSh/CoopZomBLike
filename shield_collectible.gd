@@ -4,6 +4,7 @@ extends Area3D
 @export var attack_power : float = 0.0
 @export var shove_force : float = 15.0
 @export var is_slashing_weapon : bool = false
+@export var is_throwing_weapon : bool = false
 @export var is_deflector : bool = true
 @export var item_model = load("res://shield_model.tscn")
 

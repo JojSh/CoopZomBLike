@@ -60,7 +60,9 @@ func _physics_process(delta):
 
 		# Drop item
 		if Input.is_action_just_pressed(str("p", player_number, "_drop_item")):
-			drop_item()
+			if item_equipped:
+				unequip_item()
+				drop_item()
 
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
@@ -156,46 +158,34 @@ func equip_item (item):
 	currently_held_collectible_name = item.item_name
 
 func throw_item ():
+	unequip_item()
+
+	var projectile_location = Vector3(position.x + facing_vector3.y, 0.3, position.z + facing_vector3.x)
+	var impulse = Vector3(facing_vector3.y * DEFAULT_THROW_FORCE, 0, facing_vector3.x * DEFAULT_THROW_FORCE)
+	create_projectile.emit("spear", projectile_location, facing_angle, impulse)
+
+func unequip_item ():
+	item_equipped = false
+	if slashing_weapon_equipped == true:
+		slashing_weapon_equipped = false
+
 	if throwing_weapon_equipped == true:
 		throwing_weapon_equipped = false
-		
-		#	remove model from weapon holder
-		var item_model = weaponModel.get_child(0)
-		weaponModel.remove_child(item_model)
-		
-		var projectile_location = Vector3(position.x + facing_vector3.y, 0.3, position.z + facing_vector3.x)
-		var impulse = Vector3(facing_vector3.y * DEFAULT_THROW_FORCE, 0, facing_vector3.x * DEFAULT_THROW_FORCE)
-		create_projectile.emit("spear", projectile_location, facing_angle, impulse)
 
-	#	reset to default "shove" config
-		shove_force = DEFAULT_SHOVE_FORCE
-		attack_power = 0
+	if deflector_equipped == true:
+		deflector_equipped = false
+
+#	remove model from weapon holder
+	var item_model = weaponModel.get_child(0)
+	weaponModel.remove_child(item_model)
+
+#	reset to default "shove" config
+	shove_force = DEFAULT_SHOVE_FORCE
+	attack_power = 0
 
 func drop_item ():
-	if item_equipped:
-		item_equipped = false
-		if slashing_weapon_equipped == true:
-			slashing_weapon_equipped = false
-		
-		if throwing_weapon_equipped == true:
-			throwing_weapon_equipped = false
-
-	#	remove model from weapon holder
-		var item_model = weaponModel.get_child(0)
-		weaponModel.remove_child(item_model)
-
-	#	reset to default "shove" config
-		shove_force = DEFAULT_SHOVE_FORCE
-		attack_power = 0
-
-	##	create collectible instance of dropped item in the world
-		#var currently_held_collectible_scene = load("res://" + currently_held_collectible_name + "_collectible.tscn")
-		#var dropped_item = currently_held_collectible_scene.instantiate()
-		#dropped_item.position = Vector3(position.x - facing_vector3.y, 0.5, position.z - facing_vector3.x)
-		#main.add_child(dropped_item)
-		
-		var location = Vector2(position.x - facing_vector3.y, position.z - facing_vector3.x)
-		create_collectible.emit(currently_held_collectible_name, location)
+	var location = Vector2(position.x - facing_vector3.y, position.z - facing_vector3.x)
+	create_collectible.emit(currently_held_collectible_name, location)
 
 func _on_invincibility_timer_timeout():
 	invincible = false

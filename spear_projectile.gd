@@ -14,7 +14,6 @@ func _process(delta):
 
 		if target.has_method("receive_damage"):
 			target.receive_damage(attack_power)
-			var target_position = Vector2(target.position.x, target.position.y)
-			print("target_position: ", target_position)
+			var target_position = Vector2(target.position.x, target.position.z)
 			create_collectible.emit("spear", target_position)
 			queue_free()
