@@ -103,6 +103,7 @@ func set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
 
 func receive_damage (damage):
+	if (is_dead): return
 	health_points -= damage
 	showDamageAnimation.stop()
 	showDamageAnimation.play("show_damage")
@@ -118,8 +119,6 @@ func _on_timer_timeout():
 		try_attack() 
 
 func try_attack ():
-	if is_dead: return
-
 	weaponAnimation.stop()
 	weaponAnimation.play("Slash")
 	
@@ -133,6 +132,12 @@ func try_attack ():
 			target.receive_damage(1, self)
 
 func die ():
+	# stop the timer
+	timer.stop()
+
+	# switch off the health bar
+	$HealthBar3D.hide()
+
 	showDamageAnimation.play("die")
 	is_dead = true
 	enemy_death.emit()

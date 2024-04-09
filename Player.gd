@@ -121,8 +121,10 @@ func try_attack ():
 			target.receive_damage(attack_power)
 
 func receive_damage (damage, attacker):
-	if invincible == true:
-		return
+	if is_dead: return
+
+	if invincible == true: return
+
 	elif deflector_equipped and attackShapeCast.is_colliding() and attackShapeCast.get_collider(0) == attacker:
 		weaponAnimation.stop()
 		weaponAnimation.play("Flash")
@@ -138,8 +140,10 @@ func receive_damage (damage, attacker):
 		die()
 
 func die ():
-	showDamageAnimation.play("die")
-	player_death.emit()
+	if not is_dead:
+		timer.stop()
+		showDamageAnimation.play("die")
+		player_death.emit()
 
 func equip_item (item):
 	item_equipped = true
