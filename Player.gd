@@ -11,7 +11,7 @@ signal create_projectile
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 5
+var current_hp : int = 1
 var max_hp : int = 5
 var facing_angle : float
 var facing_vector3 : Vector3
@@ -140,10 +140,10 @@ func receive_damage (damage, attacker):
 		die()
 
 func die ():
-	if not is_dead:
-		timer.stop()
-		showDamageAnimation.play("die")
-		player_death.emit()
+	timer.stop()
+	showDamageAnimation.play("die")
+	player_death.emit()
+	is_dead = true
 
 func equip_item (item):
 	item_equipped = true
