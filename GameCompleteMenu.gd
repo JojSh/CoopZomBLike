@@ -4,7 +4,7 @@ var open_to_dismissal: bool = false
 
 @onready var any_key_info = get_node("PressAnyKey")
 
-func _process(delta):
+func _process(_delta):
 	if open_to_dismissal and Input.is_anything_pressed():
 		get_tree().reload_current_scene()
 

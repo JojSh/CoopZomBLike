@@ -7,13 +7,13 @@ signal create_collectible
 const attack_power : int = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if (sleeping):
 		var current_position = Vector2(position.x, position.z)
 		create_collectible.emit("spear", current_position)
 		queue_free()
 		
-	if shapecast.is_colliding:
+	if shapecast.is_colliding() == true:
 		var target = shapecast.get_collider(0)
 		if target == null or target == self: return
 

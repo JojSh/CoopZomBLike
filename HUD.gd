@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var enemy_counter : Label = get_node("EnemyCounter")
 @onready var fps_display : Label = get_node("FPSDisplay")
 
-func _process (delta):
+func _process (_delta):
 	update_fps_counter() #off for now
 
 func update_health_bar (player_number, currentHp, maxHp):
