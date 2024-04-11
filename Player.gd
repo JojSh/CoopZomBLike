@@ -121,10 +121,8 @@ func try_attack ():
 			target.receive_damage(attack_power)
 
 func receive_damage (damage, attacker):
-	if is_dead: return
-
-	if invincible == true: return
-
+	if is_dead or invincible == true:
+		return
 	elif deflector_equipped and attackShapeCast.is_colliding() and attackShapeCast.get_collider(0) == attacker:
 		weaponAnimation.stop()
 		weaponAnimation.play("Flash")
@@ -141,6 +139,7 @@ func receive_damage (damage, attacker):
 
 func die ():
 	timer.stop()
+	showDamageAnimation.stop()
 	showDamageAnimation.play("die")
 	player_death.emit()
 	is_dead = true
@@ -201,3 +200,10 @@ func restore_hp (healing_power):
 
 func reset_position ():
 	position = starting_position
+
+func revive ():
+	is_dead = false
+	invincible = false
+	showDamageAnimation.stop()
+	showDamageAnimation.play("RESET")
+	restore_hp(2)

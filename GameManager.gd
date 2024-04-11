@@ -18,7 +18,7 @@ var wave_count : int = 0
 var player_count : int = 2
 
 var enemy_wave_sequence : Array = [
-	#[{ "x": 18, "z": -6 }],
+	[{ "x": 12, "z": 0 }], # test wave with 1 enemy
 	[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }]
@@ -37,9 +37,7 @@ func _on_orc_zomb_enemy_death ():
 	update_enemy_counter()
 
 func _on_player_player_death ():
-	var alive_players = players_container.get_children().filter(func(player):
-		return player.is_dead == false
-	)
+	var alive_players = get_alive_players()
 	if alive_players.size() < 1:
 		game_over.emit()
 
@@ -70,8 +68,8 @@ func spawn_item_at (item_name, x, z):
 func _on_create_collectible (item_name, location):
 	spawn_item_at(item_name, location.x, location.y)
 	
-func _on_create_projectile (name, location, facing_angle, impulse):
-	var projectile = load("res://" + name + "_projectile.tscn")
+func _on_create_projectile (item_name, location, facing_angle, impulse):
+	var projectile = load("res://" + item_name + "_projectile.tscn")
 	var thrown_projectile = projectile.instantiate()
 	thrown_projectile.position = location
 	thrown_projectile.rotation = Vector3(0, facing_angle, 0)
@@ -98,6 +96,18 @@ func cleanup_wave ():
 	for enemy in enemies.get_children():
 		enemy.queue_free()
 
+	var dead_players = get_dead_players()
+	var alive_players = get_alive_players()
+	
+	for player in dead_players:
+		resurrect_player(player)
+	
+	for player in alive_players:
+		player.reset_position()
+# check position is reset for revived players
+# check revived player has correct hp (2) after revival
+
+
 func generate_wave ():
 	cleanup_wave()
 	for i in enemy_wave_sequence[wave_count]:
@@ -106,8 +116,6 @@ func generate_wave ():
 	for j in item_wave_sequence[wave_count]:
 		spawn_item_at(j.item_name, j.x, j.z)
 
-	for player in players_container.get_children():
-		player.reset_position()
 	update_enemy_counter()
 
 func _on_game_start_menu_game_start():
@@ -116,3 +124,16 @@ func _on_game_start_menu_game_start():
 func _on_wave_complete_screen_wave_advance():
 	wave_count += 1
 	generate_wave()
+
+func resurrect_player (player) :
+	player.revive()
+
+func get_dead_players ():
+	return players_container.get_children().filter(func(player):
+		return player.is_dead == true
+	)
+
+func get_alive_players ():
+	return players_container.get_children().filter(func(player):
+		return player.is_dead == false
+	)
