@@ -97,16 +97,18 @@ func cleanup_wave ():
 		enemy.queue_free()
 
 	var dead_players = get_dead_players()
-	var alive_players = get_alive_players()
 	
 	for player in dead_players:
 		resurrect_player(player)
+
+	# need to set this after resurrection has taken place as the list is not
+	# updated with the latest otherwise!
+	var alive_players = get_alive_players()
 	
 	for player in alive_players:
 		player.reset_position()
-# check position is reset for revived players
-# check revived player has correct hp (2) after revival
-
+	
+	await get_tree().create_timer(2).timeout
 
 func generate_wave ():
 	cleanup_wave()
