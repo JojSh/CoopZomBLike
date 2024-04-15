@@ -15,19 +15,24 @@ signal game_over
 @onready var hud = get_node("UI/HUD")
 
 var wave_count : int = 0
-var player_count : int = 2
+var player_count : int = 1
 
 var enemy_wave_sequence : Array = [
-	[{ "x": 12, "z": 0 }], # test wave with 1 enemy
+	#[{ "x": 12, "z": 0 }], # test wave with 1 enemy
 	[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
-	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }]
+	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }],
+	[
+		{ "x": 16, "z": -8 }, { "x": 16, "z": 8 }, { "x": -8, "z": 7 }, { "x": -8, "z": -7 },
+		{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }
+	]
 ]
 
 var item_wave_sequence : Array = [
 	[],
 	[{ "item_name": "shield", "x": 4.5, "z": -8 }, { "item_name": "health", "x": 0, "z": 0 }],
 	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "health", "x": 0, "z": 0 }],
+	[{ "item_name": "spear", "x": -6, "z": -1 }, { "item_name": "spear", "x": 14.5, "z": -1 }, { "item_name": "health", "x": 0, "z": 0 }],
 ]
 
 func _ready ():
@@ -47,7 +52,7 @@ func spawn_all_players ():
 
 func spawn_player (index):
 	var player = player_scene.instantiate()
-	player.player_number = index + 1
+	player.player_number = index + 1 + 1
 	player.starting_position = Vector3(index * 3, 0.5, -3)
 	players_container.add_child(player)
 	player.connect('player_death', _on_player_player_death)

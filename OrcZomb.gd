@@ -102,7 +102,7 @@ func actor_setup():
 func set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
 
-func receive_damage (damage):
+func receive_player_damage (damage):
 	if (is_dead): return
 	health_points -= damage
 	showDamageAnimation.stop()
@@ -128,8 +128,8 @@ func try_attack ():
 		var target = attackShapeCast.get_collider(nearest_collider_index)
 		
 		if target == self: return
-		if target.has_method("receive_damage"):
-			target.receive_damage(1, self)
+		if target.has_method("receive_enemy_damage"):
+			target.receive_enemy_damage(1, self)
 
 func die ():
 	# stop the timer

@@ -17,8 +17,8 @@ func _process(_delta):
 		var target = shapecast.get_collider(0)
 		if target == null or target == self: return
 
-		if target.has_method("receive_damage"):
-			target.receive_damage(attack_power)
+		if target.has_method("receive_player_damage"):
+			target.receive_player_damage(attack_power)
 			var target_position = Vector2(target.position.x, target.position.z)
 			create_collectible.emit("spear", target_position)
 			queue_free()

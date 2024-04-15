@@ -11,7 +11,7 @@ signal create_projectile
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 1
+var current_hp : int = 5
 var max_hp : int = 5
 var facing_angle : float
 var facing_vector3 : Vector3
@@ -117,10 +117,10 @@ func try_attack ():
 		if target.has_method("receive_shove"):
 			target.receive_shove(shove_force, facing_vector3)
 
-		if slashing_weapon_equipped and target.has_method("receive_damage"):
-			target.receive_damage(attack_power)
+		if slashing_weapon_equipped and target.has_method("receive_player_damage"):
+			target.receive_player_damage(attack_power)
 
-func receive_damage (damage, attacker):
+func receive_enemy_damage (damage, attacker):
 	if is_dead or invincible == true:
 		return
 	elif deflector_equipped and attackShapeCast.is_colliding() and attackShapeCast.get_collider(0) == attacker:
