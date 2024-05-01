@@ -15,7 +15,7 @@ signal game_over
 @onready var hud = get_node("UI/HUD")
 
 var wave_count : int = 0
-var player_count : int = 1
+var player_count : int = 4
 
 var enemy_wave_sequence : Array = [
 	#[{ "x": 12, "z": 0 }], # test wave with 1 enemy
@@ -52,7 +52,7 @@ func spawn_all_players ():
 
 func spawn_player (index):
 	var player = player_scene.instantiate()
-	player.player_number = index + 1 + 1
+	player.player_number = index + 1
 	player.starting_position = Vector3(index * 3, 0.5, -3)
 	players_container.add_child(player)
 	player.connect('player_death', _on_player_player_death)

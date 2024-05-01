@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2gppq4h3unjf"]
+
+[ext_resource type="PackedScene" uid="uid://bupis38we058c" path="res://GLB character models/character-human-colormap-reposition-yellow.glb" id="1_scx4f"]
+
+[node name="character-human-colormap-reposition-yellow" instance=ExtResource("1_scx4f")]

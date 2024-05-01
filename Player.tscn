@@ -1,9 +1,12 @@
 [gd_scene load_steps=17 format=3 uid="uid://dwnpajm11fj01"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
-[ext_resource type="ArrayMesh" uid="uid://ckwi5x8ks0apx" path="res://OBJ format/character-human.obj" id="2_213eg"]
+[ext_resource type="PackedScene" uid="uid://d2gppq4h3unjf" path="res://NumberedPlayerGLBs/CharacterHumanP1.tscn" id="2_3rhyr"]
 [ext_resource type="PackedScene" uid="uid://cl2hr4ytqqx3o" path="res://show_damage_animator.tscn" id="3_7bweu"]
 [ext_resource type="Material" uid="uid://cpkefmx35v2yy" path="res://shiny_flash.tres" id="5_nksg0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
+size = Vector3(0.645788, 0.633039, 0.438799)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qo1qq"]
 
@@ -182,46 +185,9 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_erx83"]
 size = Vector3(1, 0.6, 0.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
-size = Vector3(0.645788, 0.633039, 0.438799)
-
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_q3yjm")
 starting_position = Vector3(6, 0, -3)
-
-[node name="Model" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_213eg")
-
-[node name="ShowDamageAnimator" parent="Model" instance=ExtResource("3_7bweu")]
-
-[node name="ShovingHands" type="Node3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.1)
-
-[node name="ShovingHandsModel" type="MeshInstance3D" parent="Model/ShovingHands"]
-transform = Transform3D(0.385, 0, 0, 0, 0.105, 0, 0, 0, 0.12, 0, 0, 0.221)
-visible = false
-mesh = SubResource("BoxMesh_qo1qq")
-surface_material_override/0 = SubResource("StandardMaterial3D_v4yoq")
-
-[node name="ShoveAnimator" type="AnimationPlayer" parent="Model/ShovingHands"]
-libraries = {
-"": SubResource("AnimationLibrary_x8fn7")
-}
-
-[node name="WeaponHolder" type="Node3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
-
-[node name="Model" type="Node3D" parent="Model/WeaponHolder"]
-
-[node name="WeaponAnimator" type="AnimationPlayer" parent="Model/WeaponHolder"]
-libraries = {
-"": SubResource("AnimationLibrary_5n7te")
-}
-
-[node name="AttackShapeCast" type="ShapeCast3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 0, 0.446727, 1.33214)
-shape = SubResource("BoxShape3D_erx83")
-debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 0.45
@@ -230,5 +196,41 @@ one_shot = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.335, -0.05)
 shape = SubResource("BoxShape3D_2hl1u")
+
+[node name="Models" type="Node3D" parent="."]
+
+[node name="ShowDamageAnimator" parent="Models" instance=ExtResource("3_7bweu")]
+root_node = NodePath("")
+
+[node name="ShovingHands" type="Node3D" parent="Models"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.1)
+
+[node name="ShovingHandsModel" type="MeshInstance3D" parent="Models/ShovingHands"]
+transform = Transform3D(0.385, 0, 0, 0, 0.105, 0, 0, 0, 0.12, 0, 0, 0.221)
+visible = false
+mesh = SubResource("BoxMesh_qo1qq")
+surface_material_override/0 = SubResource("StandardMaterial3D_v4yoq")
+
+[node name="ShoveAnimator" type="AnimationPlayer" parent="Models/ShovingHands"]
+libraries = {
+"": SubResource("AnimationLibrary_x8fn7")
+}
+
+[node name="WeaponHolder" type="Node3D" parent="Models"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.303229, 0.461609, 0.13322)
+
+[node name="Model" type="Node3D" parent="Models/WeaponHolder"]
+
+[node name="WeaponAnimator" type="AnimationPlayer" parent="Models/WeaponHolder"]
+libraries = {
+"": SubResource("AnimationLibrary_5n7te")
+}
+
+[node name="AttackShapeCast" type="ShapeCast3D" parent="Models"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 0, 0.446727, 1.33214)
+shape = SubResource("BoxShape3D_erx83")
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="CharacterModel" parent="Models" instance=ExtResource("2_3rhyr")]
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

@@ -29,17 +29,19 @@ var terminal_depth: float = -10.0
 @export var item_equipped : bool = false
 @export var starting_position : Vector3
 
-@onready var weaponModel = get_node("Model/WeaponHolder/Model")
-@onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
-@onready var shoveAnimation = get_node("Model/ShovingHands/ShoveAnimator")
-@onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
-@onready var attackShapeCast = get_node("Model/AttackShapeCast")
-@onready var model : MeshInstance3D = get_node("Model")
+@onready var weaponModel = get_node("Models/WeaponHolder/Model")
+@onready var weaponAnimation = get_node("Models/WeaponHolder/WeaponAnimator")
+@onready var shoveAnimation = get_node("Models/ShovingHands/ShoveAnimator")
+@onready var showDamageAnimation = get_node("Models/ShowDamageAnimator")
+@onready var attackShapeCast = get_node("Models/AttackShapeCast")
+@onready var characterModel = get_node("Models/CharacterModel")
+@onready var models : Node3D = get_node("Models")
 @onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UI/HUD")
 @onready var timer = get_node("InvincibilityTimer")
 
 func _ready():
+	set_colour_by_player_number()
 	hud.update_health_bar(player_number, current_hp, max_hp)
 	timer.wait_time = 0.45 # see if this can be timer.set_wait_time(attackRate)
 
@@ -86,8 +88,13 @@ func _physics_process(delta):
 		if input_dir.length() > 0:
 			facing_angle = Vector2(input_dir.y, input_dir.x).angle()
 			facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
-			model.rotation.y = lerp_angle(model.rotation.y, facing_angle, 0.5)
-	
+			models.rotation.y = lerp_angle(models.rotation.y, facing_angle, 0.5)
+
+func set_colour_by_player_number ():
+	var model_path = "res://NumberedPlayerGLBs/CharacterHumanP" + str(player_number) + ".tscn"
+	var player_model_to_use = load(model_path).instantiate()
+	characterModel.replace_by(player_model_to_use)
+
 func kill_if_below_terminal_altitude ():
 	if (position.y <= terminal_depth):
 		current_hp = 0
