@@ -77,6 +77,7 @@ func _physics_process(delta):
 		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 		if direction:
+			animation_player.play("sprint")
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z *  SPEED
 		else:
@@ -117,8 +118,8 @@ func try_attack ():
 		weaponAnimation.stop()
 		weaponAnimation.play("ShieldShove")
 	else:
-		shoveAnimation.stop()
-		shoveAnimation.play("Shove")
+		animation_player.stop()
+		animation_player.play("holding-both-shoot")
 
 	if attackShapeCast.is_colliding():
 		var nearest_collider_index = attackShapeCast.get_collision_count() - 1

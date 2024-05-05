@@ -15,7 +15,7 @@ signal game_over
 @onready var hud = get_node("UI/HUD")
 
 var wave_count : int = 0
-var player_count : int = 4
+var player_count : int = 1
 
 var enemy_wave_sequence : Array = [
 	#[{ "x": 12, "z": 0 }], # test wave with 1 enemy
