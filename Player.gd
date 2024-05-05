@@ -32,9 +32,9 @@ var terminal_depth: float = -10.0
 @onready var weaponModel = get_node("Models/WeaponHolder/Model")
 @onready var weaponAnimation = get_node("Models/WeaponHolder/WeaponAnimator")
 @onready var shoveAnimation = get_node("Models/ShovingHands/ShoveAnimator")
-@onready var showDamageAnimation = get_node("Models/ShowDamageAnimator")
+@onready var animation_player: AnimationPlayer
 @onready var attackShapeCast = get_node("Models/AttackShapeCast")
-@onready var characterModel = get_node("Models/CharacterModel")
+@onready var dummy_character_model = get_node("Models/DummyCharacterModel")
 @onready var models : Node3D = get_node("Models")
 @onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UI/HUD")
@@ -91,9 +91,14 @@ func _physics_process(delta):
 			models.rotation.y = lerp_angle(models.rotation.y, facing_angle, 0.5)
 
 func set_colour_by_player_number ():
-	var model_path = "res://NumberedPlayerGLBs/CharacterHumanP" + str(player_number) + ".tscn"
+	var model_name : String = "CharacterHumanP" + str(player_number)
+	var model_path : String = "res://NumberedPlayerGLBs/" + model_name + ".tscn"
 	var player_model_to_use = load(model_path).instantiate()
-	characterModel.replace_by(player_model_to_use)
+	dummy_character_model.queue_free()
+	models.add_child(player_model_to_use)
+	player_model_to_use
+	if (player_number == 2): print(models.get_children())
+	animation_player = get_node("Models/" + model_name + "/AnimationPlayer")
 
 func kill_if_below_terminal_altitude ():
 	if (position.y <= terminal_depth):
@@ -135,10 +140,10 @@ func receive_enemy_damage (damage, attacker):
 		weaponAnimation.play("Flash")
 	else:
 		current_hp -= damage
-		showDamageAnimation.stop()
+		animation_player.stop()
 		timer.start()
 		invincible = true
-		showDamageAnimation.play("show_damage")
+		animation_player.play("show_damage")
 		hud.update_health_bar(player_number, current_hp, max_hp)
 
 	if current_hp <= 0:
@@ -146,8 +151,8 @@ func receive_enemy_damage (damage, attacker):
 
 func die ():
 	timer.stop()
-	showDamageAnimation.stop()
-	showDamageAnimation.play("die")
+	animation_player.stop()
+	animation_player.play("die")
 	player_death.emit()
 	is_dead = true
 
@@ -211,6 +216,6 @@ func reset_position ():
 func revive ():
 	is_dead = false
 	invincible = false
-	showDamageAnimation.stop()
-	showDamageAnimation.play("RESET")
+	animation_player.stop()
+	animation_player.play("RESET")
 	restore_hp(2)

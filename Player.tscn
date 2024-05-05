@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dwnpajm11fj01"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
-[ext_resource type="PackedScene" uid="uid://d2gppq4h3unjf" path="res://NumberedPlayerGLBs/CharacterHumanP1.tscn" id="2_3rhyr"]
+[ext_resource type="PackedScene" uid="uid://cndk4bfnj5y4i" path="res://NumberedPlayerGLBs/CharacterHumanP1.tscn" id="2_3rhyr"]
 [ext_resource type="PackedScene" uid="uid://cl2hr4ytqqx3o" path="res://show_damage_animator.tscn" id="3_7bweu"]
 [ext_resource type="Material" uid="uid://cpkefmx35v2yy" path="res://shiny_flash.tres" id="5_nksg0"]
 
@@ -231,6 +231,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 
 shape = SubResource("BoxShape3D_erx83")
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="CharacterModel" parent="Models" instance=ExtResource("2_3rhyr")]
+[node name="DummyCharacterModel" parent="Models" instance=ExtResource("2_3rhyr")]
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
