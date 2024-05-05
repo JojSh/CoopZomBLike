@@ -42,8 +42,9 @@ func _on_orc_zomb_enemy_death ():
 	update_enemy_counter()
 
 func _on_player_player_death ():
-	var alive_players = get_alive_players()
-	if alive_players.size() < 1:
+	await get_tree().create_timer(1).timeout
+
+	if get_alive_players().size() < 1:
 		game_over.emit()
 
 func spawn_all_players ():
