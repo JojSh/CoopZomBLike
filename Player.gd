@@ -77,7 +77,7 @@ func _physics_process(delta):
 		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 		if direction:
-			animation_player.play("sprint")
+			handle_sprint_animation()
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z *  SPEED
 		else:
@@ -90,6 +90,12 @@ func _physics_process(delta):
 			facing_angle = Vector2(input_dir.y, input_dir.x).angle()
 			facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
 			models.rotation.y = lerp_angle(models.rotation.y, facing_angle, 0.5)
+
+func handle_sprint_animation ():
+	if (slashing_weapon_equipped or throwing_weapon_equipped):
+		animation_player.play("sprint_rhand_static")
+	else:
+		animation_player.play("sprint")
 
 func set_colour_by_player_number ():
 	var model_name : String = "CharacterHumanP" + str(player_number)
@@ -118,7 +124,7 @@ func try_attack ():
 		weaponAnimation.stop()
 		weaponAnimation.play("ShieldShove")
 	else:
-		animation_player.stop()
+		#shoveAnimation.stop()
 		animation_player.play("holding-both-shoot")
 
 	if attackShapeCast.is_colliding():
@@ -141,7 +147,7 @@ func receive_enemy_damage (damage, attacker):
 		weaponAnimation.play("Flash")
 	else:
 		current_hp -= damage
-		animation_player.stop()
+		#animation_player.stop()
 		timer.start()
 		invincible = true
 		animation_player.play("show_damage")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cndk4bfnj5y4i"]
+[gd_scene load_steps=32 format=3 uid="uid://cndk4bfnj5y4i"]
 
 [ext_resource type="PackedScene" uid="uid://bupis38we058c" path="res://GLB character models/character-human-colormap-reposition-yellow.glb" id="1_scx4f"]
 [ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="2_wrmje"]
@@ -27,6 +27,7 @@
 [ext_resource type="Animation" uid="uid://dhrhb76mhkmal" path="res://PlayerAnimations/sprint.res" id="25_2gr4r"]
 [ext_resource type="Animation" uid="uid://rkm0wihg56ye" path="res://PlayerAnimations/static.res" id="26_dor6b"]
 [ext_resource type="Animation" uid="uid://ct7j1wmm6ho83" path="res://PlayerAnimations/walk.res" id="27_eiqg5"]
+[ext_resource type="Animation" uid="uid://od6w1oicirqj" path="res://sprint_rhand_static.res" id="28_flh2r"]
 
 [sub_resource type="Animation" id="Animation_7h5mi"]
 length = 0.001
@@ -206,23 +207,18 @@ _data = {
 "show_damage": SubResource("Animation_a2gsv"),
 "sit": ExtResource("24_vo22i"),
 "sprint": ExtResource("25_2gr4r"),
+"sprint_rhand_static": ExtResource("28_flh2r"),
 "static": ExtResource("26_dor6b"),
 "walk": ExtResource("27_eiqg5")
 }
 
 [node name="CharacterHumanP1" instance=ExtResource("1_scx4f")]
 
-[node name="torso" parent="character-human/root" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.998511, 0.0545593, 0, -0.0545593, 0.998511, 0, 0.17625, -0.02375)
-
 [node name="arm-left" parent="character-human/root/torso" index="0"]
-transform = Transform3D(0.499669, -0.0181915, -0.866026, 0.036383, 0.999338, -1.86265e-09, 0.865452, -0.0315086, 0.5, 0.0998968, 0.1115, 0.0115)
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.0998968, 0.1115, 0.0115)
 
 [node name="arm-right" parent="character-human/root/torso" index="1"]
-transform = Transform3D(0.499669, 0.0181915, 0.866026, -0.036383, 0.999338, -1.86265e-09, -0.865452, -0.0315086, 0.5, -0.0998968, 0.1115, 0.0115)
-
-[node name="head" parent="character-human/root/torso" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.998511, -0.0545593, 0, 0.0545593, 0.998511, 0, 0.167, 0.0263888)
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.0998968, 0.1115, 0.0115)
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

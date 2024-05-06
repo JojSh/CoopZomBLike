@@ -15,7 +15,7 @@ signal game_over
 @onready var hud = get_node("UI/HUD")
 
 var wave_count : int = 0
-var player_count : int = 1
+var player_count : int = 2
 
 var enemy_wave_sequence : Array = [
 	#[{ "x": 12, "z": 0 }], # test wave with 1 enemy
@@ -29,7 +29,7 @@ var enemy_wave_sequence : Array = [
 ]
 
 var item_wave_sequence : Array = [
-	[],
+	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "shield", "x": -6, "z": -1 }, { "item_name": "spear", "x": 14.5, "z": -1 }, { "item_name": "health", "x": 0, "z": 0 }],
 	[{ "item_name": "shield", "x": 4.5, "z": -8 }, { "item_name": "health", "x": 0, "z": 0 }],
 	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "health", "x": 0, "z": 0 }],
 	[{ "item_name": "spear", "x": -6, "z": -1 }, { "item_name": "spear", "x": 14.5, "z": -1 }, { "item_name": "health", "x": 0, "z": 0 }],
