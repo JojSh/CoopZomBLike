@@ -2148,9 +2148,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.083571, 0.17625, -0.02375)
 [node name="leg-right" parent="character-human/root" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.083571, 0.17625, -0.02375)
 
-[node name="torso" parent="character-human/root" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17625, -0.02375)
-
 [node name="arm-left" parent="character-human/root/torso" index="0"]
 transform = Transform3D(0.707108, 0.707106, 0, -0.707106, 0.707108, 0, 0, 0, 1, 0.0998968, 0.1115, 0.0115)
 
