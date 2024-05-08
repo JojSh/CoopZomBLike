@@ -92,7 +92,7 @@ func _physics_process(delta):
 			models.rotation.y = lerp_angle(models.rotation.y, facing_angle, 0.5)
 
 func handle_sprint_animation ():
-	if (slashing_weapon_equipped or throwing_weapon_equipped):
+	if (slashing_weapon_equipped or throwing_weapon_equipped or deflector_equipped):
 		animation_player.play("sprint_rhand_static")
 	else:
 		animation_player.play("sprint")

@@ -215,10 +215,10 @@ _data = {
 [node name="CharacterHumanP1" instance=ExtResource("1_scx4f")]
 
 [node name="arm-left" parent="character-human/root/torso" index="0"]
-transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.0998968, 0.1115, 0.0115)
+transform = Transform3D(0.74681, 0.650495, 0.138315, -0.656423, 0.754385, -0.00362063, -0.106698, -0.0880889, 0.990382, 0.0998968, 0.1115, 0.0115)
 
 [node name="arm-right" parent="character-human/root/torso" index="1"]
-transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.0998968, 0.1115, 0.0115)
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, -0.0998968, 0.1115, 0.0115)
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
