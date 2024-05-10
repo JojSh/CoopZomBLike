@@ -2144,18 +2144,26 @@ _data = {
 
 [node name="leg-left" parent="character-human/root" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.083571, 0.17625, -0.02375)
+surface_material_override/0 = ExtResource("23_mf5eq")
 
 [node name="leg-right" parent="character-human/root" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.083571, 0.17625, -0.02375)
+surface_material_override/0 = ExtResource("23_mf5eq")
+
+[node name="torso" parent="character-human/root" index="2"]
+surface_material_override/0 = ExtResource("23_mf5eq")
 
 [node name="arm-left" parent="character-human/root/torso" index="0"]
 transform = Transform3D(0.707108, 0.707106, 0, -0.707106, 0.707108, 0, 0, 0, 1, 0.0998968, 0.1115, 0.0115)
+surface_material_override/0 = ExtResource("23_mf5eq")
 
 [node name="arm-right" parent="character-human/root/torso" index="1"]
 transform = Transform3D(0.707108, -0.707106, 0, 0.707106, 0.707108, 0, 0, 0, 1, -0.0998968, 0.1115, 0.0115)
+surface_material_override/0 = ExtResource("23_mf5eq")
 
 [node name="head" parent="character-human/root/torso" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.167, 0.0263888)
+surface_material_override/0 = ExtResource("23_mf5eq")
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

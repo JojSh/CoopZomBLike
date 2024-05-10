@@ -11,8 +11,8 @@ signal create_projectile
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 5
-var max_hp : int = 5
+var current_hp : int = 100
+var max_hp : int = 100
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = DEFAULT_SHOVE_FORCE
@@ -38,12 +38,15 @@ var terminal_depth: float = -10.0
 @onready var models : Node3D = get_node("Models")
 @onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UI/HUD")
-@onready var timer = get_node("InvincibilityTimer")
+@onready var invincibility_timer = get_node("InvincibilityTimer")
+@onready var reset_state_timer = get_node("ResetStateTimer")
 
 func _ready():
 	set_colour_by_player_number()
 	hud.update_health_bar(player_number, current_hp, max_hp)
-	timer.wait_time = 0.45 # see if this can be timer.set_wait_time(attackRate)
+	invincibility_timer.wait_time = 0.45 # see if this can be invincibility_timer.set_wait_time(attackRate)
+	reset_state_timer.wait_time = 2.0
+	reset_state_timer.start()
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -124,7 +127,7 @@ func try_attack ():
 		weaponAnimation.stop()
 		weaponAnimation.play("ShieldShove")
 	else:
-		#shoveAnimation.stop()
+		# default shove
 		animation_player.play("holding-both-shoot")
 
 	if attackShapeCast.is_colliding():
@@ -147,8 +150,7 @@ func receive_enemy_damage (damage, attacker):
 		weaponAnimation.play("Flash")
 	else:
 		current_hp -= damage
-		#animation_player.stop()
-		timer.start()
+		invincibility_timer.start()
 		invincible = true
 		animation_player.play("show_damage")
 		hud.update_health_bar(player_number, current_hp, max_hp)
@@ -157,7 +159,7 @@ func receive_enemy_damage (damage, attacker):
 		die()
 
 func die ():
-	timer.stop()
+	invincibility_timer.stop()
 	animation_player.stop()
 	animation_player.play("die")
 	player_death.emit()
@@ -211,7 +213,11 @@ func drop_item ():
 
 func _on_invincibility_timer_timeout():
 	invincible = false
-	
+
+func _on_reset_state_timer_timeout():
+	print("2 seconds have elapsed")
+	animation_player.play("RESET")
+
 func restore_hp (healing_power):
 	current_hp += healing_power
 	if current_hp > max_hp: current_hp = max_hp

@@ -29,7 +29,8 @@ var enemy_wave_sequence : Array = [
 ]
 
 var item_wave_sequence : Array = [
-	[{ "item_name": "shield", "x": 2, "z": 2 }, { "item_name": "knife", "x": 2, "z": 0 }, { "item_name": "spear", "x": 4, "z": 0 }],
+	#[{ "item_name": "shield", "x": 2, "z": 2 }, { "item_name": "knife", "x": 2, "z": 0 }, { "item_name": "spear", "x": 4, "z": 0 }],
+	[{ "item_name": "spear", "x": 4, "z": 0 }],
 	[{ "item_name": "shield", "x": 4.5, "z": -8 }, { "item_name": "health", "x": 0, "z": 0 }],
 	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "health", "x": 0, "z": 0 }],
 	[{ "item_name": "spear", "x": -6, "z": -1 }, { "item_name": "spear", "x": 14.5, "z": -1 }, { "item_name": "health", "x": 0, "z": 0 }],

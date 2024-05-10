@@ -106,6 +106,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_a2gsv"]
 resource_name = "show_damage"
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -214,11 +215,17 @@ _data = {
 
 [node name="CharacterHumanP1" instance=ExtResource("1_scx4f")]
 
+[node name="torso" parent="character-human/root" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.982721, 0.185094, 0, -0.185094, 0.982721, 0, 0.17625, -0.02375)
+
 [node name="arm-left" parent="character-human/root/torso" index="0"]
-transform = Transform3D(0.74681, 0.650495, 0.138315, -0.656423, 0.754385, -0.00362063, -0.106698, -0.0880889, 0.990382, 0.0998968, 0.1115, 0.0115)
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.0998968, 0.1115, 0.0115)
 
 [node name="arm-right" parent="character-human/root/torso" index="1"]
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866026, 0, 0.5, -0.0998968, 0.1115, 0.0115)
+transform = Transform3D(0.496154, 0.0618968, 0.866026, -0.123794, 0.992308, -2.23517e-08, -0.859364, -0.107209, 0.5, -0.0998968, 0.1115, 0.0115)
+
+[node name="head" parent="character-human/root/torso" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.982721, -0.185094, 0, 0.185094, 0.982721, 0, 0.167, 0.0263888)
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

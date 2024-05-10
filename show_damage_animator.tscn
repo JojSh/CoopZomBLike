@@ -54,10 +54,10 @@ tracks/0/path = NodePath(".:material_override")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3, 0.375),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.55, 0.65, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("1_2jb43"), null, ExtResource("1_2jb43"), null, ExtResource("1_2jb43"), null]
+"values": [ExtResource("1_2jb43"), null, ExtResource("1_2jb43"), null, ExtResource("1_2jb43"), null, null, null, null, null]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2moqt"]
