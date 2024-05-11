@@ -33,20 +33,18 @@ var terminal_depth: float = -10.0
 @onready var weaponAnimation = get_node("Models/WeaponHolder/WeaponAnimator")
 @onready var shoveAnimation = get_node("Models/ShovingHands/ShoveAnimator")
 @onready var animation_player: AnimationPlayer
+@onready var show_damage_player: AnimationPlayer
 @onready var attackShapeCast = get_node("Models/AttackShapeCast")
 @onready var dummy_character_model = get_node("Models/DummyCharacterModel")
 @onready var models : Node3D = get_node("Models")
 @onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UI/HUD")
 @onready var invincibility_timer = get_node("InvincibilityTimer")
-@onready var reset_state_timer = get_node("ResetStateTimer")
 
 func _ready():
 	set_colour_by_player_number()
 	hud.update_health_bar(player_number, current_hp, max_hp)
 	invincibility_timer.wait_time = 0.45 # see if this can be invincibility_timer.set_wait_time(attackRate)
-	reset_state_timer.wait_time = 2.0
-	reset_state_timer.start()
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -109,6 +107,7 @@ func set_colour_by_player_number ():
 	player_model_to_use
 	if (player_number == 2): print(models.get_children())
 	animation_player = get_node("Models/" + model_name + "/AnimationPlayer")
+	show_damage_player = get_node("Models/" + model_name + "/ShowDamagePlayer")
 
 func kill_if_below_terminal_altitude ():
 	if (position.y <= terminal_depth):
@@ -152,7 +151,7 @@ func receive_enemy_damage (damage, attacker):
 		current_hp -= damage
 		invincibility_timer.start()
 		invincible = true
-		animation_player.play("show_damage")
+		show_damage_player.play("show_damage")
 		hud.update_health_bar(player_number, current_hp, max_hp)
 
 	if current_hp <= 0:
@@ -213,10 +212,6 @@ func drop_item ():
 
 func _on_invincibility_timer_timeout():
 	invincible = false
-
-func _on_reset_state_timer_timeout():
-	print("2 seconds have elapsed")
-	animation_player.play("RESET")
 
 func restore_hp (healing_power):
 	current_hp += healing_power

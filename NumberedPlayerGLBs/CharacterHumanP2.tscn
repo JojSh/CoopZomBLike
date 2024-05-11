@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dur8rv71vped3"]
+[gd_scene load_steps=33 format=3 uid="uid://dur8rv71vped3"]
 
 [ext_resource type="PackedScene" uid="uid://cuo0m40hjsacb" path="res://GLB character models/character-human-colormap-reposition-blue-light.glb" id="1_g2gmu"]
 [ext_resource type="Animation" uid="uid://od6w1oicirqj" path="res://sprint_rhand_static.res" id="3_014y7"]
@@ -1708,82 +1708,6 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_yl5ew"]
-resource_name = "show_damage"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("character-human/root/torso/head:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("character-human/root/torso:surface_material_override/0")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("character-human/root/leg-left:surface_material_override/0")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("character-human/root/leg-right:surface_material_override/0")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("character-human/root/torso/arm-left:surface_material_override/0")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("character-human/root/torso/arm-right:surface_material_override/0")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
-}
-
 [sub_resource type="Animation" id="Animation_j6n6f"]
 resource_name = "sit"
 length = 0.166667
@@ -2132,7 +2056,6 @@ _data = {
 "interact-right": SubResource("Animation_5jrpw"),
 "jump": SubResource("Animation_sic8o"),
 "pick-up": SubResource("Animation_3edtl"),
-"show_damage": SubResource("Animation_yl5ew"),
 "sit": SubResource("Animation_j6n6f"),
 "sprint": SubResource("Animation_7rpnr"),
 "sprint_rhand_static": ExtResource("3_014y7"),
@@ -2140,32 +2063,109 @@ _data = {
 "walk": SubResource("Animation_16bu6")
 }
 
+[sub_resource type="Animation" id="Animation_vpyk8"]
+resource_name = "show_damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("character-human/root/torso/head:surface_material_override/0")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("character-human/root/torso:surface_material_override/0")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("character-human/root/leg-left:surface_material_override/0")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("character-human/root/leg-right:surface_material_override/0")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("character-human/root/torso/arm-left:surface_material_override/0")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("character-human/root/torso/arm-right:surface_material_override/0")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null, ExtResource("23_mf5eq"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwddw"]
+_data = {
+"show_damage": SubResource("Animation_vpyk8")
+}
+
 [node name="CharacterHumanP2" instance=ExtResource("1_g2gmu")]
 
 [node name="leg-left" parent="character-human/root" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.083571, 0.17625, -0.02375)
-surface_material_override/0 = ExtResource("23_mf5eq")
 
 [node name="leg-right" parent="character-human/root" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.083571, 0.17625, -0.02375)
-surface_material_override/0 = ExtResource("23_mf5eq")
-
-[node name="torso" parent="character-human/root" index="2"]
-surface_material_override/0 = ExtResource("23_mf5eq")
 
 [node name="arm-left" parent="character-human/root/torso" index="0"]
-transform = Transform3D(0.707108, 0.707106, 0, -0.707106, 0.707108, 0, 0, 0, 1, 0.0998968, 0.1115, 0.0115)
-surface_material_override/0 = ExtResource("23_mf5eq")
+transform = Transform3D(0.5, 0, -0.866026, 0, 1, 0, 0.866026, 0, 0.5, 0.0998968, 0.1115, 0.0115)
 
 [node name="arm-right" parent="character-human/root/torso" index="1"]
-transform = Transform3D(0.707108, -0.707106, 0, 0.707106, 0.707108, 0, 0, 0, 1, -0.0998968, 0.1115, 0.0115)
-surface_material_override/0 = ExtResource("23_mf5eq")
+transform = Transform3D(0.5, 0, 0.866026, 0, 1, 0, -0.866026, 0, 0.5, -0.0998968, 0.1115, 0.0115)
 
 [node name="head" parent="character-human/root/torso" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.167, 0.0263888)
-surface_material_override/0 = ExtResource("23_mf5eq")
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
 "": SubResource("AnimationLibrary_2xhre")
+}
+
+[node name="ShowDamagePlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_jwddw")
 }

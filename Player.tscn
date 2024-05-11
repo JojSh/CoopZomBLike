@@ -193,8 +193,6 @@ starting_position = Vector3(6, 0, -3)
 wait_time = 0.45
 one_shot = true
 
-[node name="ResetStateTimer" type="Timer" parent="."]
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.335, -0.05)
 shape = SubResource("BoxShape3D_2hl1u")
@@ -236,4 +234,3 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 [node name="DummyCharacterModel" parent="Models" instance=ExtResource("2_3rhyr")]
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
-[connection signal="timeout" from="ResetStateTimer" to="." method="_on_reset_state_timer_timeout"]
