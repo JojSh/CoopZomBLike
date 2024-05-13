@@ -1,7 +1,6 @@
-[gd_scene load_steps=34 format=3 uid="uid://cndk4bfnj5y4i"]
+[gd_scene load_steps=32 format=3 uid="uid://cndk4bfnj5y4i"]
 
 [ext_resource type="PackedScene" uid="uid://bupis38we058c" path="res://GLB character models/character-human-colormap-reposition-yellow.glb" id="1_scx4f"]
-[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="2_wrmje"]
 [ext_resource type="Animation" uid="uid://mhnk31rrb2n7" path="res://PlayerAnimations/attack-kick-left.res" id="3_ansmr"]
 [ext_resource type="Animation" uid="uid://b6xmiujscm00r" path="res://PlayerAnimations/attack-kick-right.res" id="4_4otwm"]
 [ext_resource type="Animation" uid="uid://ejd48yrbyj6q" path="res://PlayerAnimations/attack-melee-left.res" id="5_xw611"]
@@ -27,6 +26,7 @@
 [ext_resource type="Animation" uid="uid://dhrhb76mhkmal" path="res://PlayerAnimations/sprint.res" id="25_2gr4r"]
 [ext_resource type="Animation" uid="uid://rkm0wihg56ye" path="res://PlayerAnimations/static.res" id="26_dor6b"]
 [ext_resource type="Animation" uid="uid://ct7j1wmm6ho83" path="res://PlayerAnimations/walk.res" id="27_eiqg5"]
+[ext_resource type="PackedScene" uid="uid://d1bxu2r5gjwfy" path="res://show_damage_animator.tscn" id="28_cnfpn"]
 [ext_resource type="Animation" uid="uid://od6w1oicirqj" path="res://sprint_rhand_static.res" id="28_flh2r"]
 
 [sub_resource type="Animation" id="Animation_7h5mi"]
@@ -65,86 +65,6 @@ _data = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wyj7s"]
 
-[sub_resource type="Animation" id="Animation_vpyk8"]
-resource_name = "show_damage"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("character-human/root/torso/head:surface_material_override/0")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("character-human/root/torso:surface_material_override/0")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("character-human/root/leg-left:surface_material_override/0")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("character-human/root/leg-right:surface_material_override/0")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("character-human/root/torso/arm-left:surface_material_override/0")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("character-human/root/torso/arm-right:surface_material_override/0")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null, ExtResource("2_wrmje"), null]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwddw"]
-_data = {
-"show_damage": SubResource("Animation_vpyk8")
-}
-
 [node name="CharacterHumanP1" instance=ExtResource("1_scx4f")]
 
 [node name="arm-left" parent="character-human/root/torso" index="0"]
@@ -159,7 +79,4 @@ libraries = {
 "show_damage": SubResource("AnimationLibrary_wyj7s")
 }
 
-[node name="ShowDamagePlayer" type="AnimationPlayer" parent="." index="2"]
-libraries = {
-"": SubResource("AnimationLibrary_jwddw")
-}
+[node name="ShowDamagePlayer" parent="." index="2" instance=ExtResource("28_cnfpn")]

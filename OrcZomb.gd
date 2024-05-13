@@ -19,11 +19,12 @@ var nearestPlayer
 
 @onready var timer = get_node("Timer")
 @onready var players = get_node("/root/Main/Players").get_children()
-@onready var model : MeshInstance3D = get_node("Model")
-@onready var weaponAnimation = get_node("Model/WeaponHolder/WeaponAnimator")
-@onready var showDamageAnimation = get_node("Model/ShowDamageAnimator")
-@onready var attackShapeCast = get_node("Model/AttackShapeCast")
+@onready var character_model : Node3D = get_node("Models/CharacterModel")
+@onready var weaponAnimation = get_node("Models/WeaponHolder/WeaponAnimator")
+@onready var attackShapeCast = get_node("Models/AttackShapeCast")
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var animation_player = get_node("Models/CharacterModel/AnimationPlayer")
+@onready var show_damage_player = get_node("Models/CharacterModel/ShowDamageAnimator")
 
 func _ready () :
 	#set the timer wait time
@@ -68,7 +69,8 @@ func _physics_process(delta):
 		var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 
 		set_movement_target(nearestPlayer.global_position)
-
+		
+		handle_sprint_animation()
 		# specifying x and y as we don't want to affect y (vertical)
 		velocity.x = current_position.direction_to(next_path_position).x * move_speed
 		velocity.z = current_position.direction_to(next_path_position).z * move_speed
@@ -89,6 +91,9 @@ func _physics_process(delta):
 	move_and_slide()
 	knockback = lerp(knockback, Vector3.ZERO, 0.1)
 
+func handle_sprint_animation ():
+	animation_player.play("walk")
+
 func die_if_below_terminal_altitude ():
 	if (current_position.y <= terminal_depth): die()
 
@@ -105,8 +110,8 @@ func set_movement_target(movement_target: Vector3):
 func receive_player_damage (damage):
 	if (is_dead): return
 	health_points -= damage
-	showDamageAnimation.stop()
-	showDamageAnimation.play("show_damage")
+	show_damage_player.stop()
+	show_damage_player.play("show_damage")
 	$HealthBar3D.update_health_bar(health_points, max_health)
 
 	if health_points <= 0: die()
@@ -142,6 +147,6 @@ func die ():
 	$CollisionShape3DBox.disabled = true
 	$CollisionShape3DCapsule.disabled = true
 
-	showDamageAnimation.play("die")
+	animation_player.play("die")
 	is_dead = true
 	enemy_death.emit()

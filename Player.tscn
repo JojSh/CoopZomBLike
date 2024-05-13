@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwnpajm11fj01"]
+[gd_scene load_steps=16 format=3 uid="uid://dwnpajm11fj01"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
 [ext_resource type="PackedScene" uid="uid://cndk4bfnj5y4i" path="res://NumberedPlayerGLBs/CharacterHumanP1.tscn" id="2_3rhyr"]
-[ext_resource type="PackedScene" uid="uid://cl2hr4ytqqx3o" path="res://show_damage_animator.tscn" id="3_7bweu"]
 [ext_resource type="Material" uid="uid://cpkefmx35v2yy" path="res://shiny_flash.tres" id="5_nksg0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
@@ -198,9 +197,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.335, -0.05)
 shape = SubResource("BoxShape3D_2hl1u")
 
 [node name="Models" type="Node3D" parent="."]
-
-[node name="ShowDamageAnimator" parent="Models" instance=ExtResource("3_7bweu")]
-root_node = NodePath("")
 
 [node name="ShovingHands" type="Node3D" parent="Models"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.1)
