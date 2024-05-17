@@ -229,4 +229,6 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="DummyCharacterModel" parent="Models" instance=ExtResource("2_3rhyr")]
 
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

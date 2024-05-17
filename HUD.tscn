@@ -33,6 +33,32 @@ offset_top = 20.0
 offset_right = 944.0
 offset_bottom = 48.0
 
+[node name="DebugInfo" type="Node2D" parent="."]
+
+[node name="P1Info" type="Label" parent="DebugInfo"]
+offset_left = 21.0
+offset_top = 72.0
+offset_right = 61.0
+offset_bottom = 95.0
+
+[node name="P2Info" type="Label" parent="DebugInfo"]
+offset_left = 261.0
+offset_top = 72.0
+offset_right = 301.0
+offset_bottom = 95.0
+
+[node name="P3Info" type="Label" parent="DebugInfo"]
+offset_left = 501.0
+offset_top = 72.0
+offset_right = 541.0
+offset_bottom = 95.0
+
+[node name="P4Info" type="Label" parent="DebugInfo"]
+offset_left = 741.0
+offset_top = 72.0
+offset_right = 781.0
+offset_bottom = 95.0
+
 [node name="EnemyCounter" type="Label" parent="."]
 layout_direction = 1
 anchors_preset = 1

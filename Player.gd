@@ -40,6 +40,7 @@ var terminal_depth: float = -10.0
 @onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UI/HUD")
 @onready var invincibility_timer = get_node("InvincibilityTimer")
+@onready var visibility_notifier = get_node("VisibleOnScreenNotifier3D")
 
 func _ready():
 	set_colour_by_player_number()
@@ -86,11 +87,15 @@ func _physics_process(delta):
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 
 		move_and_slide()
+		update_debug_info()
 
 		if input_dir.length() > 0:
 			facing_angle = Vector2(input_dir.y, input_dir.x).angle()
 			facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
 			models.rotation.y = lerp_angle(models.rotation.y, facing_angle, 0.5)
+
+func update_debug_info ():
+	hud.update_player_debug_info(player_number, " on screen:", visibility_notifier.is_on_screen())
 
 func handle_sprint_animation ():
 	if (slashing_weapon_equipped or throwing_weapon_equipped or deflector_equipped):
@@ -105,7 +110,6 @@ func set_colour_by_player_number ():
 	dummy_character_model.queue_free()
 	models.add_child(player_model_to_use)
 	player_model_to_use
-	if (player_number == 2): print(models.get_children())
 	animation_player = get_node("Models/" + model_name + "/AnimationPlayer")
 	show_damage_player = get_node("Models/" + model_name + "/ShowDamagePlayer")
 
