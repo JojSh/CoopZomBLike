@@ -21,6 +21,10 @@ window/size/viewport_width=2300
 window/size/viewport_height=1300
 window/size/initial_position_type=2
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+
 [filesystem]
 
 import/fbx/enabled=false

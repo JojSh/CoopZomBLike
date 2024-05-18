@@ -13,6 +13,8 @@ signal game_over
 @onready var items = get_node("Items")
 @onready var projectiles = get_node("Projectiles")
 @onready var hud = get_node("UI/HUD")
+@onready var phantom_camera = get_node("PhantomCamera3D")
+
 
 var wave_count : int = 0
 var player_count : int = 2
@@ -60,6 +62,8 @@ func spawn_player (index):
 	player.connect('player_death', _on_player_player_death)
 	player.connect('create_collectible', _on_create_collectible)
 	player.connect('create_projectile', _on_create_projectile)
+	
+	phantom_camera.append_follow_targets(player)
 
 func spawn_enemy_at (x, z):
 	var orc_zomb = orc_zomb_scene.instantiate()
