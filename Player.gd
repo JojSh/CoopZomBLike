@@ -41,6 +41,8 @@ var terminal_depth: float = -10.0
 @onready var hud = get_node("/root/Main/UI/HUD")
 @onready var invincibility_timer = get_node("InvincibilityTimer")
 @onready var visibility_notifier = get_node("VisibleOnScreenNotifier3D")
+@onready var footsteps_sfx = get_node("FootstepsSFX")
+@onready var shove_sfx = get_node("ShoveSFX")
 
 func _ready():
 	set_colour_by_player_number()
@@ -83,6 +85,8 @@ func _physics_process(delta):
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z *  SPEED
 		else:
+			#footsteps_sfx.stop()
+			footsteps_sfx.play()
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 
@@ -131,7 +135,9 @@ func try_attack ():
 		weaponAnimation.play("ShieldShove")
 	else:
 		# default shove
+		shove_sfx.play()
 		animation_player.play("holding-both-shoot")
+		
 
 	if attackShapeCast.is_colliding():
 		var nearest_collider_index = attackShapeCast.get_collision_count() - 1
@@ -151,7 +157,9 @@ func receive_enemy_damage (damage, attacker):
 	elif deflector_equipped and attackShapeCast.is_colliding() and attackShapeCast.get_collider(0) == attacker:
 		weaponAnimation.stop()
 		weaponAnimation.play("Flash")
+		$ShieldClangSFX.play()
 	else:
+		$ReceiveWhackSFX.play()
 		current_hp -= damage
 		invincibility_timer.start()
 		invincible = true
@@ -162,6 +170,7 @@ func receive_enemy_damage (damage, attacker):
 		die()
 
 func die ():
+	$ThudDeathHitSFX.play()
 	invincibility_timer.stop()
 	animation_player.stop()
 	animation_player.play("die")

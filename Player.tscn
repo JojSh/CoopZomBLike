@@ -1,8 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwnpajm11fj01"]
+[gd_scene load_steps=21 format=3 uid="uid://dwnpajm11fj01"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
 [ext_resource type="PackedScene" uid="uid://cndk4bfnj5y4i" path="res://NumberedPlayerGLBs/CharacterHumanP1.tscn" id="2_3rhyr"]
+[ext_resource type="AudioStream" uid="uid://xomupwkdj7cd" path="res://Audio/footsteps_on_stone.ogg" id="4_gcroh"]
+[ext_resource type="AudioStream" uid="uid://c5bvpljalgh4b" path="res://Audio/stick-woosh-1.ogg" id="5_mpxwm"]
 [ext_resource type="Material" uid="uid://cpkefmx35v2yy" path="res://shiny_flash.tres" id="5_nksg0"]
+[ext_resource type="AudioStream" uid="uid://bp5wijwpmqvwy" path="res://Audio/shield-clang-1.ogg" id="6_pgrgf"]
+[ext_resource type="AudioStream" uid="uid://ddlfyyrs1btt3" path="res://Audio/thuds-punches/heavy-punch-1.ogg" id="7_ca4c8"]
+[ext_resource type="AudioStream" uid="uid://bsaxkvrcu4pju" path="res://Audio/blade-stabs/slash-thud-stab-1.ogg" id="8_xbdl6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hl1u"]
 size = Vector3(0.645788, 0.633039, 0.438799)
@@ -230,5 +235,25 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 [node name="DummyCharacterModel" parent="Models" instance=ExtResource("2_3rhyr")]
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="FootstepsSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_gcroh")
+volume_db = -10.03
+
+[node name="ShoveSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_mpxwm")
+volume_db = -10.03
+
+[node name="ShieldClangSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_pgrgf")
+pitch_scale = 1.8
+
+[node name="ReceiveWhackSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_ca4c8")
+volume_db = -8.0
+
+[node name="ThudDeathHitSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_xbdl6")
+volume_db = -5.0
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

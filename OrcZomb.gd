@@ -19,7 +19,6 @@ var nearestPlayer
 
 @onready var timer = get_node("Timer")
 @onready var players = get_node("/root/Main/Players").get_children()
-@onready var character_model : Node3D = get_node("Models/CharacterModel")
 @onready var weaponAnimation = get_node("Models/WeaponHolder/WeaponAnimator")
 @onready var attackShapeCast = get_node("Models/AttackShapeCast")
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
@@ -112,11 +111,15 @@ func receive_player_damage (damage):
 	health_points -= damage
 	show_damage_player.stop()
 	show_damage_player.play("show_damage")
+	$ReceiveSlashSFX.play()
 	$HealthBar3D.update_health_bar(health_points, max_health)
 
-	if health_points <= 0: die()
+	if health_points <= 0:
+		$ThudDeathHitSFX.play()
+		die()
 	
 func receive_shove (force, shove_direction):
+	$ReceiveShoveSFX.play()
 	knockback = shove_direction * force
 
 func _on_timer_timeout():

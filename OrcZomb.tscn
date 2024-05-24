@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4otta7ct55tq"]
+[gd_scene load_steps=16 format=3 uid="uid://c4otta7ct55tq"]
 
 [ext_resource type="Script" path="res://OrcZomb.gd" id="1_t5o8h"]
 [ext_resource type="ArrayMesh" uid="uid://cexhyqewatpn3" path="res://chopstick.obj" id="3_qwdqt"]
 [ext_resource type="PackedScene" uid="uid://odpfevbgxb87" path="res://NumberedPlayerGLBs/CharacterOrc.tscn" id="3_uy17n"]
 [ext_resource type="PackedScene" uid="uid://ctdrx78dnbnlv" path="res://UIHealthBar.tscn" id="4_r660k"]
 [ext_resource type="Script" path="res://HealthBar3D.gd" id="4_tgf0f"]
+[ext_resource type="AudioStream" uid="uid://hxvyf0o4eu85" path="res://Audio/thuds-punches/tiny-thud-2.ogg" id="6_awg5k"]
+[ext_resource type="AudioStream" uid="uid://rc8j0kgf7suf" path="res://Audio/blade-stabs/gory-slash-1.ogg" id="7_viv8t"]
+[ext_resource type="AudioStream" uid="uid://bsaxkvrcu4pju" path="res://Audio/blade-stabs/slash-thud-stab-1.ogg" id="8_n5yts"]
 
 [sub_resource type="Animation" id="Animation_ixa7a"]
 length = 0.001
@@ -137,5 +140,16 @@ radius = 0.6
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0.968627, 1)
+
+[node name="ReceiveShoveSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_awg5k")
+
+[node name="ReceiveSlashSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_viv8t")
+volume_db = -5.0
+
+[node name="ThudDeathHitSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_n5yts")
+volume_db = -5.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
