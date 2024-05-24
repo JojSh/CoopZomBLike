@@ -46,6 +46,10 @@ func _on_orc_zomb_enemy_death ():
 
 func _on_player_player_death ():
 	await get_tree().create_timer(1).timeout
+	
+	var last_dead_player = get_dead_players()[-1]
+	print(last_dead_player)
+	phantom_camera.erase_follow_targets(last_dead_player)
 
 	if get_alive_players().size() < 1:
 		game_over.emit()

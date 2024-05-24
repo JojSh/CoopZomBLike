@@ -246,7 +246,7 @@ volume_db = -10.03
 
 [node name="ShieldClangSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_pgrgf")
-pitch_scale = 1.8
+pitch_scale = 1.3
 
 [node name="ReceiveWhackSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_ca4c8")
