@@ -20,7 +20,7 @@ var wave_count : int = 0
 var player_count : int = 2
 
 var enemy_wave_sequence : Array = [
-	#[{ "x": 12, "z": 0 }], # test wave with 1 enemy
+	[{ "x": 12, "z": 0 }], # test wave with 1 enemy
 	[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
 	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }],

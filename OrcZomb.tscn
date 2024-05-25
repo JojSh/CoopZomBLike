@@ -84,7 +84,7 @@ height = 0.8
 [sub_resource type="ViewportTexture" id="ViewportTexture_6fcd1"]
 
 [node name="OrcZomb" type="CharacterBody3D"]
-collision_layer = 3
+collision_layer = 9
 script = ExtResource("1_t5o8h")
 
 [node name="Models" type="Node3D" parent="."]
@@ -108,6 +108,7 @@ transform = Transform3D(30, 0, 0, 0, -3.0598e-08, 1, 0, -0.7, -4.37114e-08, 0, 0
 [node name="AttackShapeCast" type="ShapeCast3D" parent="Models"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 0, 0.446727, 1.33214)
 shape = SubResource("BoxShape3D_mujcu")
+collision_mask = 4
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="CharacterModel" parent="Models" instance=ExtResource("3_uy17n")]

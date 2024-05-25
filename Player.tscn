@@ -190,6 +190,7 @@ _data = {
 size = Vector3(1, 0.6, 0.4)
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 5
 script = ExtResource("1_q3yjm")
 starting_position = Vector3(6, 0, -3)
 
@@ -230,6 +231,7 @@ libraries = {
 [node name="AttackShapeCast" type="ShapeCast3D" parent="Models"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1.10495, 0, 1, -4.82989e-08, 0, 0.446727, 1.33214)
 shape = SubResource("BoxShape3D_erx83")
+collision_mask = 8
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="DummyCharacterModel" parent="Models" instance=ExtResource("2_3rhyr")]

@@ -137,12 +137,11 @@ func try_attack ():
 		# default shove
 		shove_sfx.play()
 		animation_player.play("holding-both-shoot")
-		
 
 	if attackShapeCast.is_colliding():
 		var nearest_collider_index = attackShapeCast.get_collision_count() - 1
 		var target = attackShapeCast.get_collider(nearest_collider_index)
-		
+
 		if target == self: return
 
 		if target.has_method("receive_shove"):
@@ -163,6 +162,7 @@ func receive_enemy_damage (damage, attacker):
 		current_hp -= damage
 		invincibility_timer.start()
 		invincible = true
+		show_damage_player.stop()
 		show_damage_player.play("show_damage")
 		hud.update_health_bar(player_number, current_hp, max_hp)
 
