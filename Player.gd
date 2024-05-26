@@ -11,8 +11,8 @@ signal create_projectile
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 100
-var max_hp : int = 100
+var current_hp : int = 10
+var max_hp : int = 10
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = DEFAULT_SHOVE_FORCE
