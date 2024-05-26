@@ -21,6 +21,7 @@ var slashing_weapon_equipped : bool = false
 var throwing_weapon_equipped : bool = false
 var deflector_equipped : bool = false
 var invincible : bool = false
+var attack_delay_active : bool = false
 var currently_held_collectible_name : String
 var terminal_depth: float = -10.0
 
@@ -40,6 +41,7 @@ var terminal_depth: float = -10.0
 @onready var main = get_node("/root/Main")
 @onready var hud = get_node("/root/Main/UI/HUD")
 @onready var invincibility_timer = get_node("InvincibilityTimer")
+@onready var attack_delay_timer = get_node("AttackDelayTimer")
 @onready var visibility_notifier = get_node("VisibleOnScreenNotifier3D")
 @onready var footsteps_sfx = get_node("FootstepsSFX")
 @onready var shove_sfx = get_node("ShoveSFX")
@@ -48,6 +50,8 @@ func _ready():
 	set_colour_by_player_number()
 	hud.update_health_bar(player_number, current_hp, max_hp)
 	invincibility_timer.wait_time = 0.45 # see if this can be invincibility_timer.set_wait_time(attackRate)
+	attack_delay_timer.wait_time = 0.4 # see if this can be invincibility_timer.set_wait_time(attackRate)
+	
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -124,6 +128,7 @@ func kill_if_below_terminal_altitude ():
 		die()
 
 func try_attack ():
+	if attack_delay_active: return
 	if slashing_weapon_equipped:
 		weaponAnimation.stop()
 		weaponAnimation.play("Slash")
@@ -137,6 +142,9 @@ func try_attack ():
 		# default shove
 		shove_sfx.play()
 		animation_player.play("holding-both-shoot")
+
+	attack_delay_timer.start()
+	attack_delay_active = true
 
 	if attackShapeCast.is_colliding():
 		var nearest_collider_index = attackShapeCast.get_collision_count() - 1
@@ -172,6 +180,7 @@ func receive_enemy_damage (damage, attacker):
 func die ():
 	$ThudDeathHitSFX.play()
 	invincibility_timer.stop()
+	attack_delay_timer.stop()
 	animation_player.stop()
 	animation_player.play("die")
 	player_death.emit()
@@ -226,6 +235,9 @@ func drop_item ():
 func _on_invincibility_timer_timeout():
 	invincible = false
 
+func _on_attack_delay_timer_timeout():
+	attack_delay_active = false
+
 func restore_hp (healing_power):
 	current_hp += healing_power
 	if current_hp > max_hp: current_hp = max_hp
@@ -240,3 +252,5 @@ func revive ():
 	animation_player.stop()
 	animation_player.play("RESET")
 	restore_hp(2)
+
+

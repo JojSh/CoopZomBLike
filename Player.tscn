@@ -198,6 +198,8 @@ starting_position = Vector3(6, 0, -3)
 wait_time = 0.45
 one_shot = true
 
+[node name="AttackDelayTimer" type="Timer" parent="."]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.335, -0.05)
 shape = SubResource("BoxShape3D_2hl1u")
@@ -259,3 +261,4 @@ stream = ExtResource("8_xbdl6")
 volume_db = -5.0
 
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="AttackDelayTimer" to="." method="_on_attack_delay_timer_timeout"]

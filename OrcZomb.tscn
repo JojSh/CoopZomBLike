@@ -115,11 +115,11 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape3DBox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+visible = false
 shape = SubResource("BoxShape3D_fwwsm")
 
 [node name="CollisionShape3DCapsule" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36, 0)
-visible = false
 shape = SubResource("CapsuleShape3D_ajnae")
 
 [node name="Timer" type="Timer" parent="."]
