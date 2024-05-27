@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://chqrq5oms8di2"]
+
+[ext_resource type="PackedScene" uid="uid://u4vh0e8lqbgg" path="res://GLB character models/white-orc-1.glb" id="1_kujs7"]
+
+[node name="CharacterOrcWhite" instance=ExtResource("1_kujs7")]

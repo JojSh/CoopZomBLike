@@ -51,7 +51,6 @@ func _ready():
 	hud.update_health_bar(player_number, current_hp, max_hp)
 	invincibility_timer.wait_time = 0.45 # see if this can be invincibility_timer.set_wait_time(attackRate)
 	attack_delay_timer.wait_time = 0.4 # see if this can be invincibility_timer.set_wait_time(attackRate)
-	
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -117,7 +116,7 @@ func set_colour_by_player_number ():
 	var player_model_to_use = load(model_path).instantiate()
 	dummy_character_model.queue_free()
 	models.add_child(player_model_to_use)
-	player_model_to_use
+	#player_model_to_use
 	animation_player = get_node("Models/" + model_name + "/AnimationPlayer")
 	show_damage_player = get_node("Models/" + model_name + "/ShowDamagePlayer")
 

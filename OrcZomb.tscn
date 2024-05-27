@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://OrcZomb.gd" id="1_t5o8h"]
 [ext_resource type="ArrayMesh" uid="uid://cexhyqewatpn3" path="res://chopstick.obj" id="3_qwdqt"]
-[ext_resource type="PackedScene" uid="uid://odpfevbgxb87" path="res://NumberedPlayerGLBs/CharacterOrc.tscn" id="3_uy17n"]
+[ext_resource type="PackedScene" uid="uid://odpfevbgxb87" path="res://OrcModelScenes/CharacterOrc.tscn" id="3_uy17n"]
 [ext_resource type="PackedScene" uid="uid://ctdrx78dnbnlv" path="res://UIHealthBar.tscn" id="4_r660k"]
 [ext_resource type="Script" path="res://HealthBar3D.gd" id="4_tgf0f"]
 [ext_resource type="AudioStream" uid="uid://hxvyf0o4eu85" path="res://Audio/thuds-punches/tiny-thud-2.ogg" id="6_awg5k"]
@@ -111,7 +111,7 @@ shape = SubResource("BoxShape3D_mujcu")
 collision_mask = 4
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="CharacterModel" parent="Models" instance=ExtResource("3_uy17n")]
+[node name="DefaultCharacterModel" parent="Models" instance=ExtResource("3_uy17n")]
 
 [node name="CollisionShape3DBox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)

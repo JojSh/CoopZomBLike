@@ -16,16 +16,20 @@ var terminal_depth: float = -10.0
 var nearestPlayer
 
 @export var is_dead : bool = false
+@export var colour: String = "Green"
 
 @onready var timer = get_node("Timer")
 @onready var players = get_node("/root/Main/Players").get_children()
+@onready var models = get_node("Models")
 @onready var weaponAnimation = get_node("Models/WeaponHolder/WeaponAnimator")
 @onready var attackShapeCast = get_node("Models/AttackShapeCast")
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var animation_player = get_node("Models/CharacterModel/AnimationPlayer")
-@onready var show_damage_player = get_node("Models/CharacterModel/ShowDamageAnimator")
+@onready var default_character_model = get_node("Models/DefaultCharacterModel")
+@onready var animation_player = get_node("Models/DefaultCharacterModel/AnimationPlayer")
+@onready var show_damage_player = get_node("Models/DefaultCharacterModel/ShowDamageAnimator")
 
 func _ready () :
+	set_special_colour_model()
 	#set the timer wait time
 	$HealthBar3D.update_health_bar(health_points, max_health)
 	timer.wait_time = attackRate # see if this can be timer.set_wait_time(attackRate)
@@ -89,6 +93,18 @@ func _physics_process(delta):
 
 	move_and_slide()
 	knockback = lerp(knockback, Vector3.ZERO, 0.1)
+
+func set_special_colour_model ():
+	if colour == "Green": return
+
+	var colour_model_name : String = "CharacterOrc" + colour
+	var model_path : String = "res://OrcModelScenes/" + colour_model_name + ".tscn"
+	var orc_model_to_use = load(model_path).instantiate()
+	default_character_model.queue_free()
+	models.add_child(orc_model_to_use)
+	#player_model_to_use
+	animation_player = get_node("Models/" + colour_model_name + "/AnimationPlayer")
+	show_damage_player = get_node("Models/" + colour_model_name + "/ShowDamagePlayer")
 
 func handle_sprint_animation ():
 	animation_player.play("walk")
