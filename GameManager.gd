@@ -6,7 +6,8 @@ signal game_over
 
 @export var enemy_count : int
 
-@onready var orc_zomb_scene = load("res://OrcZomb.tscn")
+@onready var default_orc_zomb_scene = load("res://OrcZomb.tscn")
+@onready var fast_orc_zomb_scene = load("res://OrcZombFast.tscn")
 @onready var player_scene = load("res://Player.tscn")
 @onready var players_container = get_node("Players")
 @onready var enemies = get_node("Enemies")
@@ -20,13 +21,13 @@ var wave_count : int = 0
 var player_count : int = 2
 
 var enemy_wave_sequence : Array = [
-	[{ "x": 12, "z": 0 }], # test wave with 1 enemy
-	[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
-	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
-	[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }],
+	#[{ "x": 12, "z": 0, "variant": "fast" }], # test wave with 1 enemy
+	#[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
+	#[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
+	#[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }],
 	[
 		{ "x": 16, "z": -8 }, { "x": 16, "z": 8 }, { "x": -8, "z": 7 }, { "x": -8, "z": -7 },
-		{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }
+		{ "x": 18, "z": -6,"variant": "fast"  }, { "x": 18, "z": 6, "variant": "fast"  }, { "x": -10, "z": 5 }, { "x": -10, "z": -5,"variant": "fast"  }
 	]
 ]
 
@@ -68,8 +69,15 @@ func spawn_player (index):
 	
 	phantom_camera.append_follow_targets(player)
 
-func spawn_enemy_at (x, z):
-	var orc_zomb = orc_zomb_scene.instantiate()
+func spawn_enemy_at (x, z, variant = "default"):
+	var orc_zomb
+	if (variant == "fast"):
+		orc_zomb = fast_orc_zomb_scene.instantiate()
+	elif (variant == "big"):
+		orc_zomb = default_orc_zomb_scene.instantiate()
+	elif (variant == "default"):
+		orc_zomb = default_orc_zomb_scene.instantiate()
+
 	orc_zomb.global_position = Vector3(x, 0.5, z)
 	enemies.add_child(orc_zomb)
 	orc_zomb.connect('enemy_death', _on_orc_zomb_enemy_death)
@@ -127,7 +135,8 @@ func cleanup_wave ():
 func generate_wave ():
 	cleanup_wave()
 	for i in enemy_wave_sequence[wave_count]:
-		spawn_enemy_at(i.x, i.z)
+		var variant = i.variant if i.has("variant") else "default"
+		spawn_enemy_at(i.x, i.z, variant)
 	
 	for j in item_wave_sequence[wave_count]:
 		spawn_item_at(j.item_name, j.x, j.z)

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://vmcf8nqdfnj3"]
+
+[ext_resource type="PackedScene" uid="uid://c4otta7ct55tq" path="res://OrcZomb.tscn" id="1_cqmei"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hr68p"]
+
+[node name="OrcZomb" instance=ExtResource("1_cqmei")]
+colour = "White"
+move_speed = 4.0
+
+[node name="HealthBar3D" parent="." index="4"]
+texture = SubResource("ViewportTexture_hr68p")
