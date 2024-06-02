@@ -5,7 +5,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_hr68p"]
 
 [node name="OrcZomb" instance=ExtResource("1_cqmei")]
-colour = "White"
+variant = "Fast"
 move_speed = 4.0
 
 [node name="HealthBar3D" parent="." index="4"]

@@ -24,6 +24,7 @@ var invincible : bool = false
 var attack_delay_active : bool = false
 var currently_held_collectible_name : String
 var terminal_depth: float = -10.0
+var knockback = Vector3.ZERO
 
 @export var is_dead : bool = false
 @export var player_number : int
@@ -81,25 +82,42 @@ func _physics_process(delta):
 			str("p", player_number, "_up"),
 			str("p", player_number, "_down")
 		)
+
 		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 		if direction:
-			handle_sprint_animation()
-			velocity.x = direction.x * SPEED
-			velocity.z = direction.z *  SPEED
+			run_in_direction(direction)
 		else:
-			#footsteps_sfx.stop()
-			footsteps_sfx.play()
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.z = move_toward(velocity.z, 0, SPEED)
+			stop_running()
+			
+		# adjust for any knockback
+		velocity.x += knockback.x
+		velocity.z += knockback.z
 
 		move_and_slide()
+		knockback = lerp(knockback, Vector3.ZERO, 0.1)
 		update_debug_info()
 
 		if input_dir.length() > 0:
 			facing_angle = Vector2(input_dir.y, input_dir.x).angle()
 			facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
 			models.rotation.y = lerp_angle(models.rotation.y, facing_angle, 0.5)
+
+func run_in_direction (direction):
+	handle_sprint_animation()
+	velocity.x = direction.x * SPEED
+	velocity.z = direction.z *  SPEED
+
+func stop_running ():
+	# I've no idea putting footsteps_sfx.play() in the stop_running() fn causes the sound to play
+	# when the player ir running. If I change the .ogg file to something else then this no longer
+	# happens and the sound is triggered repeatedly when stopped!
+	footsteps_sfx.play()
+	animation_player.stop()
+
+	#so that the player doesn't carry on travelling in direction * velocity:
+	velocity.x = move_toward(velocity.x, 0, SPEED)
+	velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func update_debug_info ():
 	hud.update_player_debug_info(player_number, " on screen:", visibility_notifier.is_on_screen())
@@ -157,7 +175,8 @@ func try_attack ():
 		if slashing_weapon_equipped and target.has_method("receive_player_damage"):
 			target.receive_player_damage(attack_power)
 
-func receive_enemy_damage (damage, attacker):
+func receive_enemy_damage (damage, attacker, shove_direction):
+	knockback = shove_direction * 15
 	if is_dead or invincible == true:
 		return
 	elif deflector_equipped and attackShapeCast.is_colliding() and attackShapeCast.get_collider(0) == attacker:

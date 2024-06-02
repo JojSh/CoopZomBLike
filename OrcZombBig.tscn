@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://xi7g1i3w7p0g"]
+
+[ext_resource type="PackedScene" uid="uid://c4otta7ct55tq" path="res://OrcZomb.tscn" id="1_x2w34"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jyqk6"]
+
+[node name="OrcZomb" instance=ExtResource("1_x2w34")]
+variant = "Big"
+knockback_force = 15.0
+max_health = 10
+attack_power = 2
+
+[node name="HealthBar3D" parent="." index="4"]
+texture = SubResource("ViewportTexture_jyqk6")

@@ -4,7 +4,7 @@ signal create_collectible
 
 @onready var shapecast = get_node("ShapeCast3D")
 
-const attack_power : int = 10
+const attack_power : int = 3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

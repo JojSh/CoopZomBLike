@@ -2,8 +2,7 @@ extends CharacterBody3D
 
 signal enemy_death
 
-var health_points : int = 3
-var max_health : int = 3
+var health_points : int
 var attack_distance : float = 1.0
 var awarenessRadius : float = 500.0
 var movement_target_position: Vector3
@@ -13,10 +12,15 @@ var attackRate : float = 1.0
 var current_position: Vector3
 var terminal_depth: float = -10.0
 var nearestPlayer
+var facing_angle: float = 0.0
+var facing_direction: Vector3
 
 @export var is_dead : bool = false
-@export var colour: String = "Green"
+@export var variant: String = "Default"
 @export var move_speed : float = 2.0
+@export var knockback_force : float = 1.0
+@export var max_health : int = 3
+@export var attack_power : int = 1
 
 @onready var timer = get_node("Timer")
 @onready var players = get_node("/root/Main/Players").get_children()
@@ -29,7 +33,9 @@ var nearestPlayer
 @onready var show_damage_player = get_node("Models/DefaultCharacterModel/ShowDamageAnimator")
 
 func _ready () :
-	set_special_colour_model()
+	health_points = max_health
+	set_special_model()
+	set_special_size()
 	#set the timer wait time
 	$HealthBar3D.update_health_bar(health_points, max_health)
 	timer.wait_time = attackRate # see if this can be timer.set_wait_time(attackRate)
@@ -82,8 +88,8 @@ func _physics_process(delta):
 		velocity.x += knockback.y
 		velocity.z += knockback.x
 
-		var direction = (next_path_position - position).normalized()
-		var facing_angle = Vector2(direction.z, direction.x).angle()
+		facing_direction = (next_path_position - position).normalized()
+		facing_angle = Vector2(facing_direction.z, facing_direction.x).angle()
 
 		self.rotation.y = lerp_angle(self.rotation.y, facing_angle, 0.5)
 
@@ -94,17 +100,23 @@ func _physics_process(delta):
 	move_and_slide()
 	knockback = lerp(knockback, Vector3.ZERO, 0.1)
 
-func set_special_colour_model ():
-	if colour == "Green": return
+func set_special_size ():
+	if variant == "Big":
+		models.scale = models.scale * 5
+		$HealthBar3D.position.y = 3
+		$HealthBar3D.position.z = -1
 
-	var colour_model_name : String = "CharacterOrc" + colour
-	var model_path : String = "res://OrcModelScenes/" + colour_model_name + ".tscn"
+func set_special_model ():
+	if variant == "Default": return
+
+	var variant_model_name : String = "CharacterOrc" + variant
+	var model_path : String = "res://OrcModelScenes/" + variant_model_name + ".tscn"
 	var orc_model_to_use = load(model_path).instantiate()
 	default_character_model.queue_free()
 	models.add_child(orc_model_to_use)
 	#player_model_to_use
-	animation_player = get_node("Models/" + colour_model_name + "/AnimationPlayer")
-	show_damage_player = get_node("Models/" + colour_model_name + "/ShowDamagePlayer")
+	animation_player = get_node("Models/" + variant_model_name + "/AnimationPlayer")
+	show_damage_player = get_node("Models/" + variant_model_name + "/ShowDamageAnimator")
 
 func handle_sprint_animation ():
 	animation_player.play("walk")
@@ -153,7 +165,7 @@ func try_attack ():
 		
 		if target == self: return
 		if target.has_method("receive_enemy_damage"):
-			target.receive_enemy_damage(1, self)
+			target.receive_enemy_damage(attack_power, self, facing_direction * knockback_force)
 
 func die ():
 	# stop the timer

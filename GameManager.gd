@@ -8,6 +8,7 @@ signal game_over
 
 @onready var default_orc_zomb_scene = load("res://OrcZomb.tscn")
 @onready var fast_orc_zomb_scene = load("res://OrcZombFast.tscn")
+@onready var big_orc_zomb_scene = load("res://OrcZombBig.tscn")
 @onready var player_scene = load("res://Player.tscn")
 @onready var players_container = get_node("Players")
 @onready var enemies = get_node("Enemies")
@@ -16,14 +17,13 @@ signal game_over
 @onready var hud = get_node("UI/HUD")
 @onready var phantom_camera = get_node("PhantomCamera3D")
 
-
 var wave_count : int = 0
 var player_count : int = 2
 
 var enemy_wave_sequence : Array = [
-	#[{ "x": 12, "z": 0, "variant": "fast" }], # test wave with 1 enemy
-	#[{ "x": 18, "z": -6 }, { "x": -10, "z": 5 }],
-	#[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }],
+	[{ "x": 12, "z": 0, "variant": "big" }], # test wave with 1 enemy
+	#[{ "x": 18, "z": -6 }, { "x": -10, "z": 5" }],
+	#[{ "x": 18, "z": -6 }, { "x": 18, qq"z": 6 }, { "x": -10, "z": 5 }],
 	#[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }],
 	[
 		{ "x": 16, "z": -8 }, { "x": 16, "z": 8 }, { "x": -8, "z": 7 }, { "x": -8, "z": -7 },
@@ -74,7 +74,7 @@ func spawn_enemy_at (x, z, variant = "default"):
 	if (variant == "fast"):
 		orc_zomb = fast_orc_zomb_scene.instantiate()
 	elif (variant == "big"):
-		orc_zomb = default_orc_zomb_scene.instantiate()
+		orc_zomb = big_orc_zomb_scene.instantiate()
 	elif (variant == "default"):
 		orc_zomb = default_orc_zomb_scene.instantiate()
 
