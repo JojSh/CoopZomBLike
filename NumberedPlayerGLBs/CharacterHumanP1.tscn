@@ -67,26 +67,14 @@ _data = {
 
 [node name="CharacterHumanP1" instance=ExtResource("1_scx4f")]
 
-[node name="root" parent="character-human" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0483414, 0)
-
-[node name="leg-left" parent="character-human/root" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.928442, -0.371478, 0, 0.371478, 0.928442, 0.083571, 0.17625, -0.02375)
-
-[node name="leg-right" parent="character-human/root" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.928442, 0.371478, 0, -0.371478, 0.928442, -0.083571, 0.17625, -0.02375)
-
-[node name="torso" parent="character-human/root" index="2"]
-transform = Transform3D(0.999428, -0.00652703, -0.0331902, 0.00228564, 0.991995, -0.126255, 0.0337486, 0.126107, 0.991442, 0, 0.17625, -0.02375)
-
 [node name="arm-left" parent="character-human/root/torso" index="0"]
-transform = Transform3D(0.764573, 0.566247, -0.307885, -0.588071, 0.80838, 0.026373, 0.263822, 0.160894, 0.951058, 0.0998968, 0.1115, 0.0115)
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.0998968, 0.1115, 0.0115)
 
 [node name="arm-right" parent="character-human/root/torso" index="1"]
-transform = Transform3D(0.764573, -0.566247, -0.307884, 0.588071, 0.80838, -0.0263725, 0.263821, -0.160894, 0.951058, -0.0998968, 0.1115, 0.0115)
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.0998968, 0.1115, 0.0115)
 
 [node name="head" parent="character-human/root/torso" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.991998, 0.126254, 0, -0.126254, 0.991998, 0, 0.167, 0.0263888)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.167, 0.0263888)
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

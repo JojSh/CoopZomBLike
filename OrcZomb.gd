@@ -119,7 +119,7 @@ func set_special_model ():
 	show_damage_player = get_node("Models/" + variant_model_name + "/ShowDamageAnimator")
 
 func handle_sprint_animation ():
-	animation_player.play("walk")
+	animation_player.play("walk-rhand-static")
 
 func die_if_below_terminal_altitude ():
 	if (current_position.y <= terminal_depth): die()
