@@ -337,6 +337,20 @@ vertical_alignment = 1
 
 [node name="Enemies" type="Node3D" parent="."]
 
+[node name="EnemySpawnPoints" type="Node3D" parent="."]
+
+[node name="0" type="Node3D" parent="EnemySpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -9)
+
+[node name="1" type="Node3D" parent="EnemySpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 8)
+
+[node name="2" type="Node3D" parent="EnemySpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 8)
+
+[node name="3" type="Node3D" parent="EnemySpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -9)
+
 [node name="Items" type="Node3D" parent="."]
 
 [node name="Projectiles" type="Node3D" parent="."]

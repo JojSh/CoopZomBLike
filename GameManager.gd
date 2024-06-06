@@ -19,19 +19,27 @@ signal game_over
 
 var wave_count : int = 0
 var player_count : int = 2
+var enemy_spawn_point_rotator : int = 0
 
 var enemy_wave_sequence : Array = [
-	[{ "x": 12, "z": 0, "variant": "big" }], # test wave with 1 enemy
-	#[{ "x": 18, "z": -6 }, { "x": -10, "z": 5" }],
-	#[{ "x": 18, "z": -6 }, { "x": 18, qq"z": 6 }, { "x": -10, "z": 5 }],
-	#[{ "x": 18, "z": -6 }, { "x": 18, "z": 6 }, { "x": -10, "z": 5 }, { "x": -10, "z": -5 }],
-	[
-		{ "x": 16, "z": -8 }, { "x": 16, "z": 8 }, { "x": -8, "z": 7 }, { "x": -8, "z": -7 },
-		{ "x": 18, "z": -6,"variant": "fast"  }, { "x": 18, "z": 6, "variant": "fast"  }, { "x": -10, "z": 5 }, { "x": -10, "z": -5,"variant": "fast"  }
-	]
+	["default", "default"], 
+	["default", "default", "default", "default"],
+	["default", "default", "fast", "fast"],
+	["default", "default", "fast", "fast", "fast"],
+	["default", "default", "default", "default", "default", "big"],
+	["fast", "fast", "fast", "fast", "fast", "fast"],
+	["default", "default", "default", "default", "fast", "fast", "fast", "fast", "fast"],
+	["default", "default", "default", "fast", "fast", "fast", "fast", "big"],
+	["fast", "fast", "fast", "fast", "fast", "fast", "fast", "fast", "fast"],
+	["default", "default", "default", "default", "fast", "fast",  "big", "fast", "big"] # bigs not grouped so they spawn at opposite corners.
 ]
 
 var item_wave_sequence : Array = [
+	[{ "item_name": "shield", "x": 2, "z": 2 }, { "item_name": "knife", "x": 2, "z": 0 }, { "item_name": "spear", "x": 4, "z": 0 }],
+	[{ "item_name": "spear", "x": 4, "z": 0 }],
+	[{ "item_name": "shield", "x": 4.5, "z": -8 }, { "item_name": "health", "x": 0, "z": 0 }],
+	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "health", "x": 0, "z": 0 }],
+	[{ "item_name": "spear", "x": -6, "z": -1 }, { "item_name": "spear", "x": 14.5, "z": -1 }, { "item_name": "health", "x": 0, "z": 0 }],
 	[{ "item_name": "shield", "x": 2, "z": 2 }, { "item_name": "knife", "x": 2, "z": 0 }, { "item_name": "spear", "x": 4, "z": 0 }],
 	[{ "item_name": "spear", "x": 4, "z": 0 }],
 	[{ "item_name": "shield", "x": 4.5, "z": -8 }, { "item_name": "health", "x": 0, "z": 0 }],
@@ -47,7 +55,7 @@ func _on_orc_zomb_enemy_death ():
 
 func _on_player_player_death ():
 	await get_tree().create_timer(1).timeout
-	
+
 	var last_dead_player = get_dead_players()[-1]
 	phantom_camera.erase_follow_targets(last_dead_player)
 
@@ -66,21 +74,8 @@ func spawn_player (index):
 	player.connect('player_death', _on_player_player_death)
 	player.connect('create_collectible', _on_create_collectible)
 	player.connect('create_projectile', _on_create_projectile)
-	
+
 	phantom_camera.append_follow_targets(player)
-
-func spawn_enemy_at (x, z, variant = "default"):
-	var orc_zomb
-	if (variant == "fast"):
-		orc_zomb = fast_orc_zomb_scene.instantiate()
-	elif (variant == "big"):
-		orc_zomb = big_orc_zomb_scene.instantiate()
-	elif (variant == "default"):
-		orc_zomb = default_orc_zomb_scene.instantiate()
-
-	orc_zomb.global_position = Vector3(x, 0.5, z)
-	enemies.add_child(orc_zomb)
-	orc_zomb.connect('enemy_death', _on_orc_zomb_enemy_death)
 
 func spawn_item_at (item_name, x, z):
 	var item = load("res://" + item_name + "_collectible.tscn").instantiate()
@@ -89,7 +84,7 @@ func spawn_item_at (item_name, x, z):
 
 func _on_create_collectible (item_name, location):
 	spawn_item_at(item_name, location.x, location.y)
-	
+
 func _on_create_projectile (item_name, location, facing_angle, impulse):
 	var projectile = load("res://" + item_name + "_projectile.tscn")
 	var thrown_projectile = projectile.instantiate()
@@ -105,7 +100,7 @@ func update_enemy_counter ():
 		return enemy.is_dead == false
 	)
 	enemy_count = alive_enemies.size()
-	
+
 	hud.update_enemy_counter(enemy_count)
 
 	if (enemy_count <= 0):
@@ -119,29 +114,50 @@ func cleanup_wave ():
 		enemy.queue_free()
 
 	var dead_players = get_dead_players()
-	
+
 	for player in dead_players:
 		resurrect_player(player)
 
 	# need to set this after resurrection has taken place as the list is not
 	# updated with the latest otherwise!
 	var alive_players = get_alive_players()
-	
+
 	for player in alive_players:
 		player.reset_position()
-	
+
 	await get_tree().create_timer(2).timeout
 
 func generate_wave ():
 	cleanup_wave()
-	for i in enemy_wave_sequence[wave_count]:
-		var variant = i.variant if i.has("variant") else "default"
-		spawn_enemy_at(i.x, i.z, variant)
-	
+
+	for enemy_type in enemy_wave_sequence[wave_count]:
+		spawn_enemy(enemy_type)
+
 	for j in item_wave_sequence[wave_count]:
 		spawn_item_at(j.item_name, j.x, j.z)
 
 	update_enemy_counter()
+
+func spawn_enemy (variant):
+	var orc_zomb
+	if (variant == "fast"):
+		orc_zomb = fast_orc_zomb_scene.instantiate()
+	elif (variant == "big"):
+		orc_zomb = big_orc_zomb_scene.instantiate()
+	elif (variant == "default"):
+		orc_zomb = default_orc_zomb_scene.instantiate()
+	
+	var pos_to_spawn_at = $EnemySpawnPoints.get_child(enemy_spawn_point_rotator)
+
+	orc_zomb.global_position = Vector3(pos_to_spawn_at.position.x, 0.5, pos_to_spawn_at.position.z)
+	print('pos_to_spawn_at: ', pos_to_spawn_at)
+	if (enemy_spawn_point_rotator == 3):
+		enemy_spawn_point_rotator = 0
+	else:
+		enemy_spawn_point_rotator += 1
+	enemies.add_child(orc_zomb)
+	orc_zomb.connect('enemy_death', _on_orc_zomb_enemy_death)
+	
 
 func _on_game_start_menu_game_start():
 	generate_wave()
@@ -150,7 +166,7 @@ func _on_wave_complete_screen_wave_advance():
 	wave_count += 1
 	generate_wave()
 
-func resurrect_player (player) :
+func resurrect_player (player):
 	player.revive()
 
 func get_dead_players ():

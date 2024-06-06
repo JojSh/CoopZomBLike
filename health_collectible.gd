@@ -1,7 +1,7 @@
 extends Area3D
 
 @export var item_name : String = "health"
-@export var healing_power : float = 5.0
+@export var healing_power : int = 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

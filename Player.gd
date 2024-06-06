@@ -175,8 +175,8 @@ func try_attack ():
 		if slashing_weapon_equipped and target.has_method("receive_player_damage"):
 			target.receive_player_damage(attack_power)
 
-func receive_enemy_damage (damage, attacker, shove_direction):
-	knockback = shove_direction * 15
+func receive_enemy_damage (damage, attacker, shove_direction, knockback_force):
+	knockback = shove_direction * knockback_force
 	if is_dead or invincible == true:
 		return
 	elif deflector_equipped and attackShapeCast.is_colliding() and attackShapeCast.get_collider(0) == attacker:

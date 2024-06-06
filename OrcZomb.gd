@@ -18,7 +18,7 @@ var facing_direction: Vector3
 @export var is_dead : bool = false
 @export var variant: String = "Default"
 @export var move_speed : float = 2.0
-@export var knockback_force : float = 1.0
+@export var knockback_force : int = 3
 @export var max_health : int = 3
 @export var attack_power : int = 1
 
@@ -165,7 +165,7 @@ func try_attack ():
 		
 		if target == self: return
 		if target.has_method("receive_enemy_damage"):
-			target.receive_enemy_damage(attack_power, self, facing_direction * knockback_force)
+			target.receive_enemy_damage(attack_power, self, facing_direction, knockback_force)
 
 func die ():
 	# stop the timer

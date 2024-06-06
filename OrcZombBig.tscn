@@ -6,7 +6,7 @@
 
 [node name="OrcZomb" instance=ExtResource("1_x2w34")]
 variant = "Big"
-knockback_force = 15.0
+knockback_force = 15
 max_health = 10
 attack_power = 2
 
