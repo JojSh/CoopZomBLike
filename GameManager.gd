@@ -35,16 +35,16 @@ var enemy_wave_sequence : Array = [
 ]
 
 var item_wave_sequence : Array = [
-	[{ "item_name": "shield", "x": 2, "z": 2 }, { "item_name": "knife", "x": 2, "z": 0 }, { "item_name": "spear", "x": 4, "z": 0 }],
-	[{ "item_name": "spear", "x": 4, "z": 0 }],
-	[{ "item_name": "shield", "x": 4.5, "z": -8 }, { "item_name": "health", "x": 0, "z": 0 }],
-	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "health", "x": 0, "z": 0 }],
-	[{ "item_name": "spear", "x": -6, "z": -1 }, { "item_name": "spear", "x": 14.5, "z": -1 }, { "item_name": "health", "x": 0, "z": 0 }],
-	[{ "item_name": "shield", "x": 2, "z": 2 }, { "item_name": "knife", "x": 2, "z": 0 }, { "item_name": "spear", "x": 4, "z": 0 }],
-	[{ "item_name": "spear", "x": 4, "z": 0 }],
-	[{ "item_name": "shield", "x": 4.5, "z": -8 }, { "item_name": "health", "x": 0, "z": 0 }],
-	[{ "item_name": "knife", "x": 4.5, "z": 7 }, { "item_name": "health", "x": 0, "z": 0 }],
-	[{ "item_name": "spear", "x": -6, "z": -1 }, { "item_name": "spear", "x": 14.5, "z": -1 }, { "item_name": "health", "x": 0, "z": 0 }],
+	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
+	#[{ "type": "spear", "x": 4, "z": 0 }],
+	#[{ "type": "shield", "x": 4.5, "z": -8 }, { "type": "health", "x": 0, "z": 0 }],
+	#[{ "type": "knife", "x": 4.5, "z": 7 }, { "type": "health", "x": 0, "z": 0 }],
+	#[{ "type": "spear", "x": -6, "z": -1 }, { "type": "spear", "x": 14.5, "z": -1 }, { "type": "health", "x": 0, "z": 0 }],
+	#[{ "type": "shield", "x": 2, "z": 2 }, { "type": "knife", "x": 2, "z": 0 }, { "type": "spear", "x": 4, "z": 0 }],
+	#[{ "type": "spear", "x": 4, "z": 0 }],
+	#[{ "type": "shield", "x": 4.5, "z": -8 }, { "type": "health", "x": 0, "z": 0 }],
+	#[{ "type": "knife", "x": 4.5, "z": 7 }, { "type": "health", "x": 0, "z": 0 }],
+	#[{ "type": "spear", "x": -6, "z": -1 }, { "type": "spear", "x": 14.5, "z": -1 }, { "type": "health", "x": 0, "z": 0 }],
 ]
 
 func _ready ():
@@ -77,16 +77,23 @@ func spawn_player (index):
 
 	phantom_camera.append_follow_targets(player)
 
-func spawn_item_at (item_name, x, z):
-	var item = load("res://" + item_name + "_collectible.tscn").instantiate()
+func spawn_item_at_node (type, node_pos):
+	var item = load("res://" + type + "_collectible.tscn").instantiate()
+	var targeted_node_position = get_node("ItemSpawnPoints/" + node_pos).position
+	print('targeted_node: ', targeted_node_position)
+	item.global_position = targeted_node_position
+	items.add_child(item)
+
+func drop_item_at (type, x, z):
+	var item = load("res://" + type + "_collectible.tscn").instantiate()
 	item.global_position = Vector3(x, 0.5, z)
 	items.add_child(item)
 
-func _on_create_collectible (item_name, location):
-	spawn_item_at(item_name, location.x, location.y)
+func _on_create_collectible (type, location):
+	drop_item_at(type, location.x, location.y)
 
-func _on_create_projectile (item_name, location, facing_angle, impulse):
-	var projectile = load("res://" + item_name + "_projectile.tscn")
+func _on_create_projectile (type, location, facing_angle, impulse):
+	var projectile = load("res://" + type + "_projectile.tscn")
 	var thrown_projectile = projectile.instantiate()
 	thrown_projectile.position = location
 	thrown_projectile.rotation = Vector3(0, facing_angle, 0)
@@ -133,8 +140,8 @@ func generate_wave ():
 	for enemy_type in enemy_wave_sequence[wave_count]:
 		spawn_enemy(enemy_type)
 
-	for j in item_wave_sequence[wave_count]:
-		spawn_item_at(j.item_name, j.x, j.z)
+	for item in item_wave_sequence[wave_count]:
+		spawn_item_at_node(item.type, item.pos)
 
 	update_enemy_counter()
 
