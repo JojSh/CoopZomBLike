@@ -18,8 +18,8 @@ signal game_over
 @onready var phantom_camera = get_node("PhantomCamera3D")
 
 var wave_count : int = 0
-var player_count : int = 2
-var enemy_spawn_point_rotator : int = 0
+var player_count : int = 4
+var enemy_spawn_point_rotating_index : int = 0
 
 var enemy_wave_sequence : Array = [
 	["default", "default"], 
@@ -50,18 +50,6 @@ var item_wave_sequence : Array = [
 func _ready ():
 	spawn_all_players()
 
-func _on_orc_zomb_enemy_death ():
-	update_enemy_counter()
-
-func _on_player_player_death ():
-	await get_tree().create_timer(1).timeout
-
-	var last_dead_player = get_dead_players()[-1]
-	phantom_camera.erase_follow_targets(last_dead_player)
-
-	if get_alive_players().size() < 1:
-		game_over.emit()
-
 func spawn_all_players ():
 	for i in player_count:
 		spawn_player(i)
@@ -69,7 +57,7 @@ func spawn_all_players ():
 func spawn_player (index):
 	var player = player_scene.instantiate()
 	player.player_number = index + 1
-	player.starting_position = Vector3(index * 3, 0.5, -3)
+	player.starting_position = $PlayerSpawnPoints.get_child(index).position
 	players_container.add_child(player)
 	player.connect('player_death', _on_player_player_death)
 	player.connect('create_collectible', _on_create_collectible)
@@ -89,17 +77,25 @@ func drop_item_at (type, x, z):
 	item.global_position = Vector3(x, 0.5, z)
 	items.add_child(item)
 
-func _on_create_collectible (type, location):
-	drop_item_at(type, location.x, location.y)
+func spawn_enemy (variant):
+	var orc_zomb
+	if (variant == "fast"):
+		orc_zomb = fast_orc_zomb_scene.instantiate()
+	elif (variant == "big"):
+		orc_zomb = big_orc_zomb_scene.instantiate()
+	elif (variant == "default"):
+		orc_zomb = default_orc_zomb_scene.instantiate()
+	
+	var pos_to_spawn_at = $EnemySpawnPoints.get_child(enemy_spawn_point_rotating_index)
 
-func _on_create_projectile (type, location, facing_angle, impulse):
-	var projectile = load("res://" + type + "_projectile.tscn")
-	var thrown_projectile = projectile.instantiate()
-	thrown_projectile.position = location
-	thrown_projectile.rotation = Vector3(0, facing_angle, 0)
-	projectiles.add_child(thrown_projectile)
-	thrown_projectile.connect('create_collectible', _on_create_collectible)
-	thrown_projectile.apply_impulse(impulse)
+	orc_zomb.global_position = Vector3(pos_to_spawn_at.position.x, 0.5, pos_to_spawn_at.position.z)
+	print('pos_to_spawn_at: ', pos_to_spawn_at)
+	if (enemy_spawn_point_rotating_index == 3):
+		enemy_spawn_point_rotating_index = 0
+	else:
+		enemy_spawn_point_rotating_index += 1
+	enemies.add_child(orc_zomb)
+	orc_zomb.connect('enemy_death', _on_orc_zomb_enemy_death)
 
 func update_enemy_counter ():
 	await get_tree().create_timer(0).timeout # waiting for even 0 sec seems to allow for the enemy to be deleted and the count to be correct
@@ -145,34 +141,6 @@ func generate_wave ():
 
 	update_enemy_counter()
 
-func spawn_enemy (variant):
-	var orc_zomb
-	if (variant == "fast"):
-		orc_zomb = fast_orc_zomb_scene.instantiate()
-	elif (variant == "big"):
-		orc_zomb = big_orc_zomb_scene.instantiate()
-	elif (variant == "default"):
-		orc_zomb = default_orc_zomb_scene.instantiate()
-	
-	var pos_to_spawn_at = $EnemySpawnPoints.get_child(enemy_spawn_point_rotator)
-
-	orc_zomb.global_position = Vector3(pos_to_spawn_at.position.x, 0.5, pos_to_spawn_at.position.z)
-	print('pos_to_spawn_at: ', pos_to_spawn_at)
-	if (enemy_spawn_point_rotator == 3):
-		enemy_spawn_point_rotator = 0
-	else:
-		enemy_spawn_point_rotator += 1
-	enemies.add_child(orc_zomb)
-	orc_zomb.connect('enemy_death', _on_orc_zomb_enemy_death)
-	
-
-func _on_game_start_menu_game_start():
-	generate_wave()
-
-func _on_wave_complete_screen_wave_advance():
-	wave_count += 1
-	generate_wave()
-
 func resurrect_player (player):
 	player.revive()
 
@@ -185,3 +153,35 @@ func get_alive_players ():
 	return players_container.get_children().filter(func(player):
 		return player.is_dead == false
 	)
+
+# on signal functions:
+func _on_create_collectible (type, location):
+	drop_item_at(type, location.x, location.y)
+
+func _on_create_projectile (type, location, facing_angle, impulse):
+	var projectile = load("res://" + type + "_projectile.tscn")
+	var thrown_projectile = projectile.instantiate()
+	thrown_projectile.position = location
+	thrown_projectile.rotation = Vector3(0, facing_angle, 0)
+	projectiles.add_child(thrown_projectile)
+	thrown_projectile.connect('create_collectible', _on_create_collectible)
+	thrown_projectile.apply_impulse(impulse)
+
+func _on_orc_zomb_enemy_death ():
+	update_enemy_counter()
+
+func _on_player_player_death ():
+	await get_tree().create_timer(1).timeout
+
+	var last_dead_player = get_dead_players()[-1]
+	phantom_camera.erase_follow_targets(last_dead_player)
+
+	if get_alive_players().size() < 1:
+		game_over.emit()
+
+func _on_game_start_menu_game_start():
+	generate_wave()
+
+func _on_wave_complete_screen_wave_advance():
+	wave_count += 1
+	generate_wave()
