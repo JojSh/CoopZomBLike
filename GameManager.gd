@@ -85,7 +85,7 @@ func spawn_enemy (variant):
 		orc_zomb = big_orc_zomb_scene.instantiate()
 	elif (variant == "default"):
 		orc_zomb = default_orc_zomb_scene.instantiate()
-	
+
 	var pos_to_spawn_at = $EnemySpawnPoints.get_child(enemy_spawn_point_rotating_index)
 
 	orc_zomb.global_position = Vector3(pos_to_spawn_at.position.x, 0.5, pos_to_spawn_at.position.z)

@@ -4,13 +4,13 @@
 [ext_resource type="ArrayMesh" uid="uid://dqhmqh06nkwr7" path="res://OBJ format/floor-detail.obj" id="2_neeaq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_21cex"]
-size = Vector3(1, 0.015, 3)
+size = Vector3(1, 0, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_12qeo"]
-size = Vector3(1, 0.015, 1)
+size = Vector3(1, 0, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_by645"]
-size = Vector3(1, 0.015, 3)
+size = Vector3(1, 0, 3)
 
 [node name="3x3floor" type="Node3D"]
 
@@ -22,7 +22,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shape = SubResource("BoxShape3D_21cex")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.5)
 shape = SubResource("BoxShape3D_12qeo")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
@@ -54,6 +54,11 @@ mesh = ExtResource("1_3wvoc")
 [node name="Floor6" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 mesh = ExtResource("1_3wvoc")
+
+[node name="Floor7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../Floor6")
 
 [node name="Floor-detail" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, -1)

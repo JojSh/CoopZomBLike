@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=26 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://GameCompleteMenu.gd" id="6_cryiv"]
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://HUD.tscn" id="6_e6gqo"]
 [ext_resource type="PackedScene" uid="uid://dwkuqpc1kyu36" path="res://3x_3_wall.tscn" id="9_bldd1"]
+[ext_resource type="PackedScene" uid="uid://behl6ytr7tsln" path="res://3x3FloorWithHole.tscn" id="11_6eer4"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="12_0nqj1"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_41gnw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_1c4eq"]
@@ -368,28 +369,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.5, -9)
 [node name="ItemSpawnPoints" type="Node3D" parent="."]
 
 [node name="NE-I" type="Node3D" parent="ItemSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -2)
+transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, 8, 0.50014, -2)
 
 [node name="SE-I" type="Node3D" parent="ItemSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 2.5)
+transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, 8, 0.50014, 2.5)
 
 [node name="SW-I" type="Node3D" parent="ItemSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2.5)
+transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, 0, 0.49986, 2.5)
 
 [node name="NW-I" type="Node3D" parent="ItemSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
+transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, 0, 0.49986, -2)
 
 [node name="NE-O" type="Node3D" parent="ItemSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.5, -6)
+transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, 11, 0.500244, -6)
 
 [node name="SE-O" type="Node3D" parent="ItemSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.5, 6)
+transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, 11, 0.500244, 6)
 
 [node name="SW-O" type="Node3D" parent="ItemSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 6)
+transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, -3, 0.499756, 6)
 
 [node name="NW-O" type="Node3D" parent="ItemSpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -6)
+transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, -3, 0.499756, -6)
 
 [node name="Projectiles" type="Node3D" parent="."]
 
@@ -781,8 +782,8 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, 
 [node name="3x3floor2" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor" instance=ExtResource("1_pm7yx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
 
-[node name="3x3floor3" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -1)
+[node name="3x3floorWithHole1" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor" instance=ExtResource("11_6eer4")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 1)
 
 [node name="3x3floor4" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor" instance=ExtResource("1_pm7yx")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 4)
@@ -793,8 +794,8 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0,
 [node name="3x3floor6" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor" instance=ExtResource("1_pm7yx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
-[node name="3x3floor7" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor" instance=ExtResource("1_pm7yx")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 1)
+[node name="3x3floorWithHole2" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor" instance=ExtResource("11_6eer4")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 5, 0, -1)
 
 [node name="3x3floor8" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor" instance=ExtResource("1_pm7yx")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 2)
