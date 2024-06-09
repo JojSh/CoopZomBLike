@@ -70,3 +70,84 @@ mesh = ExtResource("2_neeaq")
 
 [node name="Floor-detail3" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_neeaq")
+
+[node name="Edge1" type="Node3D" parent="."]
+
+[node name="Edge1" type="MeshInstance3D" parent="Edge1"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.50265, -0.2, 0.00243974)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge2" type="MeshInstance3D" parent="Edge1"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.50265, -0.2, -0.99756)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge3" type="MeshInstance3D" parent="Edge1"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.50265, -0.2, -1.99756)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge2" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -2)
+
+[node name="Edge1" type="MeshInstance3D" parent="Edge2"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.50244, -0.2, -0.00264645)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge2" type="MeshInstance3D" parent="Edge2"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 1.50244, -0.2, -1.00265)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge3" type="MeshInstance3D" parent="Edge2"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.50244, -0.2, -2.00265)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge4" type="MeshInstance3D" parent="Edge2"]
+transform = Transform3D(7.64274e-16, -4.37114e-08, 1, -0.4, -4.37114e-08, 0, 1.74846e-08, -1, -4.37114e-08, 2, -0.2, -0.5)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge5" type="MeshInstance3D" parent="Edge2"]
+transform = Transform3D(7.64274e-16, -4.37114e-08, -1, -0.4, -4.37114e-08, 0, -1.74846e-08, 1, -4.37114e-08, 2, -0.2, -1.5)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge3" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2, 0, -2)
+
+[node name="Edge1" type="MeshInstance3D" parent="Edge3"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.49735, -0.2, -0.00243974)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge2" type="MeshInstance3D" parent="Edge3"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.49735, -0.2, -1.00244)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge3" type="MeshInstance3D" parent="Edge3"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.49735, -0.2, -2.00244)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge4" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 0)
+
+[node name="Edge1" type="MeshInstance3D" parent="Edge4"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.49756, -0.2, 0.00264645)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge2" type="MeshInstance3D" parent="Edge4"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.49756, -0.2, -0.997354)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
+
+[node name="Edge3" type="MeshInstance3D" parent="Edge4"]
+transform = Transform3D(-1.74846e-08, 1, 0, -0.4, -4.37114e-08, 0, 0, 0, 1, 2.49756, -0.2, -1.99735)
+mesh = ExtResource("1_3wvoc")
+skeleton = NodePath("../..")
