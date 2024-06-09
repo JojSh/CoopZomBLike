@@ -57,6 +57,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_dead:
 		if not is_on_floor():
+			footsteps_sfx.stop()
 			velocity.y -= gravity * delta
 			kill_if_below_terminal_altitude()
 
@@ -138,12 +139,6 @@ func set_colour_by_player_number ():
 	animation_player = get_node("Models/" + model_name + "/AnimationPlayer")
 	show_damage_player = get_node("Models/" + model_name + "/ShowDamagePlayer")
 
-func kill_if_below_terminal_altitude ():
-	if (position.y <= terminal_depth):
-		current_hp = 0
-		hud.update_health_bar(player_number, current_hp, max_hp)
-		die()
-
 func try_attack ():
 	if attack_delay_active: return
 	if slashing_weapon_equipped:
@@ -195,14 +190,26 @@ func receive_enemy_damage (damage, attacker, shove_direction, knockback_force):
 	if current_hp <= 0:
 		die()
 
+func kill_if_below_terminal_altitude ():
+	if (position.y <= terminal_depth):
+		velocity = Vector3.ZERO
+		current_hp = 0
+		animation_player.play("die")
+		hud.update_health_bar(player_number, current_hp, max_hp)
+		die()
+
 func die ():
 	$ThudDeathHitSFX.play()
+	footsteps_sfx.stop()
 	invincibility_timer.stop()
 	attack_delay_timer.stop()
 	animation_player.stop()
-	animation_player.play("die")
 	player_death.emit()
 	is_dead = true
+
+	# get round some race condition that interrupts "die: animation when falling to death
+	await get_tree().create_timer(0.01).timeout
+	animation_player.play("die")
 
 func equip_item (item):
 	item_equipped = true
@@ -270,5 +277,3 @@ func revive ():
 	animation_player.stop()
 	animation_player.play("RESET")
 	restore_hp(2)
-
-

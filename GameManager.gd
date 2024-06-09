@@ -68,7 +68,7 @@ func spawn_player (index):
 func spawn_item_at_node (type, node_pos):
 	var item = load("res://" + type + "_collectible.tscn").instantiate()
 	var targeted_node_position = get_node("ItemSpawnPoints/" + node_pos).position
-	print('targeted_node: ', targeted_node_position)
+
 	item.global_position = targeted_node_position
 	items.add_child(item)
 
@@ -89,7 +89,7 @@ func spawn_enemy (variant):
 	var pos_to_spawn_at = $EnemySpawnPoints.get_child(enemy_spawn_point_rotating_index)
 
 	orc_zomb.global_position = Vector3(pos_to_spawn_at.position.x, 0.5, pos_to_spawn_at.position.z)
-	print('pos_to_spawn_at: ', pos_to_spawn_at)
+
 	if (enemy_spawn_point_rotating_index == 3):
 		enemy_spawn_point_rotating_index = 0
 	else:
