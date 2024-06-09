@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=27 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://HUD.tscn" id="6_e6gqo"]
 [ext_resource type="PackedScene" uid="uid://behl6ytr7tsln" path="res://3x3FloorWithHole.tscn" id="11_6eer4"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="12_0nqj1"]
+[ext_resource type="Material" uid="uid://c6bba4v2nge6o" path="res://black.tres" id="12_gmadr"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_41gnw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_1c4eq"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="15_upbtu"]
@@ -35,11 +36,16 @@ sky_material = SubResource("PanoramaSkyMaterial_calph")
 background_mode = 2
 background_energy_multiplier = 1.5
 sky = SubResource("Sky_5xoj3")
+fog_light_color = Color(0.168627, 0.184314, 0.211765, 1)
+fog_sun_scatter = 0.5
+fog_density = 0.03
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_wtsvp"]
 cell_size = 0.5
 agent_height = 0.4
 agent_radius = 0.1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cr0wk"]
 
 [sub_resource type="Resource" id="Resource_mf3yd"]
 script = ExtResource("14_1c4eq")
@@ -1074,6 +1080,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4.94979)
 
 [node name="3x3floor29" parent="WorldEnvironment/NavigationRegion3D/Ground/Floor9" instance=ExtResource("1_pm7yx")]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0, -6.94979)
+
+[node name="PointOfLightCover" type="MeshInstance3D" parent="WorldEnvironment"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4.5, -12, 0)
+mesh = SubResource("PlaneMesh_cr0wk")
+surface_material_override/0 = ExtResource("12_gmadr")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.139173, 0.990268, 0, -0.990268, 0.139173, 0, 0, 0)
