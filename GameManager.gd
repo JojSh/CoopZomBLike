@@ -20,6 +20,7 @@ signal game_over
 var wave_count : int = 0
 var player_count : int = 4
 var enemy_spawn_point_rotating_index : int = 0
+var music_part_b_queued : bool = false
 
 var enemy_wave_sequence : Array = [
 	["default", "default"], 
@@ -181,7 +182,22 @@ func _on_player_player_death ():
 
 func _on_game_start_menu_game_start():
 	generate_wave()
+	music_part_b_queued = true
+	#$MusicPartA
+	#$MusicPartB.play()
 
 func _on_wave_complete_screen_wave_advance():
 	wave_count += 1
 	generate_wave()
+
+func _on_part_a_finished():
+	if wave_count > 1:
+		$Music/PartB.play()
+	else:
+		$Music/PartA.play()
+
+func _on_part_b_finished():
+	#if music_part_c_queued:
+		#$MusicPartC.play()
+	#else:
+	$MusicPartB.play()
