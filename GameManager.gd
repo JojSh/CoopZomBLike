@@ -37,7 +37,7 @@ var enemy_wave_sequence : Array = [
 
 var item_wave_sequence : Array = [
 	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
-	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "knife", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
+	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
 	[{ "type": "spear", "pos": "NE-O" }, { "type": "health", "pos": "SE-I" }, { "type": "spear", "pos": "SW-O" }, { "type": "knife", "pos": "NW-I" }],
 	[
 		{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "knife", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" },
@@ -130,6 +130,9 @@ func update_enemy_counter ():
 func cleanup_wave ():
 	for enemy in enemies.get_children():
 		enemy.queue_free()
+
+	for item in items.get_children():
+		item.queue_free()
 
 	var dead_players = get_dead_players()
 
