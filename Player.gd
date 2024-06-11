@@ -206,6 +206,9 @@ func die ():
 	animation_player.stop()
 	player_death.emit()
 	is_dead = true
+	
+	# switch off colliders so dead players can be passed over/through
+	$CollisionShape3D.disabled = true
 
 	# get round some race condition that interrupts "die: animation when falling to death
 	await get_tree().create_timer(0.01).timeout
