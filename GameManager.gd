@@ -23,19 +23,31 @@ var enemy_spawn_point_rotating_index : int = 0
 var music_part_b_queued : bool = false
 
 var enemy_wave_sequence : Array = [
-	["default", "default"], 
+	["default", "default"], # 0
 	["default", "default", "default", "default"],
 	["default", "default", "fast", "fast"],
 	["default", "default", "fast", "fast", "fast"],
 	["default", "default", "default", "default", "default", "big"],
-	["fast", "fast", "fast", "fast", "fast", "fast"],
+	["fast", "fast", "fast", "fast", "fast", "fast"], # 5
 	["default", "default", "default", "default", "fast", "fast", "fast", "fast", "fast"],
 	["default", "default", "default", "fast", "fast", "fast", "fast", "big"],
 	["fast", "fast", "fast", "fast", "fast", "fast", "fast", "fast", "fast"],
-	["default", "default", "default", "default", "fast", "fast",  "big", "fast", "big"] # bigs not grouped so they spawn at opposite corners.
+	["default", "default", "default", "default", "fast", "fast",  "big", "fast", "big"] # 9 - bigs not grouped so they spawn at opposite corners.
 ]
 
 var item_wave_sequence : Array = [
+	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
+	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "knife", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
+	[{ "type": "spear", "pos": "NE-O" }, { "type": "health", "pos": "SE-I" }, { "type": "spear", "pos": "SW-O" }, { "type": "knife", "pos": "NW-I" }],
+	[
+		{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "knife", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" },
+		{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "knife", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }
+	],
+	# copy pasted until have an idea of what's better:
+	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
+	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
+	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
+	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
 	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
 	#[{ "type": "spear", "x": 4, "z": 0 }],
 	#[{ "type": "shield", "x": 4.5, "z": -8 }, { "type": "health", "x": 0, "z": 0 }],
@@ -68,6 +80,8 @@ func spawn_player (index):
 
 func spawn_item_at_node (type, node_pos):
 	var item = load("res://" + type + "_collectible.tscn").instantiate()
+	var targeted_node = get_node("ItemSpawnPoints/" + node_pos)
+	print('targeted_node: ', targeted_node)
 	var targeted_node_position = get_node("ItemSpawnPoints/" + node_pos).position
 
 	item.global_position = targeted_node_position
