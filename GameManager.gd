@@ -40,24 +40,27 @@ var item_wave_sequence : Array = [
 	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
 	[{ "type": "spear", "pos": "NE-O" }, { "type": "health", "pos": "SE-I" }, { "type": "spear", "pos": "SW-O" }, { "type": "knife", "pos": "NW-I" }],
 	[
-		{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "knife", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" },
-		{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "knife", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }
+		{ "type": "shield", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" },
+		{ "type": "spear", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "shield", "pos": "NW-O" }
 	],
-	# copy pasted until have an idea of what's better:
-	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
-	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
-	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
-	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
-	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
-	#[{ "type": "spear", "x": 4, "z": 0 }],
-	#[{ "type": "shield", "x": 4.5, "z": -8 }, { "type": "health", "x": 0, "z": 0 }],
-	#[{ "type": "knife", "x": 4.5, "z": 7 }, { "type": "health", "x": 0, "z": 0 }],
-	#[{ "type": "spear", "x": -6, "z": -1 }, { "type": "spear", "x": 14.5, "z": -1 }, { "type": "health", "x": 0, "z": 0 }],
-	#[{ "type": "shield", "x": 2, "z": 2 }, { "type": "knife", "x": 2, "z": 0 }, { "type": "spear", "x": 4, "z": 0 }],
-	#[{ "type": "spear", "x": 4, "z": 0 }],
-	#[{ "type": "shield", "x": 4.5, "z": -8 }, { "type": "health", "x": 0, "z": 0 }],
-	#[{ "type": "knife", "x": 4.5, "z": 7 }, { "type": "health", "x": 0, "z": 0 }],
-	#[{ "type": "spear", "x": -6, "z": -1 }, { "type": "spear", "x": 14.5, "z": -1 }, { "type": "health", "x": 0, "z": 0 }],
+	[
+		{ "type": "knife", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "knife", "pos": "NW-I" },
+		{ "type": "health", "pos": "NE-O" }, { "type": "health", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "health", "pos": "NW-O" }
+	],
+	[
+		{ "type": "health", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "health", "pos": "SW-I" }, { "type": "health", "pos": "NW-I" },
+		{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "shield", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }
+	],
+	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
+	[{ "type": "spear", "pos": "NE-O" }, { "type": "health", "pos": "SE-I" }, { "type": "spear", "pos": "SW-O" }, { "type": "knife", "pos": "NW-I" }],
+	[
+		{ "type": "shield", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" },
+		{ "type": "spear", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "shield", "pos": "NW-O" }
+	],
+	[
+		{ "type": "knife", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "knife", "pos": "NW-I" },
+		{ "type": "health", "pos": "NE-O" }, { "type": "health", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "health", "pos": "NW-O" }
+	],
 ]
 
 func _ready ():

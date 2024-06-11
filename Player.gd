@@ -275,8 +275,9 @@ func reset_position ():
 	position = starting_position
 
 func revive ():
+	reset_position()
 	is_dead = false
 	invincible = false
 	animation_player.stop()
 	animation_player.play("RESET")
-	restore_hp(2)
+	restore_hp(5)
