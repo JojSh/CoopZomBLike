@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=31 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
@@ -19,8 +19,14 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_1c4eq"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="15_upbtu"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_20nlu"]
+font_size = 80
+
 [sub_resource type="LabelSettings" id="LabelSettings_i4qa8"]
-font_size = 48
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_yvttv"]
+font_size = 40
 
 [sub_resource type="Gradient" id="Gradient_40m4r"]
 
@@ -89,6 +95,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("3_r2jor")
 
 [node name="Background" type="ColorRect" parent="UI/GameStartMenu"]
@@ -102,19 +110,15 @@ color = Color(0.160784, 0, 0.8, 1)
 
 [node name="TitleLabel" type="Label" parent="UI/GameStartMenu"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -130.0
-offset_top = -641.0
-offset_right = 158.0
-offset_bottom = -455.0
+offset_left = -194.0
+offset_right = 194.0
+offset_bottom = 186.0
 grow_horizontal = 2
-grow_vertical = 2
-text = "OrC ZoMbZ"
-label_settings = SubResource("LabelSettings_i4qa8")
+text = "Entrénched"
+label_settings = SubResource("LabelSettings_20nlu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -138,6 +142,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="KeyboardControls" type="Label" parent="UI/GameStartMenu"]
+visible = false
 layout_mode = 1
 offset_left = 140.0
 offset_top = 300.0
@@ -155,24 +160,25 @@ Move                      [arrow keys]
 
 [node name="GamepadControls" type="Label" parent="UI/GameStartMenu"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -901.0
-offset_top = 301.0
-offset_right = -181.0
-offset_bottom = 802.0
-grow_horizontal = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.5
+offset_top = -178.5
+offset_right = 298.5
+offset_bottom = 178.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Gamepad controls:
 
 Attack / shove                 X
 Drop item                        B
-Move                      [d-pad]
-
-
-"
-horizontal_alignment = 2
+Move                      [d-pad]"
+label_settings = SubResource("LabelSettings_yvttv")
+horizontal_alignment = 1
 
 [node name="GameOverMenu" type="Control" parent="UI"]
 visible = false
@@ -195,17 +201,13 @@ color = Color(0.341176, 0.137255, 0.145098, 1)
 
 [node name="TitleLabel" type="Label" parent="UI/GameOverMenu"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -130.0
-offset_top = -641.0
-offset_right = 158.0
-offset_bottom = -455.0
+offset_left = -144.0
+offset_right = 144.0
+offset_bottom = 186.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Game over.
 Cri evri tim :'("
 label_settings = SubResource("LabelSettings_i4qa8")
@@ -220,15 +222,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -499.0
-offset_top = -596.0
-offset_right = 552.0
-offset_bottom = -516.0
+offset_left = -292.0
+offset_top = -148.0
+offset_right = 328.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/normal = ExtResource("4_31ns0")
-text = "Press any button to return to the main menu
-"
+text = "Press any button to start again."
 label_settings = SubResource("LabelSettings_i4qa8")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -259,10 +260,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -130.0
-offset_top = -548.0
-offset_right = 158.0
-offset_bottom = -271.0
+offset_left = -144.0
+offset_top = -138.5
+offset_right = 144.0
+offset_bottom = 138.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "You win!
@@ -281,15 +282,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -499.0
-offset_top = -596.0
-offset_right = 552.0
-offset_bottom = -516.0
+offset_left = -292.0
+offset_top = -148.0
+offset_right = 328.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/normal = ExtResource("4_31ns0")
-text = "Press any button to return to the main menu
-"
+text = "Press any button to start again."
 label_settings = SubResource("LabelSettings_i4qa8")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -315,17 +315,13 @@ color = Color(0.811765, 0.592157, 0.32549, 1)
 
 [node name="TitleLabel" type="Label" parent="UI/WaveCompleteScreen"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -170.0
-offset_top = -448.0
-offset_right = 199.0
-offset_bottom = -262.0
+offset_left = -184.5
+offset_right = 184.5
+offset_bottom = 186.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Wave complete!"
 label_settings = SubResource("LabelSettings_i4qa8")
 horizontal_alignment = 1
