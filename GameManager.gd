@@ -220,4 +220,4 @@ func _on_part_b_finished():
 	#if music_part_c_queued:
 		#$MusicPartC.play()
 	#else:
-	$MusicPartB.play()
+	$Music/PartB.play()
