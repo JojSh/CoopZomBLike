@@ -31,6 +31,7 @@ uv1_world_triplanar = true
 [node name="Node3D" type="Node3D"]
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(0.999954, 0, 0, 0, 0.906188, 0.422588, 0, -0.422562, 0.906243, -7.26116, 5.72974, 12.279)
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera3D"]
