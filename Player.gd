@@ -130,6 +130,8 @@ func handle_sprint_animation ():
 		animation_player.play("sprint")
 
 func set_colour_by_player_number ():
+	current_hp = 1
+	if (player_number == 2): current_hp = 10
 	var model_name : String = "CharacterHumanP" + str(player_number)
 	var model_path : String = "res://NumberedPlayerGLBs/" + model_name + ".tscn"
 	var player_model_to_use = load(model_path).instantiate()
@@ -275,9 +277,10 @@ func reset_position ():
 	position = starting_position
 
 func revive ():
-	reset_position()
 	is_dead = false
 	invincible = false
 	animation_player.stop()
 	animation_player.play("RESET")
+	$CollisionShape3D.disabled = false
+	reset_position()
 	restore_hp(5)

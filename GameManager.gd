@@ -23,7 +23,8 @@ var enemy_spawn_point_rotating_index : int = 0
 var music_part_b_queued : bool = false
 
 var enemy_wave_sequence : Array = [
-	["default", "default"], # 0
+	#["default", "default"], # 0
+	["fast"], # test round
 	["default", "default", "default", "default"],
 	["default", "default", "fast", "fast"],
 	["default", "default", "fast", "fast", "fast"],
@@ -74,6 +75,7 @@ func spawn_player (index):
 	var player = player_scene.instantiate()
 	player.player_number = index + 1
 	player.starting_position = $PlayerSpawnPoints.get_child(index).position
+	print("starting_position: ", player.starting_position)
 	players_container.add_child(player)
 	player.connect('player_death', _on_player_player_death)
 	player.connect('create_collectible', _on_create_collectible)
@@ -83,8 +85,6 @@ func spawn_player (index):
 
 func spawn_item_at_node (type, node_pos):
 	var item = load("res://" + type + "_collectible.tscn").instantiate()
-	var targeted_node = get_node("ItemSpawnPoints/" + node_pos)
-	print('targeted_node: ', targeted_node)
 	var targeted_node_position = get_node("ItemSpawnPoints/" + node_pos).position
 
 	item.global_position = targeted_node_position
@@ -203,8 +203,6 @@ func _on_player_player_death ():
 func _on_game_start_menu_game_start():
 	generate_wave()
 	music_part_b_queued = true
-	#$MusicPartA
-	#$MusicPartB.play()
 
 func _on_wave_complete_screen_wave_advance():
 	wave_count += 1
