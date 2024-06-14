@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4otta7ct55tq"]
+[gd_scene load_steps=15 format=3 uid="uid://c4otta7ct55tq"]
 
 [ext_resource type="Script" path="res://OrcZomb.gd" id="1_t5o8h"]
 [ext_resource type="ArrayMesh" uid="uid://cexhyqewatpn3" path="res://chopstick.obj" id="3_qwdqt"]
@@ -74,9 +74,6 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_mujcu"]
 size = Vector3(1, 0.6, 0.6)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fwwsm"]
-size = Vector3(0.562874, 0.545938, 0.389595)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ajnae"]
 radius = 0.3
 height = 0.8
@@ -110,10 +107,6 @@ collision_mask = 4
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="DefaultCharacterModel" parent="Models" instance=ExtResource("3_uy17n")]
-
-[node name="CollisionShape3DBox" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
-shape = SubResource("BoxShape3D_fwwsm")
 
 [node name="CollisionShape3DCapsule" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36, 0)

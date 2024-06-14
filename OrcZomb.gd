@@ -175,7 +175,7 @@ func die ():
 	$HealthBar3D.hide()
 	
 	# switch off colliders so dead enemies can be passed over/through
-	$CollisionShape3DBox.disabled = true
+	#$CollisionShape3DBox.disabled = true
 	$CollisionShape3DCapsule.disabled = true
 
 	animation_player.play("die")
