@@ -106,10 +106,11 @@ func spawn_enemy (variant):
 
 	var pos_to_spawn_at = $EnemySpawnPoints.get_child(enemy_spawn_point_rotating_index)
 
-	orc_zomb.global_position = Vector3(pos_to_spawn_at.position.x, 0.5, pos_to_spawn_at.position.z)
+	orc_zomb.global_position = Vector3(pos_to_spawn_at.position.x + spawn_point_modifier, 0.5, pos_to_spawn_at.position.z)
 
 	if (enemy_spawn_point_rotating_index == 3):
 		enemy_spawn_point_rotating_index = 0
+		spawn_point_modifier += 0.1
 	else:
 		enemy_spawn_point_rotating_index += 1
 	enemies.add_child(orc_zomb)
