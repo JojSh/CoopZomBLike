@@ -85,8 +85,8 @@ func _physics_process(delta):
 		velocity.z = current_position.direction_to(next_path_position).z * move_speed
 		
 		# adjust for any knockback
-		velocity.x += knockback.y
-		velocity.z += knockback.x
+		velocity.x += knockback.y * (1.5 if variant == "Fast" else 1) # so that faster enemies aren't
+		velocity.z += knockback.x * (1.5 if variant == "Fast" else 1)  # more resistant to knockback
 
 		facing_direction = (next_path_position - position).normalized()
 		facing_angle = Vector2(facing_direction.z, facing_direction.x).angle()
