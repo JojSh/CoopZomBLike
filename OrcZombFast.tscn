@@ -8,5 +8,5 @@
 variant = "Fast"
 move_speed = 4.0
 
-[node name="HealthBar3D" parent="." index="4"]
+[node name="HealthBar3D" parent="." index="3"]
 texture = SubResource("ViewportTexture_hr68p")

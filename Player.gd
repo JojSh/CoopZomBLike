@@ -12,7 +12,7 @@ signal create_projectile
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var current_hp : int = 10
-var max_hp : int = 10
+var max_hp : int = 20
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = DEFAULT_SHOVE_FORCE
@@ -130,8 +130,8 @@ func handle_sprint_animation ():
 		animation_player.play("sprint")
 
 func set_colour_by_player_number ():
-	current_hp = 1
-	if (player_number == 2): current_hp = 10
+	#current_hp = 10
+	if (player_number == 1): current_hp = 20
 	var model_name : String = "CharacterHumanP" + str(player_number)
 	var model_path : String = "res://NumberedPlayerGLBs/" + model_name + ".tscn"
 	var player_model_to_use = load(model_path).instantiate()

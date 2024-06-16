@@ -21,14 +21,14 @@ var wave_count : int = 0
 var player_count : int = 4
 var enemy_spawn_point_rotating_index : int = 0
 var music_part_b_queued : bool = false
+var spawn_point_modifier : float = 0.0
 
 var enemy_wave_sequence : Array = [
-	#["default", "default"], # 0
-	["fast"], # test round
+	["default", "default"], # 0
 	["default", "default", "default", "default"],
 	["default", "default", "fast", "fast"],
 	["default", "default", "fast", "fast", "fast"],
-	["default", "default", "default", "default", "default", "big"],
+	["default", "default", "default", "default", "default", "big"], # 4
 	["fast", "fast", "fast", "fast", "fast", "fast"], # 5
 	["default", "default", "default", "default", "fast", "fast", "fast", "fast", "fast"],
 	["default", "default", "default", "fast", "fast", "fast", "fast", "big"],
@@ -37,20 +37,20 @@ var enemy_wave_sequence : Array = [
 ]
 
 var item_wave_sequence : Array = [
-	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }],
+	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }], # 0
 	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
 	[{ "type": "spear", "pos": "NE-O" }, { "type": "health", "pos": "SE-I" }, { "type": "spear", "pos": "SW-O" }, { "type": "knife", "pos": "NW-I" }],
 	[
 		{ "type": "shield", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" },
 		{ "type": "spear", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "shield", "pos": "NW-O" }
 	],
-	[
+	[ # 4
 		{ "type": "knife", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "knife", "pos": "NW-I" },
 		{ "type": "health", "pos": "NE-O" }, { "type": "health", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "health", "pos": "NW-O" }
 	],
-	[
-		{ "type": "health", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "health", "pos": "SW-I" }, { "type": "health", "pos": "NW-I" },
-		{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "shield", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }
+	[ # 5
+		{ "type": "shield", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "health", "pos": "NW-I" },
+		{ "type": "health", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }
 	],
 	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
 	[{ "type": "spear", "pos": "NE-O" }, { "type": "health", "pos": "SE-I" }, { "type": "spear", "pos": "SW-O" }, { "type": "knife", "pos": "NW-I" }],
@@ -59,7 +59,7 @@ var item_wave_sequence : Array = [
 		{ "type": "spear", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "shield", "pos": "NW-O" }
 	],
 	[
-		{ "type": "knife", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "knife", "pos": "NW-I" },
+		{ "type": "knife", "pos": "NE-I" }, { "type": "spear", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" },
 		{ "type": "health", "pos": "NE-O" }, { "type": "health", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "health", "pos": "NW-O" }
 	],
 ]
