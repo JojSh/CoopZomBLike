@@ -196,7 +196,6 @@ func kill_if_below_terminal_altitude ():
 	if (position.y <= terminal_depth):
 		velocity = Vector3.ZERO
 		current_hp = 0
-		animation_player.play("die")
 		hud.update_health_bar(player_number, current_hp, max_hp)
 		die()
 

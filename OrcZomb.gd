@@ -143,7 +143,6 @@ func receive_player_damage (damage):
 	$HealthBar3D.update_health_bar(health_points, max_health)
 
 	if health_points <= 0:
-		$ThudDeathHitSFX.play()
 		die()
 	
 func receive_shove (force, shove_direction):
@@ -178,6 +177,11 @@ func die ():
 	#$CollisionShape3DBox.disabled = true
 	$CollisionShape3DCapsule.disabled = true
 
-	animation_player.play("die")
+	$ThudDeathHitSFX.play()
 	is_dead = true
+	
+	# get round some race condition that interrupts "die: animation when falling to death
+	await get_tree().create_timer(0.01).timeout
+	animation_player.play("die")
+
 	enemy_death.emit()
