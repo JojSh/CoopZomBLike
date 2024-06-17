@@ -30,6 +30,7 @@
 [ext_resource type="Animation" uid="uid://od6w1oicirqj" path="res://sprint_rhand_static.res" id="28_flh2r"]
 
 [sub_resource type="Animation" id="Animation_7h5mi"]
+resource_name = "RESET"
 length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a52op"]

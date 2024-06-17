@@ -25,6 +25,7 @@ var attack_delay_active : bool = false
 var currently_held_collectible_name : String
 var terminal_depth: float = -10.0
 var knockback = Vector3.ZERO
+var shove_animation_alternator : int = 0
 
 @export var is_dead : bool = false
 @export var player_number : int
@@ -114,7 +115,6 @@ func stop_running ():
 	# when the player ir running. If I change the .ogg file to something else then this no longer
 	# happens and the sound is triggered repeatedly when stopped!
 	footsteps_sfx.play()
-	animation_player.stop()
 
 	#so that the player doesn't carry on travelling in direction * velocity:
 	velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -124,6 +124,7 @@ func update_debug_info ():
 	hud.update_player_debug_info(player_number, " on screen:", visibility_notifier.is_on_screen())
 
 func handle_sprint_animation ():
+	if animation_player.is_playing(): return
 	if (slashing_weapon_equipped or throwing_weapon_equipped or deflector_equipped):
 		animation_player.play("sprint_rhand_static")
 	else:
@@ -155,7 +156,7 @@ func try_attack ():
 	else:
 		# default shove
 		shove_sfx.play()
-		animation_player.play("holding-both-shoot")
+		handle_shove_animations()
 
 	attack_delay_timer.start()
 	attack_delay_active = true
@@ -171,6 +172,22 @@ func try_attack ():
 
 		if slashing_weapon_equipped and target.has_method("receive_player_damage"):
 			target.receive_player_damage(attack_power)
+	
+func handle_shove_animations ():
+	animation_player.stop()
+	if shove_animation_alternator == 1:
+		animation_player.play("attack-melee-left")
+	elif shove_animation_alternator == 2:
+		animation_player.play("attack-kick-right")
+	elif shove_animation_alternator == 3:
+		animation_player.play("attack-kick-left")
+	else:
+		animation_player.play("attack-melee-right")
+
+	shove_animation_alternator += 1
+	if shove_animation_alternator == 4:
+		shove_animation_alternator = 0
+		
 
 func receive_enemy_damage (damage, attacker, shove_direction, knockback_force):
 	knockback = shove_direction * knockback_force
