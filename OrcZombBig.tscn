@@ -9,6 +9,7 @@ variant = "Big"
 knockback_force = 15
 max_health = 10
 attack_power = 2
+variant_knockbackableness = 0.2
 
 [node name="HealthBar3D" parent="." index="3"]
 texture = SubResource("ViewportTexture_jyqk6")

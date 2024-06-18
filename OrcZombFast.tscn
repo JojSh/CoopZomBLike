@@ -7,6 +7,7 @@
 [node name="OrcZomb" instance=ExtResource("1_cqmei")]
 variant = "Fast"
 move_speed = 4.0
+variant_knockbackableness = 1.5
 
 [node name="HealthBar3D" parent="." index="3"]
 texture = SubResource("ViewportTexture_hr68p")
