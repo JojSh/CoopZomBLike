@@ -29,7 +29,7 @@ var enemy_wave_sequence : Array = [
 	["default", "default", "fast", "fast"],
 	["default", "default", "fast", "fast", "fast"],
 	["default", "default", "default", "default", "default", "big"], # 4
-	["fast", "fast", "fast", "fast", "fast", "fast"], # 5
+	["default", "default", "default", "default"], # 5
 	["default", "default", "default", "default", "fast", "fast", "fast", "fast", "fast"],
 	["default", "default", "default", "fast", "fast", "fast", "fast", "big"],
 	["fast", "fast", "fast", "fast", "fast", "fast", "fast", "fast", "fast"],
