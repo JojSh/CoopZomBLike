@@ -13,6 +13,7 @@ config_version=5
 config/name="CoopZomBLike"
 run/main_scene="res://Area1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/low_processor_mode=true
 config/icon="res://icon.svg"
 
 [autoload]
@@ -23,8 +24,8 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
-window/size/mode=3
 window/size/initial_position_type=2
+window/stretch/mode="viewport"
 
 [editor_plugins]
 

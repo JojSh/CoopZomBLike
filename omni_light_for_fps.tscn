@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://5npvav3lxf3m"]
+
+[node name="OmniLightFPS" type="OmniLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.26192, 12.7971, -0.355)
+light_energy = 7.0
+light_indirect_energy = 0.0
+light_size = 0.5
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 2.0
+shadow_reverse_cull_face = true
+omni_range = 20.0

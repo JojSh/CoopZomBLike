@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=33 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_1c4eq"]
 [ext_resource type="PackedScene" uid="uid://cmwevpgcplne5" path="res://3x3FloorWith2x2HoleR.tscn" id="14_05hvn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="15_upbtu"]
+[ext_resource type="PackedScene" uid="uid://5npvav3lxf3m" path="res://omni_light_for_fps.tscn" id="20_hgbl6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_20nlu"]
 font_size = 80
@@ -43,7 +44,7 @@ sky_material = SubResource("PanoramaSkyMaterial_calph")
 
 [sub_resource type="Environment" id="Environment_x1nbh"]
 background_mode = 2
-background_energy_multiplier = 1.5
+background_energy_multiplier = 0.6
 sky = SubResource("Sky_5xoj3")
 fog_light_color = Color(0.168627, 0.184314, 0.211765, 1)
 fog_sun_scatter = 0.5
@@ -1125,37 +1126,17 @@ auto_follow_distance_max = 10.0
 auto_follow_distance_divisor = 20.0
 
 [node name="Lighting (disabled for fps)" type="Node3D" parent="."]
+
+[node name="OmniLightFPS1" parent="Lighting (disabled for fps)" instance=ExtResource("20_hgbl6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.56813, 13, 0)
 visible = false
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lighting (disabled for fps)"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.708, 9.63341, -0.35475)
-visible = false
-light_energy = 4.0
-light_indirect_energy = 0.0
-light_size = 0.228
-shadow_bias = 2.0
-shadow_reverse_cull_face = true
-omni_range = 10.0
+[node name="OmniLightFPS2" parent="Lighting (disabled for fps)" instance=ExtResource("20_hgbl6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.262, 12.797, 0)
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lighting (disabled for fps)"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 9.633, -0.355)
+[node name="OmniLightFPS3" parent="Lighting (disabled for fps)" instance=ExtResource("20_hgbl6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.558, 12.797, 0)
 visible = false
-light_energy = 4.0
-light_indirect_energy = 0.0
-light_size = 0.228
-shadow_bias = 2.0
-shadow_reverse_cull_face = true
-omni_range = 10.0
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Lighting (disabled for fps)"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.26192, 12.7971, -0.355)
-light_energy = 7.0
-light_indirect_energy = 0.0
-light_size = 0.228
-shadow_enabled = true
-shadow_bias = 2.0
-shadow_reverse_cull_face = true
-omni_range = 20.0
 
 [connection signal="game_complete" from="." to="UI/GameCompleteMenu" method="_on_main_game_complete"]
 [connection signal="game_over" from="." to="UI/GameOverMenu" method="_on_main_game_over"]
