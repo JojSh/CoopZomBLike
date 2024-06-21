@@ -44,7 +44,7 @@ sky_material = SubResource("PanoramaSkyMaterial_calph")
 
 [sub_resource type="Environment" id="Environment_x1nbh"]
 background_mode = 2
-background_energy_multiplier = 0.6
+background_energy_multiplier = 0.7
 sky = SubResource("Sky_5xoj3")
 fog_light_color = Color(0.168627, 0.184314, 0.211765, 1)
 fog_sun_scatter = 0.5
