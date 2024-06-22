@@ -101,9 +101,12 @@ func _physics_process(delta):
 		update_debug_info()
 
 		if input_dir.length() > 0:
-			facing_angle = Vector2(input_dir.y, input_dir.x).angle()
-			facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
-			models.rotation.y = lerp_angle(models.rotation.y, facing_angle, 0.5)
+			if (Input.is_action_pressed(str("p", player_number, "_lock_rotation"))):
+				return
+			else:			
+				facing_angle = Vector2(input_dir.y, input_dir.x).angle()
+				facing_vector3 = Vector3(input_dir.y, input_dir.x, 0)
+				models.rotation.y = lerp_angle(models.rotation.y, facing_angle, 0.5)
 
 func run_in_direction (direction):
 	handle_sprint_animation()

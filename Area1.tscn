@@ -183,9 +183,10 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Gamepad controls:
 
-Attack / shove                 X
-Drop item                        B
-Move                      [d-pad]"
+Attack / shove:                 X
+Drop item:                        B
+Move:                     [d-pad]
+Lock rotation (strafe):   R"
 label_settings = SubResource("LabelSettings_yvttv")
 horizontal_alignment = 1
 
