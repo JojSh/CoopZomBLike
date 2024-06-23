@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmh14ogsdbhgt"]
+[gd_scene load_steps=4 format=3 uid="uid://bmh14ogsdbhgt"]
 
 [ext_resource type="Script" path="res://HUD.gd" id="1_bsw00"]
 [ext_resource type="PackedScene" uid="uid://ctdrx78dnbnlv" path="res://UIHealthBar.tscn" id="2_5spns"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ey27"]
+font_size = 18
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="HUD" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -36,28 +41,32 @@ offset_bottom = 48.0
 [node name="DebugInfo" type="Node2D" parent="."]
 
 [node name="P1Info" type="Label" parent="DebugInfo"]
-offset_left = 21.0
-offset_top = 72.0
-offset_right = 61.0
-offset_bottom = 95.0
+offset_left = 29.0
+offset_top = 21.0
+offset_right = 69.0
+offset_bottom = 47.0
+label_settings = SubResource("LabelSettings_2ey27")
 
 [node name="P2Info" type="Label" parent="DebugInfo"]
-offset_left = 261.0
-offset_top = 72.0
-offset_right = 301.0
-offset_bottom = 95.0
+offset_left = 269.0
+offset_top = 21.0
+offset_right = 309.0
+offset_bottom = 47.0
+label_settings = SubResource("LabelSettings_2ey27")
 
 [node name="P3Info" type="Label" parent="DebugInfo"]
-offset_left = 501.0
-offset_top = 72.0
-offset_right = 541.0
-offset_bottom = 95.0
+offset_left = 509.0
+offset_top = 21.0
+offset_right = 549.0
+offset_bottom = 47.0
+label_settings = SubResource("LabelSettings_2ey27")
 
 [node name="P4Info" type="Label" parent="DebugInfo"]
-offset_left = 741.0
-offset_top = 72.0
-offset_right = 781.0
-offset_bottom = 95.0
+offset_left = 749.0
+offset_top = 21.0
+offset_right = 789.0
+offset_bottom = 47.0
+label_settings = SubResource("LabelSettings_2ey27")
 
 [node name="EnemyCounter" type="Label" parent="."]
 layout_direction = 1
