@@ -124,7 +124,7 @@ func stop_running ():
 	velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func update_debug_info ():
-	hud.update_player_debug_info(player_number, " on screen:", visibility_notifier.is_on_screen())
+	hud.update_player_debug_info(player_number, "", "") # , " on screen:", visibility_notifier.is_on_screen())
 
 func handle_sprint_animation ():
 	if animation_player.is_playing(): return

@@ -75,7 +75,7 @@ func spawn_player (index):
 	var player = player_scene.instantiate()
 	player.player_number = index + 1
 	player.starting_position = $PlayerSpawnPoints.get_child(index).position
-	print("starting_position: ", player.starting_position)
+
 	players_container.add_child(player)
 	player.connect('player_death', _on_player_player_death)
 	player.connect('create_collectible', _on_create_collectible)
