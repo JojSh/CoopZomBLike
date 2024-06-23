@@ -19,7 +19,12 @@ script = ExtResource("5_jt2lp")
 cull_mask = 1048575
 h_offset = 0.0
 v_offset = 0.0
+projection = 0
 fov = 75.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
 
 [sub_resource type="Resource" id="Resource_e7t18"]
 script = ExtResource("2_47xf2")
@@ -32,7 +37,12 @@ script = ExtResource("5_jt2lp")
 cull_mask = 1048575
 h_offset = 1.0
 v_offset = 0.0
+projection = 0
 fov = 75.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_wsigl"]
 size = Vector3(1, 10, 20)
@@ -51,7 +61,12 @@ script = ExtResource("5_jt2lp")
 cull_mask = 1048575
 h_offset = 0.0
 v_offset = 0.0
+projection = 0
 fov = 75.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
 
 [node name="Root" type="Node3D"]
 
