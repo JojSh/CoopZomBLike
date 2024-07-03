@@ -214,3 +214,7 @@ p4_right={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":3,"axis":0,"axis_value":1.0,"script":null)
 ]
 }
+
+[rendering]
+
+mesh_lod/lod_change/threshold_pixels=0.1
