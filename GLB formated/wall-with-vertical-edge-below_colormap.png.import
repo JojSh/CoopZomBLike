@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgsftj0k44mxo"
-path.s3tc="res://.godot/imported/wall-half_colormap.png-3fc48eec4603df7b9bfdd2838d22072b.s3tc.ctex"
+uid="uid://h4itbv58bwmb"
+path.s3tc="res://.godot/imported/wall-with-vertical-edge-below_colormap.png-844bb394c9c10e24743ca9fbe1a60dd9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://GLB formated/wall-half_colormap.png"
-dest_files=["res://.godot/imported/wall-half_colormap.png-3fc48eec4603df7b9bfdd2838d22072b.s3tc.ctex"]
+source_file="res://GLB formated/wall-with-vertical-edge-below_colormap.png"
+dest_files=["res://.godot/imported/wall-with-vertical-edge-below_colormap.png-844bb394c9c10e24743ca9fbe1a60dd9.s3tc.ctex"]
 
 [params]
 

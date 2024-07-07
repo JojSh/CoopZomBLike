@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bxsm3nvw0t1cd"
-path="res://.godot/imported/wall-narrow.glb-d630f84a7935866dd445f437d28730ab.scn"
+uid="uid://dq0b67wer5xuh"
+path="res://.godot/imported/wall-with-vertical-edge-below.glb-94e74c295c6418745999d6ada2ac55dc.scn"
 
 [deps]
 
-source_file="res://GLB formated/wall-narrow.glb"
-dest_files=["res://.godot/imported/wall-narrow.glb-d630f84a7935866dd445f437d28730ab.scn"]
+source_file="res://GLB formated/wall-with-vertical-edge-below.glb"
+dest_files=["res://.godot/imported/wall-with-vertical-edge-below.glb-94e74c295c6418745999d6ada2ac55dc.scn"]
 
 [params]
 
