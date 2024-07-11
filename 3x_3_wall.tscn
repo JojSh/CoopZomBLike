@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwkuqpc1kyu36"]
-
-[ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_8usql"]
-
-[node name="3x3wall" instance=ExtResource("1_8usql")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.5, 0)
-
-[node name="Floor" parent="." index="1"]
-gi_mode = 2
