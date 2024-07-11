@@ -1,18 +1,24 @@
-[gd_scene load_steps=27 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=33 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
+[ext_resource type="PackedScene" uid="uid://cnkdrsvetyx8l" path="res://3x3Floor.tscn" id="1_pm7yx"]
 [ext_resource type="AudioStream" uid="uid://bb7x0y2odm4mw" path="res://Audio/music/Entrenched_Part_A_v1.ogg" id="2_6hmnu"]
 [ext_resource type="AudioStream" uid="uid://dl6lqt247ao5g" path="res://Audio/music/Entrenched_Part_B_v1.ogg" id="3_3gn80"]
 [ext_resource type="Script" path="res://GameOverMenu.gd" id="3_3rwnw"]
 [ext_resource type="Script" path="res://GameStartMenu.gd" id="3_r2jor"]
 [ext_resource type="StyleBox" uid="uid://ckhhy1j1yce5" path="res://press_any_key_background.tres" id="4_31ns0"]
+[ext_resource type="PackedScene" uid="uid://dwixkm3sa7y25" path="res://WallCorner.tscn" id="4_r0see"]
 [ext_resource type="Script" path="res://WaveCompleteScreen.gd" id="5_5tbhd"]
+[ext_resource type="PackedScene" uid="uid://58fq0875qtau" path="res://Wall.tscn" id="5_ojn1r"]
 [ext_resource type="Script" path="res://GameCompleteMenu.gd" id="6_cryiv"]
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://HUD.tscn" id="6_e6gqo"]
-[ext_resource type="PackedScene" uid="uid://drvv017b0yvt1" path="res://map_1.tscn" id="10_0lygs"]
+[ext_resource type="PackedScene" uid="uid://durvvgy8f05jr" path="res://map_0.tscn" id="10_62gi7"]
+[ext_resource type="MeshLibrary" uid="uid://cx7lpg2vmwnud" path="res://mesh_library_1.tres" id="11_psd5s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="12_0nqj1"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_41gnw"]
+[ext_resource type="PackedScene" uid="uid://c6185hyg3acxg" path="res://3x3FloorWith2x2HoleL.tscn" id="13_dfg2o"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_1c4eq"]
+[ext_resource type="PackedScene" uid="uid://cmwevpgcplne5" path="res://3x3FloorWith2x2HoleR.tscn" id="14_05hvn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="15_upbtu"]
 [ext_resource type="PackedScene" uid="uid://5npvav3lxf3m" path="res://omni_light_for_fps.tscn" id="20_hgbl6"]
 
@@ -47,13 +53,8 @@ fog_sun_scatter = 0.5
 fog_density = 0.03
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_wtsvp"]
-vertices = PackedVector3Array(-6.5, 0.25, -1, -5.5, 0.25, -0.5, -5.5, 0.25, -3, -7, 0.25, -4.5, -10, 0.25, -4.5, -7, 0.25, -4.5, -5.5, 0.25, -5.5, -5, 0.25, -9.5, -12.5, 0.25, -12.5, -5.5, 0.25, -3, -4.5, 0.25, -3.5, -4.5, 0.25, -5, -5.5, 0.25, -5.5, -7, 0.25, -4.5, -12.5, 0.25, -1, -10.5, 0.25, -1, -10, 0.25, -4.5, -12.5, 0.25, -12.5, -5, 0.25, -9.5, 4, 0.25, -9, 4.5, 0.25, -9, 14, 0.25, -9.5, 14, 0.25, -12.5, -12.5, 0.25, -12.5, -2.5, 0.25, 2, -3, 0.25, 1.5, -3, 0.25, 3, -5, 0.25, 4, -5, 0.25, 4.5, -3.5, 0.25, 4.5, -3, 0.25, 3, 14.5, 0.25, 9.5, 14, 0.25, 9, 5, 0.25, 9, 12.5, 0.25, 5, 14.5, 0.25, 4.5, 14, 0.25, 4, 12.5, 0.25, 3.5, 21.5, 0.25, -12.5, 14, 0.25, -12.5, 15, 0.25, -9, 19, 0.25, -4.5, 5, 0.25, -7, 4.5, 0.25, -9, 4, 0.25, -9, 3, 0.25, -7, 12.5, 0.25, 6.5, 12.5, 0.25, 5, 12, 0.25, 5, 11, 0.25, 6, -4.5, 0.25, -5, -4.5, 0.25, -3.5, -3, 0.25, -3, -2, 0.25, -5.5, -3, 0.25, -7, -3, 0.25, -3, -3, 0.25, 0, -2.5, 0.25, -0.5, -2, 0.25, -5.5, 12, 0.25, -5, 13, 0.25, -4.5, 14, 0.25, -5, 12.5, 0.25, -5.5, 16, 0.25, -4.5, 15, 0.25, -6, 14, 0.25, -5, 12.5, 0.25, 3.5, 13, 0.25, -4.5, 12, 0.25, -1, 12, 0.25, 1, -2, 0.25, 6, -2.5, 0.25, 2, -3, 0.25, 3, -3.5, 0.25, 4.5, -3, 0.25, 6.5, 13, 0.25, -4.5, 12, 0.25, -5, 12, 0.25, -1, -5.5, 0.25, 9.5, 14.5, 0.25, 9.5, 5, 0.25, 9, 3, 0.25, 9, 15, 0.25, -4, 15, 0.25, -0.5, 15.5, 0.25, -0.5, 16, 0.25, -4.5, 3, 0.25, 9, -5, 0.25, 9, -5.5, 0.25, 9.5, 13, 0.25, -4.5, 15, 0.25, -4, 16, 0.25, -4.5, 14, 0.25, -5, 14, 0.25, -12.5, 14, 0.25, -9.5, 15, 0.25, -9, 9.5, 0.25, -0.5, 9.5, 0.25, -3, 6.5, 0.25, -3, 9.5, 0.25, -0.5, 6.5, 0.25, -3, 5.5, 0.25, -0.5, 9.5, 0.25, 1, 5.5, 0.25, -0.5, 5.5, 0.25, 1, 6, 0.25, 3.5, 9.5, 0.25, 3.5, 9.5, 0.25, 1, 12, 0.25, 5, 12.5, 0.25, 5, 12.5, 0.25, 3.5, 12, 0.25, 1, 4, 0.25, 7, 3, 0.25, 9, 5, 0.25, 9, 4.5, 0.25, 7, 5, 0.25, -7, 3, 0.25, -7, -2, 0.25, -5.5, 11, 0.25, 0, 9.5, 0.25, -0.5, 9.5, 0.25, 1, 12, 0.25, 1, 12.5, 0.25, -7, 5, 0.25, -7, -2, 0.25, -5.5, 12, 0.25, -5, 12.5, 0.25, -5.5, 12, 0.25, -1, 11, 0.25, 0, 12, 0.25, 1, 19, 0.25, -4.5, 19.5, 0.25, -1, 21.5, 0.25, -1, 21.5, 0.25, -12.5, 3, 0.25, -7, -3, 0.25, -7, -2, 0.25, -5.5, -2, 0.25, 6, -3, 0.25, 6.5, 4, 0.25, 7, 4.5, 0.25, 7, 12.5, 0.25, 6.5, 11, 0.25, 6, 19, 0.25, -4.5, 15, 0.25, -9, 15, 0.25, -6, 16, 0.25, -4.5, -4.5, 1.25, -8.5, -4.5, 1.25, -6.5, -3, 1.25, -8, 9, 1.25, -4.5, 11, 1.25, -3, 11, 1.25, -4.5, -1, 0.25, 0, -2.5, 0.25, -0.5, -3, 0.25, 0, -3, 0.25, 1.5, -2.5, 0.25, 2, -0.5, 0.25, 1.5, 2.5, 0.25, -1, 5, 0.25, -1.5, 6.5, 0.25, -3, 0, 0.25, -3, 5, 0.25, -1.5, 5.5, 0.25, -0.5, 6.5, 0.25, -3, -0.5, 0.25, 1.5, 0, 0.25, 3.5, 3, 0.25, 1.5, -1, 0.25, 0, -0.5, 0.25, 1.5, 3, 0.25, 1.5, 2.5, 0.25, -1, 0, 0.25, -3, 6, 0.25, 3.5, 5.5, 0.25, 1, 3, 0.25, 1.5, 0, 0.25, 3.5, -5, 0.25, 4, -5.5, 0.25, -0.5, -6.5, 0.25, -1, -7, 0.25, 2.5, -5, 0.25, 4.5, -5.5, 0.25, 9.5, -5, 0.25, 9, -5, 0.25, 4.5, -7, 0.25, 2.5, -10, 0.25, 2.5, -12.5, 0.25, 9.5, -10, 0.25, 2.5, -10.5, 0.25, -1, -12.5, 0.25, -1, -12.5, 0.25, 9.5, 15, 0.25, 3, 14, 0.25, 4, 14.5, 0.25, 4.5, 15, 0.25, 8, 14, 0.25, 9, 14.5, 0.25, 9.5, 21.5, 0.25, 9.5, 16, 0.25, 2.5, 15.5, 0.25, -0.5, 15, 0.25, -0.5, 15, 0.25, 3, 21.5, 0.25, -1, 19.5, 0.25, -1, 19, 0.25, 2.5, 21.5, 0.25, 9.5, 16, 0.25, 2.5, 15, 0.25, 3, 14.5, 0.25, 4.5, 15, 0.25, 8, 21.5, 0.25, 9.5, 19, 0.25, 2.5, 14, 1.25, 8, 14, 1.25, 6, 13, 1.25, 7.5, 5.5, 1.25, 7.5, 14, 1.25, 8, 13, 1.25, 7.5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 8), PackedInt32Array(10, 9, 11), PackedInt32Array(11, 9, 12), PackedInt32Array(12, 9, 13), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 23), PackedInt32Array(20, 23, 21), PackedInt32Array(21, 23, 22), PackedInt32Array(26, 25, 24), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 30), PackedInt32Array(33, 32, 31), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 34), PackedInt32Array(39, 38, 40), PackedInt32Array(40, 38, 41), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 45), PackedInt32Array(47, 46, 48), PackedInt32Array(48, 46, 49), PackedInt32Array(51, 50, 52), PackedInt32Array(52, 50, 53), PackedInt32Array(53, 50, 54), PackedInt32Array(56, 55, 57), PackedInt32Array(57, 55, 58), PackedInt32Array(59, 62, 60), PackedInt32Array(60, 62, 61), PackedInt32Array(65, 64, 63), PackedInt32Array(69, 68, 66), PackedInt32Array(66, 68, 67), PackedInt32Array(74, 73, 70), PackedInt32Array(70, 73, 72), PackedInt32Array(70, 72, 71), PackedInt32Array(77, 76, 75), PackedInt32Array(81, 80, 78), PackedInt32Array(78, 80, 79), PackedInt32Array(83, 82, 84), PackedInt32Array(84, 82, 85), PackedInt32Array(88, 87, 86), PackedInt32Array(89, 92, 90), PackedInt32Array(90, 92, 91), PackedInt32Array(93, 95, 94), PackedInt32Array(98, 97, 96), PackedInt32Array(102, 101, 99), PackedInt32Array(99, 101, 100), PackedInt32Array(104, 103, 105), PackedInt32Array(105, 103, 107), PackedInt32Array(105, 107, 106), PackedInt32Array(109, 108, 110), PackedInt32Array(110, 108, 111), PackedInt32Array(115, 114, 112), PackedInt32Array(112, 114, 113), PackedInt32Array(118, 117, 116), PackedInt32Array(120, 119, 121), PackedInt32Array(121, 119, 122), PackedInt32Array(127, 126, 123), PackedInt32Array(123, 126, 124), PackedInt32Array(124, 126, 125), PackedInt32Array(130, 129, 128), PackedInt32Array(132, 131, 133), PackedInt32Array(133, 131, 134), PackedInt32Array(136, 135, 137), PackedInt32Array(139, 138, 140), PackedInt32Array(140, 138, 141), PackedInt32Array(141, 138, 143), PackedInt32Array(141, 143, 142), PackedInt32Array(147, 146, 144), PackedInt32Array(144, 146, 145), PackedInt32Array(150, 149, 148), PackedInt32Array(153, 152, 151), PackedInt32Array(156, 155, 157), PackedInt32Array(157, 155, 158), PackedInt32Array(158, 155, 154), PackedInt32Array(158, 154, 159), PackedInt32Array(161, 160, 162), PackedInt32Array(162, 160, 163), PackedInt32Array(164, 166, 165), PackedInt32Array(169, 168, 167), PackedInt32Array(170, 174, 171), PackedInt32Array(171, 174, 173), PackedInt32Array(171, 173, 172), PackedInt32Array(176, 175, 177), PackedInt32Array(177, 175, 178), PackedInt32Array(183, 182, 179), PackedInt32Array(179, 182, 180), PackedInt32Array(180, 182, 181), PackedInt32Array(185, 184, 186), PackedInt32Array(186, 184, 187), PackedInt32Array(187, 184, 188), PackedInt32Array(188, 184, 189), PackedInt32Array(191, 190, 192), PackedInt32Array(192, 190, 193), PackedInt32Array(194, 196, 195), PackedInt32Array(198, 197, 199), PackedInt32Array(199, 197, 200), PackedInt32Array(202, 201, 203), PackedInt32Array(203, 201, 204), PackedInt32Array(206, 205, 207), PackedInt32Array(207, 205, 208), PackedInt32Array(210, 209, 211), PackedInt32Array(211, 209, 214), PackedInt32Array(211, 214, 212), PackedInt32Array(212, 214, 213), PackedInt32Array(217, 216, 215), PackedInt32Array(220, 219, 218)]
-geometry_parsed_geometry_type = 1
-cell_size = 0.5
-cell_height = 0.1
-agent_height = 0.1
-agent_max_climb = 0.1
+vertices = PackedVector3Array(-7.73692, 0.997854, -5.23875, -7.48692, 0.997854, -4.23875, -6.73692, 0.997854, -4.23875, -10.4869, 0.997854, -3.98875, -9.48692, 0.997854, -4.23875, -9.23692, 0.997854, -5.23875, -12.4869, 0.997854, -12.4887, -12.4869, 0.997854, -1.98875, -10.4869, 0.997854, -1.98875, -10.4869, 0.997854, -3.98875, -12.4869, 0.997854, -12.4887, -6.73692, 0.997854, -4.23875, -6.48692, 0.997854, -3.73875, -2.48692, 0.997854, -3.73875, -6.73692, 0.997854, -4.23875, -2.48692, 0.997854, -3.73875, -2.23692, 0.997854, -5.48875, -7.73692, 0.997854, -5.23875, -2.23692, 0.997854, -5.48875, -0.236919, 0.997854, -5.48875, -0.236919, 0.997854, -12.4887, -9.23692, 0.997854, -5.23875, -7.73692, 0.997854, -5.23875, -2.23692, 0.997854, -5.48875, -0.236919, 0.997854, -12.4887, -12.4869, 0.997854, -12.4887, -0.236919, 0.997854, -5.48875, 9.51308, 0.997854, -5.48875, 9.51308, 0.997854, -12.4887, -0.236919, 0.997854, -12.4887, 19.2631, 0.997854, -4.23875, 19.5131, 0.997854, -1.98875, 21.5131, 0.997854, -1.98875, 21.5131, 0.997854, -12.4887, 11.5131, 0.997854, -5.48875, 11.7631, 0.997854, -4.48875, 16.0131, 0.997854, -4.23875, 9.51308, 0.997854, -12.4887, 9.51308, 0.997854, -5.48875, 11.5131, 0.997854, -5.48875, 11.5131, 0.997854, -5.48875, 16.0131, 0.997854, -4.23875, 19.2631, 0.997854, -4.23875, 21.5131, 0.997854, -12.4887, 9.51308, 0.997854, -12.4887, -1.48692, 1.74785, -4.48875, -1.48692, 1.99785, -3.98875, 10.5131, 1.99785, -3.98875, 10.5131, 1.74785, -4.48875, 10.7631, 0.997854, -1.23875, 10.7631, 0.997854, -0.48875, 11.7631, 0.997854, -0.23875, 11.7631, 0.997854, -1.48875, 11.7631, 0.997854, -0.23875, 15.5131, 0.997854, 2.26125, 15.5131, 0.997854, -3.98875, 11.7631, 0.997854, -1.48875, 11.7631, 0.997854, 2.76125, 16.0131, 0.997854, 2.51125, 15.5131, 0.997854, 2.26125, 15.5131, 0.997854, -3.98875, 16.0131, 0.997854, -4.23875, 11.7631, 0.997854, -4.48875, 11.7631, 0.997854, -0.23875, 11.7631, 0.997854, 2.76125, 15.5131, 0.997854, 2.26125, 15.5131, 0.997854, -3.98875, 11.7631, 0.997854, -4.48875, 11.7631, 0.997854, -1.48875, 4.01308, 0.997854, 2.51125, 4.01308, 0.997854, 1.51125, 2.51308, 0.997854, 1.26125, -0.236919, 0.997854, 2.51125, 2.51308, 0.997854, -0.98875, 4.01308, 0.997854, -1.23875, 4.01308, 0.997854, -3.23875, -0.486919, 0.997854, 0.51125, -0.236919, 0.997854, -0.48875, -2.23692, 0.997854, -0.23875, -2.23692, 0.997854, 0.51125, -0.486919, 0.997854, 0.51125, -0.236919, 0.997854, 2.51125, 2.51308, 0.997854, 1.26125, 2.51308, 0.997854, -0.98875, -0.236919, 0.997854, -0.48875, -2.23692, 0.997854, -0.23875, -2.48692, 0.997854, -3.73875, -6.48692, 0.997854, -3.73875, -6.48692, 0.997854, 2.01125, -2.48692, 0.997854, 2.01125, -2.23692, 0.997854, 0.51125, 2.51308, 0.997854, -0.98875, 4.01308, 0.997854, -3.23875, -0.236919, 0.997854, -3.23875, -0.236919, 0.997854, -0.48875, 9.51308, 0.997854, -0.23875, 10.7631, 0.997854, -0.48875, 10.7631, 0.997854, -1.23875, 9.51308, 0.997854, -1.48875, 5.51308, 0.997854, -0.98875, 5.51308, 0.997854, 1.26125, 9.51308, 0.997854, 2.51125, 9.51308, 0.997854, -0.23875, 5.51308, 0.997854, -0.98875, 5.51308, 0.997854, 1.26125, 4.01308, 0.997854, 1.51125, 4.01308, 0.997854, 2.51125, 9.51308, 0.997854, 2.51125, 4.01308, 0.997854, -3.23875, 4.01308, 0.997854, -1.23875, 5.51308, 0.997854, -0.98875, 9.51308, 0.997854, -1.48875, 9.51308, 0.997854, -3.23875, -10.4869, 0.997854, 2.26125, -10.4869, 0.997854, -1.98875, -12.4869, 0.997854, -1.98875, -8.73692, 0.997854, 9.51125, -8.73692, 0.997854, 2.51125, -10.4869, 0.997854, 2.26125, -10.4869, 0.997854, 2.26125, -12.4869, 0.997854, -1.98875, -12.4869, 0.997854, 9.51125, -8.73692, 0.997854, 9.51125, 16.0131, 0.997854, 2.51125, 11.7631, 0.997854, 2.76125, 11.7631, 0.997854, 4.51125, 21.5131, 0.997854, -1.98875, 19.5131, 0.997854, -1.98875, 19.5131, 0.997854, 2.26125, 21.5131, 0.997854, 9.51125, 11.7631, 0.997854, 4.51125, 10.0131, 0.997854, 4.76125, 10.2631, 0.997854, 9.51125, 19.5131, 0.997854, 2.26125, 16.0131, 0.997854, 2.51125, 11.7631, 0.997854, 4.51125, 10.2631, 0.997854, 9.51125, 21.5131, 0.997854, 9.51125, -2.48692, 0.997854, 2.01125, -6.48692, 0.997854, 2.01125, -6.73692, 0.997854, 2.51125, -2.48692, 0.997854, 4.51125, -2.48692, 0.997854, 4.51125, -6.73692, 0.997854, 2.51125, -8.73692, 0.997854, 2.51125, -8.73692, 0.997854, 9.51125, -0.986919, 0.997854, 9.51125, -0.986919, 0.997854, 9.51125, -0.736919, 0.997854, 4.76125, -2.48692, 0.997854, 4.51125, -0.986919, 1.99785, 3.51125, -1.48692, 1.99785, 3.01125, -1.48692, 1.74785, 3.76125, 10.5131, 1.74785, 3.76125, 10.5131, 1.99785, 3.26125, -0.986919, 1.99785, 3.51125, -1.48692, 1.74785, 3.76125, -0.986919, 0.997854, 9.51125, 10.2631, 0.997854, 9.51125, 10.0131, 0.997854, 4.76125, -0.736919, 0.997854, 4.76125)
+polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(13, 12, 11), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(20, 19, 18), PackedInt32Array(22, 21, 23), PackedInt32Array(23, 21, 24), PackedInt32Array(24, 21, 25), PackedInt32Array(29, 28, 26), PackedInt32Array(26, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(36, 35, 34), PackedInt32Array(39, 38, 37), PackedInt32Array(41, 40, 42), PackedInt32Array(42, 40, 44), PackedInt32Array(42, 44, 43), PackedInt32Array(48, 47, 45), PackedInt32Array(45, 47, 46), PackedInt32Array(49, 52, 50), PackedInt32Array(50, 52, 51), PackedInt32Array(56, 55, 53), PackedInt32Array(53, 55, 54), PackedInt32Array(59, 58, 57), PackedInt32Array(62, 61, 60), PackedInt32Array(65, 64, 63), PackedInt32Array(68, 67, 66), PackedInt32Array(70, 69, 71), PackedInt32Array(71, 69, 72), PackedInt32Array(75, 74, 73), PackedInt32Array(79, 78, 76), PackedInt32Array(76, 78, 77), PackedInt32Array(80, 84, 81), PackedInt32Array(81, 84, 82), PackedInt32Array(82, 84, 83), PackedInt32Array(90, 89, 85), PackedInt32Array(85, 89, 88), PackedInt32Array(85, 88, 86), PackedInt32Array(86, 88, 87), PackedInt32Array(94, 93, 91), PackedInt32Array(91, 93, 92), PackedInt32Array(96, 95, 97), PackedInt32Array(97, 95, 98), PackedInt32Array(98, 95, 99), PackedInt32Array(103, 102, 100), PackedInt32Array(100, 102, 101), PackedInt32Array(105, 104, 106), PackedInt32Array(106, 104, 107), PackedInt32Array(109, 108, 110), PackedInt32Array(110, 108, 111), PackedInt32Array(111, 108, 112), PackedInt32Array(115, 114, 113), PackedInt32Array(118, 117, 116), PackedInt32Array(122, 121, 119), PackedInt32Array(119, 121, 120), PackedInt32Array(125, 124, 123), PackedInt32Array(127, 126, 128), PackedInt32Array(128, 126, 129), PackedInt32Array(132, 131, 130), PackedInt32Array(134, 133, 135), PackedInt32Array(135, 133, 136), PackedInt32Array(136, 133, 137), PackedInt32Array(139, 138, 140), PackedInt32Array(140, 138, 141), PackedInt32Array(143, 142, 144), PackedInt32Array(144, 142, 145), PackedInt32Array(145, 142, 146), PackedInt32Array(149, 148, 147), PackedInt32Array(152, 151, 150), PackedInt32Array(154, 153, 155), PackedInt32Array(155, 153, 156), PackedInt32Array(160, 159, 157), PackedInt32Array(157, 159, 158)]
 
 [sub_resource type="Resource" id="Resource_mf3yd"]
 script = ExtResource("14_1c4eq")
@@ -418,9 +419,693 @@ transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, -3, 0.49
 environment = SubResource("Environment_x1nbh")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 navigation_mesh = SubResource("NavigationMesh_wtsvp")
 
-[node name="GridMap" parent="WorldEnvironment/NavigationRegion3D" instance=ExtResource("10_0lygs")]
+[node name="GridMap2" parent="WorldEnvironment/NavigationRegion3D" instance=ExtResource("10_62gi7")]
+mesh_library = ExtResource("11_psd5s")
+cell_size = Vector3(1, 1, 1)
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="OldMap" type="Node3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00174713, -0.111389, 0.185562)
+visible = false
+
+[node name="Walls-inner" type="Node3D" parent="WorldEnvironment/OldMap"]
+
+[node name="WallNWCorner" parent="WorldEnvironment/OldMap/Walls-inner" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+skeleton = NodePath("../../../..")
+
+[node name="WallNECorner" parent="WorldEnvironment/OldMap/Walls-inner" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4)
+skeleton = NodePath("../../../..")
+
+[node name="WallSWCorner" parent="WorldEnvironment/OldMap/Walls-inner" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+skeleton = NodePath("../../../..")
+
+[node name="WallSECorner" parent="WorldEnvironment/OldMap/Walls-inner" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 4)
+skeleton = NodePath("../../../..")
+
+[node name="SouthWall" type="Node3D" parent="WorldEnvironment/OldMap/Walls-inner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Wall" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall2" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall3" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall4" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall5" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall6" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall7" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall8" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall9" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall10" parent="WorldEnvironment/OldMap/Walls-inner/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="NorthWall" type="Node3D" parent="WorldEnvironment/OldMap/Walls-inner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Wall" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall2" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall3" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall4" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall5" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall6" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall7" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall8" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall9" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall10" parent="WorldEnvironment/OldMap/Walls-inner/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="WestWall" type="Node3D" parent="WorldEnvironment/OldMap/Walls-inner"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, -3)
+
+[node name="Wall" parent="WorldEnvironment/OldMap/Walls-inner/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall2" parent="WorldEnvironment/OldMap/Walls-inner/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall3" parent="WorldEnvironment/OldMap/Walls-inner/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall6" parent="WorldEnvironment/OldMap/Walls-inner/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall7" parent="WorldEnvironment/OldMap/Walls-inner/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="EastWall" type="Node3D" parent="WorldEnvironment/OldMap/Walls-inner"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, -3)
+
+[node name="Wall" parent="WorldEnvironment/OldMap/Walls-inner/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall2" parent="WorldEnvironment/OldMap/Walls-inner/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall5" parent="WorldEnvironment/OldMap/Walls-inner/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall6" parent="WorldEnvironment/OldMap/Walls-inner/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall7" parent="WorldEnvironment/OldMap/Walls-inner/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Walls-outer" type="Node3D" parent="WorldEnvironment/OldMap"]
+
+[node name="WallNWCorner" parent="WorldEnvironment/OldMap/Walls-outer" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
+skeleton = NodePath("../../../..")
+
+[node name="WallNECorner" parent="WorldEnvironment/OldMap/Walls-outer" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7921, 0, -8)
+skeleton = NodePath("../../../..")
+
+[node name="WallSWCorner" parent="WorldEnvironment/OldMap/Walls-outer" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 7)
+skeleton = NodePath("../../../..")
+
+[node name="WallSECorner" parent="WorldEnvironment/OldMap/Walls-outer" instance=ExtResource("4_r0see")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 7)
+skeleton = NodePath("../../../..")
+
+[node name="NorthWall" type="Node3D" parent="WorldEnvironment/OldMap/Walls-outer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="Wall" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.03539, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall2" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03539, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall3" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03539, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall4" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0353947, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall5" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.964605, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall6" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96461, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall7" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96461, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall8" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96461, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall9" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.96461, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall10" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.96461, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall11" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.96461, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall12" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.96461, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall13" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9646, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall14" parent="WorldEnvironment/OldMap/Walls-outer/NorthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9646, 1.90735e-06, 0.00872231)
+skeleton = NodePath("../../../../..")
+
+[node name="WestWall" type="Node3D" parent="WorldEnvironment/OldMap/Walls-outer"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0, -7)
+
+[node name="Wall" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall2" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall3" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4.76837e-07)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall6" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall7" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall4" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -1.19209e-06)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall5" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -1.19209e-06)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall8" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -4.76837e-07)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall9" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1.43051e-06)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall10" parent="WorldEnvironment/OldMap/Walls-outer/WestWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -1.19209e-06)
+skeleton = NodePath("../../../../..")
+
+[node name="EastWall" type="Node3D" parent="WorldEnvironment/OldMap/Walls-outer"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0, 0)
+
+[node name="Wall" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0.2)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall2" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0.2)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall3" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall6" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall7" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall4" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.68434e-14, 0, -9.53674e-07)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall5" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9.53674e-07)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall8" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall9" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -9.53674e-07)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall10" parent="WorldEnvironment/OldMap/Walls-outer/EastWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9.53674e-07)
+skeleton = NodePath("../../../../..")
+
+[node name="SouthWall" type="Node3D" parent="WorldEnvironment/OldMap/Walls-outer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 7)
+
+[node name="Wall" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall2" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall3" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall4" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall5" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall6" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall7" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall8" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall9" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall10" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall11" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall12" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall13" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Wall14" parent="WorldEnvironment/OldMap/Walls-outer/SouthWall" instance=ExtResource("5_ojn1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+skeleton = NodePath("../../../../..")
+
+[node name="Ground" type="Node3D" parent="WorldEnvironment/OldMap"]
+
+[node name="Floor" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+
+[node name="3x3floor" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, 1)
+
+[node name="3x3floor2" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+
+[node name="3x3floor4" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 4)
+
+[node name="3x3floor5" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, -4)
+
+[node name="3x3floor6" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="3x3floor8" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 2)
+
+[node name="3x3floor9" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, -1)
+
+[node name="3x3floor10" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="3x3floor11" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+
+[node name="3x3floor12" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, -2)
+
+[node name="3x3floor13" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0, 2)
+
+[node name="3x3floor14" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 11, 0, 1)
+
+[node name="3x3floor15" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 3.49691e-07, 0, 1, 0, -3.49691e-07, 0, 1, 11, 0, -2)
+
+[node name="3x3floor16" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, 2)
+
+[node name="3x3floor17" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 5.24537e-07, 0, 1, 0, -5.24537e-07, 0, 1, -4, 0, 0.999999)
+
+[node name="3x3floor18" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 6.99382e-07, 0, 1, 0, -6.99382e-07, 0, 1, -4, 0, -2)
+
+[node name="3x3floor19" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 10, 0, 5)
+
+[node name="3x3floor20" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1.94707e-07, 0, -1, 0, 1, 0, 1, 0, 1.94707e-07, 5, 0, 5)
+
+[node name="3x3floor21" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1.07284e-07, 0, 1, 0, 1, 0, -1, 0, -1.07284e-07, 4, 0, 7)
+
+[node name="3x3floor22" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.999995, 0, 5)
+
+[node name="3x3floor23" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 3.01992e-07, 0, 1, 0, -3.01992e-07, 0, 1, -4, 0, 7)
+
+[node name="3x3floor24" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 6.51683e-07, 0, 1, 0, -6.51683e-07, 0, 1, 11, 0, 7)
+
+[node name="3x3floor25" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.94979)
+
+[node name="3x3floor26" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, -4.94979)
+
+[node name="3x3floor27" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, -6.94979)
+
+[node name="3x3floor28" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4.94979)
+
+[node name="3x3floor29" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 13, 0, -6.94979)
+
+[node name="3x3floor30" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, -6.94979)
+
+[node name="3x3floorWithHoleL" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("13_dfg2o")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 1)
+
+[node name="3x3floorWithHoleR" parent="WorldEnvironment/OldMap/Ground/Floor" instance=ExtResource("14_05hvn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 0)
+
+[node name="Floor2" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
+
+[node name="3x3floor2" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+
+[node name="3x3floor3" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -1)
+
+[node name="3x3floor4" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 4)
+
+[node name="3x3floor6" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="3x3floor16" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, 2)
+
+[node name="3x3floor17" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 5.24537e-07, 0, 1, 0, -5.24537e-07, 0, 1, -4, 0, 0.999999)
+
+[node name="3x3floor18" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 6.99382e-07, 0, 1, 0, -6.99382e-07, 0, 1, -4, 0, -2)
+
+[node name="3x3floor21" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1.07284e-07, 0, 1, 0, 1, 0, -1, 0, -1.07284e-07, 4, 0, 7)
+
+[node name="3x3floor22" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.999995, 0, 5)
+
+[node name="3x3floor23" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 3.01992e-07, 0, 1, 0, -3.01992e-07, 0, 1, -4, 0, 7)
+
+[node name="3x3floor25" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.94979)
+
+[node name="3x3floor26" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, -4.94979)
+
+[node name="3x3floor30" parent="WorldEnvironment/OldMap/Ground/Floor2" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, -6.94979)
+
+[node name="Floor3" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0)
+
+[node name="3x3floor7" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 1)
+
+[node name="3x3floor8" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 2)
+
+[node name="3x3floor10" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="3x3floor11" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+
+[node name="3x3floor13" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0, 2)
+
+[node name="3x3floor14" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 11, 0, 1)
+
+[node name="3x3floor15" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 3.49691e-07, 0, 1, 0, -3.49691e-07, 0, 1, 11, 0, -2)
+
+[node name="3x3floor19" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 10, 0, 5)
+
+[node name="3x3floor20" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1.94707e-07, 0, -1, 0, 1, 0, 1, 0, 1.94707e-07, 5, 0, 5)
+
+[node name="3x3floor24" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 6.51683e-07, 0, 1, 0, -6.51683e-07, 0, 1, 11, 0, 7)
+
+[node name="3x3floor27" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, -6.94979)
+
+[node name="3x3floor28" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4.94979)
+
+[node name="3x3floor29" parent="WorldEnvironment/OldMap/Ground/Floor3" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0, -6.94979)
+
+[node name="Floor4" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.2299)
+
+[node name="3x3floor2" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+
+[node name="3x3floor4" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 4)
+
+[node name="3x3floor8" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 2)
+
+[node name="3x3floor10" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="3x3floor13" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0, 2)
+
+[node name="3x3floor16" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, 2)
+
+[node name="3x3floor19" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 10, 0, 5)
+
+[node name="3x3floor20" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1.94707e-07, 0, -1, 0, 1, 0, 1, 0, 1.94707e-07, 5, 0, 5)
+
+[node name="3x3floor21" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1.07284e-07, 0, 1, 0, 1, 0, -1, 0, -1.07284e-07, 4, 0, 7)
+
+[node name="3x3floor22" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.999995, 0, 5)
+
+[node name="3x3floor23" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 3.01992e-07, 0, 1, 0, -3.01992e-07, 0, 1, -4, 0, 7)
+
+[node name="3x3floor24" parent="WorldEnvironment/OldMap/Ground/Floor4" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 6.51683e-07, 0, 1, 0, -6.51683e-07, 0, 1, 11, 0, 7)
+
+[node name="Floor5" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -14.2299)
+
+[node name="3x3floor2" parent="WorldEnvironment/OldMap/Ground/Floor5" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+
+[node name="3x3floor4" parent="WorldEnvironment/OldMap/Ground/Floor5" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 4)
+
+[node name="3x3floor16" parent="WorldEnvironment/OldMap/Ground/Floor5" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, 2)
+
+[node name="3x3floor21" parent="WorldEnvironment/OldMap/Ground/Floor5" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1.07284e-07, 0, 1, 0, 1, 0, -1, 0, -1.07284e-07, 4, 0, 7)
+
+[node name="3x3floor22" parent="WorldEnvironment/OldMap/Ground/Floor5" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.999995, 0, 5)
+
+[node name="3x3floor23" parent="WorldEnvironment/OldMap/Ground/Floor5" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 3.01992e-07, 0, 1, 0, -3.01992e-07, 0, 1, -4, 0, 7)
+
+[node name="Floor6" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, -14.2299)
+
+[node name="3x3floor8" parent="WorldEnvironment/OldMap/Ground/Floor6" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 2)
+
+[node name="3x3floor10" parent="WorldEnvironment/OldMap/Ground/Floor6" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="3x3floor13" parent="WorldEnvironment/OldMap/Ground/Floor6" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0, 2)
+
+[node name="3x3floor19" parent="WorldEnvironment/OldMap/Ground/Floor6" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 10, 0, 5)
+
+[node name="3x3floor20" parent="WorldEnvironment/OldMap/Ground/Floor6" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1.94707e-07, 0, -1, 0, 1, 0, 1, 0, 1.94707e-07, 5, 0, 5)
+
+[node name="3x3floor24" parent="WorldEnvironment/OldMap/Ground/Floor6" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 6.51683e-07, 0, 1, 0, -6.51683e-07, 0, 1, 11, 0, 7)
+
+[node name="Floor7" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.5402)
+
+[node name="3x3floor25" parent="WorldEnvironment/OldMap/Ground/Floor7" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.94979)
+
+[node name="3x3floor26" parent="WorldEnvironment/OldMap/Ground/Floor7" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, -4.94979)
+
+[node name="3x3floor27" parent="WorldEnvironment/OldMap/Ground/Floor7" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, -6.94979)
+
+[node name="3x3floor28" parent="WorldEnvironment/OldMap/Ground/Floor7" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4.94979)
+
+[node name="3x3floor29" parent="WorldEnvironment/OldMap/Ground/Floor7" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0, -6.94979)
+
+[node name="3x3floor30" parent="WorldEnvironment/OldMap/Ground/Floor7" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, -6.94979)
+
+[node name="Floor8" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 14.5402)
+
+[node name="3x3floor25" parent="WorldEnvironment/OldMap/Ground/Floor8" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.94979)
+
+[node name="3x3floor26" parent="WorldEnvironment/OldMap/Ground/Floor8" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, -4.94979)
+
+[node name="3x3floor30" parent="WorldEnvironment/OldMap/Ground/Floor8" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -5.00687e-07, 0, 1, 0, 5.00687e-07, 0, -1, -2, 0, -6.94979)
+
+[node name="Floor9" type="Node3D" parent="WorldEnvironment/OldMap/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 14.5402)
+
+[node name="3x3floor27" parent="WorldEnvironment/OldMap/Ground/Floor9" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, -6.94979)
+
+[node name="3x3floor28" parent="WorldEnvironment/OldMap/Ground/Floor9" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4.94979)
+
+[node name="3x3floor29" parent="WorldEnvironment/OldMap/Ground/Floor9" instance=ExtResource("1_pm7yx")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 13, 0, -6.94979)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939692, 0, -0.939692, 0.34202, 0, 0, 0)

@@ -1378,7 +1378,6 @@ points = PackedVector3Array(0.5, 9.78478e-05, 0.5, -0.5, 9.78478e-05, -0.5, -0.5
 [node name="MeshLibrary" type="Node3D"]
 
 [node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_25dup")
 skeleton = NodePath("")
@@ -1389,7 +1388,6 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_wuyo7")
 
 [node name="floor-detail" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_rt365")
 skeleton = NodePath("")
@@ -1400,7 +1398,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_wuyo7")
 
 [node name="3x3-floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 visible = false
 mesh = SubResource("ArrayMesh_54tf7")
 skeleton = NodePath("")
@@ -1411,7 +1409,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_fcm0k")
 
 [node name="3x3-floor-detail" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 visible = false
 mesh = SubResource("ArrayMesh_p41bw")
 skeleton = NodePath("")
@@ -1423,7 +1421,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_fcm0k")
 
 [node name="3x3-floor-detail-2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 visible = false
 mesh = SubResource("ArrayMesh_38fn4")
 skeleton = NodePath("")
@@ -1435,7 +1433,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 shape = SubResource("ConcavePolygonShape3D_fcm0k")
 
 [node name="floor-vertical-edge-corner" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -3.57628e-07, -1, 0, 1, -3.57628e-07, 0.5, -0.5, 1)
+transform = Transform3D(1, 0, 0, 0, -3.57628e-07, -1, 0, 1, -3.57628e-07, 0, -0.5, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_ly2om")
 skeleton = NodePath("")
@@ -1447,7 +1445,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 5.68434e-14, 0, -5.68434e-14, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_yk0rm")
 
 [node name="floor-vertical-edge-corner2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 0, 0.5)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 visible = false
 mesh = SubResource("ArrayMesh_ly2om")
 skeleton = NodePath("")
@@ -1459,7 +1457,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 5.68434e-14, 0, -5.68434e-14, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_yk0rm")
 
 [node name="floor-vertical-edge-detail" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.38419e-07, -5.96046e-08, -1, -1, 0, -1.78814e-07, -5.96046e-08, 1, 0, 0.5, -0.5, 1)
+transform = Transform3D(2.38419e-07, -5.96046e-08, -1, -1, 0, -1.78814e-07, -5.96046e-08, 1, 0, 0, -0.5, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_1f20d")
 skeleton = NodePath("")
@@ -1471,7 +1469,7 @@ transform = Transform3D(1, 0, 4.26326e-14, -2.13163e-14, 1, -2.01948e-28, -8.171
 shape = SubResource("ConcavePolygonShape3D_xqqtk")
 
 [node name="floor-vertical-edge" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -3.57628e-07, -1, 0, 1, -3.57628e-07, 0.5, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, -3.57628e-07, -1, 0, 1, -3.57628e-07, 0, -0.5, -0.5)
 visible = false
 mesh = SubResource("ArrayMesh_4t5lb")
 skeleton = NodePath("")
@@ -1483,7 +1481,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 5.68434e-14, 0, -5.68434e-14, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_jox32")
 
 [node name="floor-vertical-edge-corner-detail" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_shag1")
 skeleton = NodePath("")
@@ -1495,7 +1492,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 shape = SubResource("ConcavePolygonShape3D_yk0rm")
 
 [node name="wall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_g0g7q")
 skeleton = NodePath("")
@@ -1507,7 +1503,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_n38yw")
 
 [node name="wall-half" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_17i2r")
 skeleton = NodePath("")
@@ -1518,7 +1513,6 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_l38rd")
 
 [node name="wall-narrow-with-vertical-edge-below-" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_ihebf")
 skeleton = NodePath("")
@@ -1529,7 +1523,6 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_h1p84")
 
 [node name="wall-with-vertical-edge-below" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 visible = false
 mesh = SubResource("ArrayMesh_w0rpa")
 skeleton = NodePath("")
@@ -1540,7 +1533,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_v1nj2")
 
 [node name="wall-narrow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+visible = false
 mesh = SubResource("ArrayMesh_ei1s8")
 skeleton = NodePath("")
 
