@@ -1192,8 +1192,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_wnhmd")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l38rd"]
-points = PackedVector3Array(0.498416, 0.951584, 0.498416, -0.5, 9.71195e-05, -0.5, -0.5, 9.71195e-05, 0.5, -0.507937, 1.00784, 0.238058, 0.5, 9.71195e-05, -0.5, 0.492447, 0.9, -0.492447, 0.5, 9.71195e-05, 0.5, -0.492447, 0.9, -0.492447, -0.498416, 0.951584, 0.498416, 0.507937, 1.00784, 0.238058, 0.412674, -0.00793651, -0.507937, -0.498419, 0.99832, 0.45168, 0.498419, 0.99832, 0.45168, -0.174516, -0.00793651, -0.507937, -0.171789, 0, 0.499999)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_iwutp"]
+points = PackedVector3Array(0.5, 1, 0.44998, 0.5, 0.94998, 0.5, 0.5, 1, 0.249902, -0.5, 1, 0.44998, 0.5, 0, 0.5, -0.5, 0.94998, 0.5, 0.5, 0.899961, -0.5, -0.5, 1, 0.249902, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.899961, -0.5, -0.5, 0, -0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nle5k"]
 resource_name = "colormap.001"
@@ -1372,8 +1372,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7fj0v")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7mk72"]
-points = PackedVector3Array(0.5, 9.78478e-05, 0.5, -0.5, 9.78478e-05, -0.5, -0.5, 9.78478e-05, 0.5, 0.482809, 0.998415, -0.451585, -0.498421, 0.998318, 0.451682, 0.5, 9.78478e-05, -0.5, 0.49837, 0.95163, 0.49837, -0.49837, 0.95163, -0.49837, 0.49837, 0.95163, -0.49837, -0.49837, 0.95163, 0.49837, -0.498421, 0.998318, -0.451682, 0.482809, 0.998415, 0.451585, 0.218677, -5.55112e-17, 0.5, -0.218677, -5.55112e-17, -0.5)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kasiv"]
+points = PackedVector3Array(0.5, 1, 0.44998, 0.5, 0.94998, 0.5, 0.5, 1, -0.450078, -0.5, 1, 0.44998, 0.5, 0, 0.5, -0.5, 0.94998, 0.5, 0.5, 0.94998, -0.5, -0.5, 1, -0.450078, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0.94998, -0.5, -0.5, 0, -0.5)
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -1510,7 +1510,7 @@ skeleton = NodePath("")
 [node name="StaticBody3D" type="StaticBody3D" parent="wall-half"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="wall-half/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_l38rd")
+shape = SubResource("ConvexPolygonShape3D_iwutp")
 
 [node name="wall-narrow-with-vertical-edge-below-" type="MeshInstance3D" parent="."]
 visible = false
@@ -1533,11 +1533,10 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_v1nj2")
 
 [node name="wall-narrow" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("ArrayMesh_ei1s8")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="wall-narrow"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="wall-narrow/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_7mk72")
+shape = SubResource("ConvexPolygonShape3D_kasiv")

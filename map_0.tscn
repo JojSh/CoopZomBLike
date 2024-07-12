@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://durvvgy8f05jr"]
 
-[ext_resource type="PackedScene" uid="uid://cerexi8gmchki" path="res://map_1.tscn" id="1_8d87h"]
+[ext_resource type="PackedScene" uid="uid://ccb33wg3hde6v" path="res://map_1.tscn" id="1_8d87h"]
 
 [node name="GridMap" type="GridMap"]
 
