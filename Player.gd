@@ -63,8 +63,8 @@ func _physics_process(delta):
 			kill_if_below_terminal_altitude()
 
 		# Handle Jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
+		#if Input.is_action_just_pressed("jump") and is_on_floor():
+			#velocity.y = JUMP_VELOCITY
 
 		# Handle attack
 		if Input.is_action_just_pressed(str("p", player_number, "_attack")):
