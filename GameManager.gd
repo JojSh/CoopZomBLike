@@ -16,6 +16,7 @@ signal game_over
 @onready var projectiles = get_node("Projectiles")
 @onready var hud = get_node("UI/HUD")
 @onready var phantom_camera = get_node("PhantomCamera3D")
+@onready var navigation_region_3D = get_node("WorldEnvironment/NavigationRegion3D")
 
 var wave_count : int = 0
 var player_count : int = 4
@@ -66,6 +67,11 @@ var item_wave_sequence : Array = [
 
 func _ready ():
 	spawn_all_players()
+	#DRY this out with method:
+	var first_map = load("res://maps/map_" + str(0) + ".tscn")
+	var map_scene = first_map.instantiate()
+	navigation_region_3D.add_child(map_scene)
+	navigation_region_3D.bake_navigation_mesh()
 
 func spawn_all_players ():
 	for i in player_count:
@@ -205,6 +211,14 @@ func _on_game_start_menu_game_start():
 	generate_wave()
 	music_part_b_queued = true
 
+func _on_game_start_menu_change_map(map_index):
+	navigation_region_3D.get_child(0).queue_free()
+	var first_map = load("res://maps/map_" + str(map_index) + ".tscn")
+	var map_scene = first_map.instantiate()
+	navigation_region_3D.add_child(map_scene)
+	await get_tree().create_timer(1).timeout
+	navigation_region_3D.bake_navigation_mesh()
+
 func _on_wave_complete_screen_wave_advance():
 	wave_count += 1
 	generate_wave()
@@ -220,3 +234,4 @@ func _on_part_b_finished():
 		#$MusicPartC.play()
 	#else:
 	$Music/PartB.play()
+
