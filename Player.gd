@@ -72,9 +72,7 @@ func _physics_process(delta):
 
 		# Drop item
 		if Input.is_action_just_pressed(str("p", player_number, "_drop_item")):
-			if item_equipped:
-				unequip_item()
-				drop_item()
+			drop_item()
 
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
@@ -218,6 +216,7 @@ func kill_if_below_terminal_altitude ():
 		die()
 
 func die ():
+	drop_item()
 	$ThudDeathHitSFX.play()
 	footsteps_sfx.stop()
 	invincibility_timer.stop()
@@ -276,8 +275,10 @@ func unequip_item ():
 	attack_power = 0
 
 func drop_item ():
-	var location = Vector2(position.x - facing_vector3.y, position.z - facing_vector3.x)
-	create_collectible.emit(currently_held_collectible_name, location)
+	if item_equipped:
+		unequip_item()
+		var location = Vector2(position.x - facing_vector3.y, position.z - facing_vector3.x)
+		create_collectible.emit(currently_held_collectible_name, location)
 
 func _on_invincibility_timer_timeout():
 	invincible = false

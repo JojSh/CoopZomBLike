@@ -397,16 +397,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1.75)
 [node name="EnemySpawnPoints" type="Node3D" parent="."]
 
 [node name="0" type="Node3D" parent="EnemySpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.5, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.5, -10)
 
 [node name="1" type="Node3D" parent="EnemySpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.5, 8)
 
 [node name="2" type="Node3D" parent="EnemySpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0.5, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.5, 8)
 
 [node name="3" type="Node3D" parent="EnemySpawnPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.5, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.5, -10)
 
 [node name="Items" type="Node3D" parent="."]
 
