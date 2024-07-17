@@ -171,6 +171,7 @@ func generate_wave ():
 
 func resurrect_player (player):
 	player.revive()
+	phantom_camera.append_follow_targets(player)
 
 func get_dead_players ():
 	return players_container.get_children().filter(func(player):
