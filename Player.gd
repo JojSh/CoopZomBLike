@@ -296,6 +296,7 @@ func reset_position ():
 func revive ():
 	is_dead = false
 	invincible = false
+	attack_delay_active = false
 	animation_player.stop()
 	animation_player.play("RESET")
 	$CollisionShape3D.disabled = false
