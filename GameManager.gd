@@ -19,7 +19,7 @@ signal game_over
 @onready var world_environment = get_node("WorldEnvironment")
 
 var wave_count : int = 0
-var player_count : int = 4
+var player_count : int = 2
 var enemy_spawn_point_rotating_index : int = 0
 var music_part_b_queued : bool = false
 var spawn_point_modifier : float = 0.0
@@ -228,8 +228,4 @@ func _on_part_a_finished():
 		$Music/PartA.play()
 
 func _on_part_b_finished():
-	#if music_part_c_queued:
-		#$MusicPartC.play()
-	#else:
 	$Music/PartB.play()
-
