@@ -16,7 +16,7 @@ signal game_over
 @onready var projectiles = get_node("Projectiles")
 @onready var hud = get_node("UI/HUD")
 @onready var phantom_camera = get_node("PhantomCamera3D")
-@onready var navigation_region_3D = get_node("WorldEnvironment/NavigationRegion3D")
+@onready var world_environment = get_node("WorldEnvironment")
 
 var wave_count : int = 0
 var player_count : int = 4
@@ -66,12 +66,7 @@ var item_wave_sequence : Array = [
 ]
 
 func _ready ():
-	spawn_all_players()
-	#DRY this out with method:
-	var first_map = load("res://maps/map_" + str(0) + ".tscn")
-	var map_scene = first_map.instantiate()
-	navigation_region_3D.add_child(map_scene)
-	navigation_region_3D.bake_navigation_mesh()
+	load_map(0)
 
 func spawn_all_players ():
 	for i in player_count:
@@ -183,7 +178,12 @@ func get_alive_players ():
 		return player.is_dead == false
 	)
 
-# on signal functions:
+func load_map (map_num):
+	var first_map = load("res://maps/map_" + str(map_num) + ".tscn")
+	var map_scene = first_map.instantiate()
+	world_environment.add_child(map_scene)
+
+# _on signal functions:
 func _on_create_collectible (type, location):
 	drop_item_at(type, location.x, location.y)
 
@@ -209,16 +209,13 @@ func _on_player_player_death ():
 		game_over.emit()
 
 func _on_game_start_menu_game_start():
+	spawn_all_players()
 	generate_wave()
 	music_part_b_queued = true
 
 func _on_game_start_menu_change_map(map_index):
-	navigation_region_3D.get_child(0).queue_free()
-	var first_map = load("res://maps/map_" + str(map_index) + ".tscn")
-	var map_scene = first_map.instantiate()
-	navigation_region_3D.add_child(map_scene)
-	await get_tree().create_timer(1).timeout
-	navigation_region_3D.bake_navigation_mesh()
+	world_environment.get_child(0).queue_free()
+	load_map(map_index)
 
 func _on_wave_complete_screen_wave_advance():
 	wave_count += 1

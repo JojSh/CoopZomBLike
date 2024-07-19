@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=27 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_4pfci"]
 [ext_resource type="AudioStream" uid="uid://bb7x0y2odm4mw" path="res://Audio/music/Entrenched_Part_A_v1.ogg" id="2_6hmnu"]
@@ -46,8 +46,6 @@ reflected_light_source = 2
 fog_light_color = Color(0.168627, 0.184314, 0.211765, 1)
 fog_sun_scatter = 0.5
 fog_density = 0.03
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_wtsvp"]
 
 [sub_resource type="Resource" id="Resource_mf3yd"]
 script = ExtResource("14_1c4eq")
@@ -440,10 +438,6 @@ transform = Transform3D(1, -3.49066e-05, 0, 3.49066e-05, 1, 0, 0, 0, 1, -2.75, 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_x1nbh")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
-navigation_mesh = SubResource("NavigationMesh_wtsvp")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939692, 0, -0.939692, 0.34202, 0, 0, 0)

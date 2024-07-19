@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://durvvgy8f05jr"]
+[gd_scene load_steps=3 format=3 uid="uid://durvvgy8f05jr"]
 
 [ext_resource type="MeshLibrary" uid="uid://cx7lpg2vmwnud" path="res://mesh_library_1.tres" id="1_8ih40"]
+[ext_resource type="NavigationMesh" uid="uid://bw8ose88ph2v0" path="res://NavMesh1.tres" id="1_t4gw2"]
 
-[node name="Map0" type="GridMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0130806, -0.00214577, 0.011272)
+[node name="NavigationRegion3D" type="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+navigation_mesh = ExtResource("1_t4gw2")
+
+[node name="Map0" type="GridMap" parent="."]
 mesh_library = ExtResource("1_8ih40")
 cell_size = Vector3(1, 1, 1)
 bake_navigation = true
