@@ -85,7 +85,7 @@ func spawn_player (index):
 	phantom_camera.append_follow_targets(player)
 
 func spawn_item_at_node (type, node_pos):
-	var item = load("res://" + type + "_collectible.tscn").instantiate()
+	var item = load("res://Collectibles/Scenes/" + type + "_collectible.tscn").instantiate()
 	var targeted_node_position = get_node("ItemSpawnPoints/" + node_pos).position
 
 	item.global_position = targeted_node_position
@@ -179,7 +179,7 @@ func get_alive_players ():
 	)
 
 func load_map (map_num):
-	var first_map = load("res://maps/map_" + str(map_num) + ".tscn")
+	var first_map = load("res://Maps/map_0.tscn" + str(map_num) + ".tscn")
 	var map_scene = first_map.instantiate()
 	world_environment.add_child(map_scene)
 

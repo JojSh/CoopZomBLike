@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bp5jjsjua0pog"]
 
-[ext_resource type="Script" path="res://shield_collectible.gd" id="1_grnlq"]
+[ext_resource type="Script" path="res://Collectibles/Scripts/shield_collectible.gd" id="1_grnlq"]
 [ext_resource type="PackedScene" uid="uid://583adrcw44iv" path="res://shield_model.tscn" id="2_p15f5"]
-[ext_resource type="PackedScene" uid="uid://b4kmddv23doen" path="res://collectible_bubble.tscn" id="3_ewtkw"]
+[ext_resource type="PackedScene" uid="uid://b4kmddv23doen" path="res://Collectibles/Scenes/collectible_bubble.tscn" id="3_ewtkw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dvu5h"]
 radius = 0.363016

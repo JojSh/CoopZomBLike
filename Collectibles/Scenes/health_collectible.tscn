@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://jcwf6f634p36"]
 
 [ext_resource type="ArrayMesh" uid="uid://byulyj6dqbom1" path="res://turkey.obj" id="1_f2ffd"]
-[ext_resource type="Script" path="res://health_collectible.gd" id="1_rji1b"]
-[ext_resource type="PackedScene" uid="uid://b4kmddv23doen" path="res://collectible_bubble.tscn" id="3_dryuk"]
+[ext_resource type="Script" path="res://Collectibles/Scripts/health_collectible.gd" id="1_rji1b"]
+[ext_resource type="PackedScene" uid="uid://b4kmddv23doen" path="res://Collectibles/Scenes/collectible_bubble.tscn" id="3_dryuk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tq4rm"]
 radius = 0.363016

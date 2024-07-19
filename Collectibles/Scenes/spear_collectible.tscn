@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cd8qpgfldjcj5"]
 
-[ext_resource type="Script" path="res://spear_collectible.gd" id="1_017rm"]
+[ext_resource type="Script" path="res://Collectibles/Scripts/spear_collectible.gd" id="1_017rm"]
 [ext_resource type="PackedScene" uid="uid://c7gk3faq1w5qb" path="res://spear_model.tscn" id="2_lcnx0"]
-[ext_resource type="PackedScene" uid="uid://b4kmddv23doen" path="res://collectible_bubble.tscn" id="3_505hy"]
+[ext_resource type="PackedScene" uid="uid://b4kmddv23doen" path="res://Collectibles/Scenes/collectible_bubble.tscn" id="3_505hy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dvu5h"]
 radius = 0.363016
