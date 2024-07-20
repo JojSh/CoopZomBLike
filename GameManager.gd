@@ -92,7 +92,7 @@ func spawn_item_at_node (type, node_pos):
 	items.add_child(item)
 
 func drop_item_at (type, x, z):
-	var item = load("res://" + type + "_collectible.tscn").instantiate()
+	var item = load("res://Collectibles/Scenes/" + type + "_collectible.tscn").instantiate()
 	item.global_position = Vector3(x, 0.5, z)
 	items.add_child(item)
 
@@ -179,8 +179,8 @@ func get_alive_players ():
 	)
 
 func load_map (map_num):
-	var first_map = load("res://Maps/map_0.tscn" + str(map_num) + ".tscn")
-	var map_scene = first_map.instantiate()
+	var map = load("res://Maps/map_" + str(map_num) + ".tscn")
+	var map_scene = map.instantiate()
 	world_environment.add_child(map_scene)
 
 # _on signal functions:
