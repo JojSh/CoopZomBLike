@@ -1,7 +1,7 @@
 [gd_scene load_steps=35 format=3 uid="uid://odpfevbgxb87"]
 
 [ext_resource type="PackedScene" uid="uid://k8hdceylihrs" path="res://GLB character models/orc.glb" id="1_eiqyq"]
-[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="2_6rhwo"]
+[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://Collectibles/injury_red.tres" id="2_6rhwo"]
 
 [sub_resource type="Animation" id="Animation_0ovyw"]
 length = 0.001

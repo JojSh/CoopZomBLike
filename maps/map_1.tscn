@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://de5duj56fmnfw"]
 
-[ext_resource type="NavigationMesh" uid="uid://b2y3erskysnt8" path="res://NavMesh2.tres" id="1_bmi1u"]
+[ext_resource type="NavigationMesh" uid="uid://b2y3erskysnt8" path="res://NavMesh1.tres" id="1_bmi1u"]
 [ext_resource type="MeshLibrary" uid="uid://cx7lpg2vmwnud" path="res://mesh_library_1.tres" id="1_ryi42"]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D"]

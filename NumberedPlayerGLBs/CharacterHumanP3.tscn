@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://bmtojb70ry1p4"]
 
 [ext_resource type="PackedScene" uid="uid://ttt2fubk8d5m" path="res://GLB character models/character-human-colormap-reposition-red.glb" id="1_m51aj"]
-[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="2_faxhf"]
+[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://Collectibles/injury_red.tres" id="2_faxhf"]
 [ext_resource type="Animation" uid="uid://od6w1oicirqj" path="res://sprint_rhand_static.res" id="3_hneyp"]
 
 [sub_resource type="Animation" id="Animation_i6syr"]

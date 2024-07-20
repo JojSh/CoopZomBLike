@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cuo0m40hjsacb" path="res://GLB character models/character-human-colormap-reposition-blue-light.glb" id="1_g2gmu"]
 [ext_resource type="Animation" uid="uid://od6w1oicirqj" path="res://sprint_rhand_static.res" id="3_014y7"]
-[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="23_mf5eq"]
+[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://Collectibles/injury_red.tres" id="23_mf5eq"]
 
 [sub_resource type="Animation" id="Animation_4i0my"]
 length = 0.001

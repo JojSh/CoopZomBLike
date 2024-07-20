@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://durvvgy8f05jr"]
 
 [ext_resource type="MeshLibrary" uid="uid://cx7lpg2vmwnud" path="res://mesh_library_1.tres" id="1_8ih40"]
-[ext_resource type="NavigationMesh" uid="uid://bw8ose88ph2v0" path="res://NavMesh1.tres" id="1_t4gw2"]
+[ext_resource type="NavigationMesh" uid="uid://bw8ose88ph2v0" path="res://NavMesh0.tres" id="1_t4gw2"]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

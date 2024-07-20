@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://dwnpajm11fj01"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_q3yjm"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_q3yjm"]
 [ext_resource type="PackedScene" uid="uid://cndk4bfnj5y4i" path="res://NumberedPlayerGLBs/CharacterHumanP1.tscn" id="2_3rhyr"]
 [ext_resource type="AudioStream" uid="uid://xomupwkdj7cd" path="res://Audio/footsteps_on_stone.ogg" id="4_gcroh"]
 [ext_resource type="AudioStream" uid="uid://c5bvpljalgh4b" path="res://Audio/stick-woosh-1.ogg" id="5_mpxwm"]

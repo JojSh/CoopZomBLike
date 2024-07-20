@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://l5ax0xd0aww"]
 
 [ext_resource type="PackedScene" uid="uid://bv1f0xwkpf5q6" path="res://GLB character models/orange-orc-1.glb" id="1_ortr2"]
-[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="2_hpoek"]
+[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://Collectibles/injury_red.tres" id="2_hpoek"]
 
 [sub_resource type="Animation" id="Animation_u8hh5"]
 resource_name = "attack-kick-left"

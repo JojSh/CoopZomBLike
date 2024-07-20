@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d1bxu2r5gjwfy"]
 
-[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://injury_red.tres" id="1_2jb43"]
+[ext_resource type="Material" uid="uid://cd7510rh6c1lt" path="res://Collectibles/injury_red.tres" id="1_2jb43"]
 
 [sub_resource type="Animation" id="Animation_b7xfu"]
 length = 0.001
