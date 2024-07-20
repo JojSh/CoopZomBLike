@@ -11,8 +11,8 @@ signal create_projectile
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var current_hp : int = 6
 var max_hp : int = 6
+var current_hp
 var facing_angle : float
 var facing_vector3 : Vector3
 var shove_force : float = DEFAULT_SHOVE_FORCE
@@ -49,6 +49,7 @@ var shove_animation_alternator : int = 0
 @onready var shove_sfx = get_node("ShoveSFX")
 
 func _ready():
+	current_hp = max_hp
 	set_colour_by_player_number()
 	hud.update_health_bar(player_number, current_hp, max_hp)
 	invincibility_timer.wait_time = 0.45 # see if this can be invincibility_timer.set_wait_time(attackRate)
