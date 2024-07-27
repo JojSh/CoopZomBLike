@@ -17,11 +17,13 @@ signal game_over
 @onready var hud = get_node("UI/HUD")
 @onready var phantom_camera = get_node("PhantomCamera3D")
 @onready var world_environment = get_node("WorldEnvironment")
+@onready var random_wave_generator = load("res://Scripts/RandomWaveGenerator.gd")
 
 var wave_count : int = 0
 var player_count : int = 2
 var enemy_spawn_point_rotating_index : int = 0
 var music_part_b_queued : bool = false
+var rng_mode_on : bool = true
 var spawn_point_modifier : float = 0.0
 
 var enemy_wave_sequence : Array = [
@@ -38,35 +40,43 @@ var enemy_wave_sequence : Array = [
 ]
 
 var item_wave_sequence : Array = [
-	[{ "type": "shield", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" }], # 0
-	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
-	[{ "type": "spear", "pos": "NE-O" }, { "type": "health", "pos": "SE-I" }, { "type": "spear", "pos": "SW-O" }, { "type": "knife", "pos": "NW-I" }],
+	[{ "type": "shield", "spawn_point": "NE-I" }, { "type": "knife", "spawn_point": "SE-I" }, { "type": "shield", "spawn_point": "SW-I" }, { "type": "spear", "spawn_point": "NW-I" }], # 0
+	[{ "type": "shield", "spawn_point": "NE-O" }, { "type": "knife", "spawn_point": "SE-O" }, { "type": "health", "spawn_point": "SW-O" }, { "type": "spear", "spawn_point": "NW-O" }],
+	[{ "type": "spear", "spawn_point": "NE-O" }, { "type": "health", "spawn_point": "SE-I" }, { "type": "spear", "spawn_point": "SW-O" }, { "type": "knife", "spawn_point": "NW-I" }],
 	[
-		{ "type": "shield", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" },
-		{ "type": "spear", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "shield", "pos": "NW-O" }
+		{ "type": "shield", "spawn_point": "NE-I" }, { "type": "health", "spawn_point": "SE-I" }, { "type": "knife", "spawn_point": "SW-I" }, { "type": "spear", "spawn_point": "NW-I" },
+		{ "type": "spear", "spawn_point": "NE-O" }, { "type": "knife", "spawn_point": "SE-O" }, { "type": "health", "spawn_point": "SW-O" }, { "type": "shield", "spawn_point": "NW-O" }
 	],
 	[ # 4
-		{ "type": "knife", "pos": "NE-I" }, { "type": "knife", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "knife", "pos": "NW-I" },
-		{ "type": "health", "pos": "NE-O" }, { "type": "health", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "health", "pos": "NW-O" }
+		{ "type": "knife", "spawn_point": "NE-I" }, { "type": "knife", "spawn_point": "SE-I" }, { "type": "knife", "spawn_point": "SW-I" }, { "type": "knife", "spawn_point": "NW-I" },
+		{ "type": "health", "spawn_point": "NE-O" }, { "type": "health", "spawn_point": "SE-O" }, { "type": "health", "spawn_point": "SW-O" }, { "type": "health", "spawn_point": "NW-O" }
 	],
 	[ # 5
-		{ "type": "shield", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "shield", "pos": "SW-I" }, { "type": "health", "pos": "NW-I" },
-		{ "type": "health", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }
+		{ "type": "shield", "spawn_point": "NE-I" }, { "type": "health", "spawn_point": "SE-I" }, { "type": "shield", "spawn_point": "SW-I" }, { "type": "health", "spawn_point": "NW-I" },
+		{ "type": "health", "spawn_point": "NE-O" }, { "type": "knife", "spawn_point": "SE-O" }, { "type": "health", "spawn_point": "SW-O" }, { "type": "spear", "spawn_point": "NW-O" }
 	],
-	[{ "type": "shield", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "spear", "pos": "NW-O" }],
-	[{ "type": "spear", "pos": "NE-O" }, { "type": "health", "pos": "SE-I" }, { "type": "spear", "pos": "SW-O" }, { "type": "knife", "pos": "NW-I" }],
+	[{ "type": "shield", "spawn_point": "NE-O" }, { "type": "knife", "spawn_point": "SE-O" }, { "type": "health", "spawn_point": "SW-O" }, { "type": "spear", "spawn_point": "NW-O" }],
+	[{ "type": "spear", "spawn_point": "NE-O" }, { "type": "health", "spawn_point": "SE-I" }, { "type": "spear", "spawn_point": "SW-O" }, { "type": "knife", "spawn_point": "NW-I" }],
 	[
-		{ "type": "shield", "pos": "NE-I" }, { "type": "health", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" },
-		{ "type": "spear", "pos": "NE-O" }, { "type": "knife", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "shield", "pos": "NW-O" }
+		{ "type": "shield", "spawn_point": "NE-I" }, { "type": "health", "spawn_point": "SE-I" }, { "type": "knife", "spawn_point": "SW-I" }, { "type": "spear", "spawn_point": "NW-I" },
+		{ "type": "spear", "spawn_point": "NE-O" }, { "type": "knife", "spawn_point": "SE-O" }, { "type": "health", "spawn_point": "SW-O" }, { "type": "shield", "spawn_point": "NW-O" }
 	],
 	[
-		{ "type": "knife", "pos": "NE-I" }, { "type": "spear", "pos": "SE-I" }, { "type": "knife", "pos": "SW-I" }, { "type": "spear", "pos": "NW-I" },
-		{ "type": "health", "pos": "NE-O" }, { "type": "health", "pos": "SE-O" }, { "type": "health", "pos": "SW-O" }, { "type": "health", "pos": "NW-O" }
+		{ "type": "knife", "spawn_point": "NE-I" }, { "type": "spear", "spawn_point": "SE-I" }, { "type": "knife", "spawn_point": "SW-I" }, { "type": "spear", "spawn_point": "NW-I" },
+		{ "type": "health", "spawn_point": "NE-O" }, { "type": "health", "spawn_point": "SE-O" }, { "type": "health", "spawn_point": "SW-O" }, { "type": "health", "spawn_point": "NW-O" }
 	],
 ]
 
+var randomly_generated_wave : Dictionary
+
 func _ready ():
+	if (rng_mode_on): init_random_wave_generation()
 	load_map(0)
+
+func init_random_wave_generation ():
+	var rwg = random_wave_generator.new()
+	randomly_generated_wave = rwg.generate_wave(30)
+	print(str(randomly_generated_wave))
 
 func spawn_all_players ():
 	for i in player_count:
@@ -155,12 +165,21 @@ func cleanup_wave ():
 
 func generate_wave ():
 	cleanup_wave()
+	
+	var items : Array
+	var enemies : Array
+	
+	if (rng_mode_on):
+		items = randomly_generated_wave.items
+		enemies = randomly_generated_wave.enemies
+	else:
+		items = item_wave_sequence[wave_count]
+		enemies = enemy_wave_sequence[wave_count]
 
-	for enemy_type in enemy_wave_sequence[wave_count]:
+	for item in items:
+		spawn_item_at_node(item.type, item.spawn_point)
+	for enemy_type in enemies:
 		spawn_enemy(enemy_type)
-
-	for item in item_wave_sequence[wave_count]:
-		spawn_item_at_node(item.type, item.pos)
 
 	update_enemy_counter()
 
