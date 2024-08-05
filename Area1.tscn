@@ -1,17 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://wumlc1eyja2s"]
+[gd_scene load_steps=24 format=3 uid="uid://wumlc1eyja2s"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_4pfci"]
 [ext_resource type="AudioStream" uid="uid://bb7x0y2odm4mw" path="res://Audio/music/Entrenched_Part_A_v1.ogg" id="2_6hmnu"]
 [ext_resource type="AudioStream" uid="uid://dl6lqt247ao5g" path="res://Audio/music/Entrenched_Part_B_v1.ogg" id="3_3gn80"]
 [ext_resource type="Script" path="res://UIScreenScripts/GameOverMenu.gd" id="3_3rwnw"]
-[ext_resource type="Script" path="res://UIScreenScripts/GameStartMenu.gd" id="3_r2jor"]
 [ext_resource type="StyleBox" uid="uid://ckhhy1j1yce5" path="res://press_any_key_background.tres" id="4_31ns0"]
 [ext_resource type="Script" path="res://UIScreenScripts/WaveCompleteScreen.gd" id="5_5tbhd"]
 [ext_resource type="Script" path="res://UIScreenScripts/GameCompleteMenu.gd" id="6_cryiv"]
 [ext_resource type="PackedScene" uid="uid://bmh14ogsdbhgt" path="res://HUD.tscn" id="6_e6gqo"]
-[ext_resource type="Texture2D" uid="uid://dvpymmtwp4owa" path="res://Maps/map_0_preview.png" id="7_6dbh2"]
-[ext_resource type="Texture2D" uid="uid://ct70sh1n82amd" path="res://Maps/map_1_preview.png" id="8_gdfys"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="12_0nqj1"]
+[ext_resource type="Script" path="res://UIScreenScripts/GameStartMenu.gd" id="12_4wdte"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_41gnw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_1c4eq"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="15_upbtu"]
@@ -21,9 +19,6 @@
 font_size = 80
 
 [sub_resource type="LabelSettings" id="LabelSettings_i4qa8"]
-font_size = 40
-
-[sub_resource type="LabelSettings" id="LabelSettings_yvttv"]
 font_size = 40
 
 [sub_resource type="Gradient" id="Gradient_40m4r"]
@@ -90,9 +85,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("3_r2jor")
+script = ExtResource("12_4wdte")
 
 [node name="Background" type="ColorRect" parent="UI/GameStartMenu"]
 layout_mode = 1
@@ -101,110 +94,101 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.160784, 0, 0.8, 1)
+color = Color(0, 0, 0, 1)
 
-[node name="TitleLabel" type="Label" parent="UI/GameStartMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/GameStartMenu"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -194.0
-offset_right = 194.0
-offset_bottom = 186.0
-grow_horizontal = 2
-text = "Entrénched"
-label_settings = SubResource("LabelSettings_20nlu")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PressAnyKey" type="Label" parent="UI/GameStartMenu"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -292.0
-offset_top = -148.0
-offset_right = 328.0
-offset_bottom = -68.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/normal = ExtResource("4_31ns0")
-text = "Press Attack button to start."
-label_settings = SubResource("LabelSettings_i4qa8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="KeyboardControls" type="Label" parent="UI/GameStartMenu"]
-visible = false
-layout_mode = 1
-offset_left = 140.0
-offset_top = 300.0
-offset_right = 598.0
-offset_bottom = 585.0
-theme_override_font_sizes/font_size = 50
-text = "Keyboard controls:
-
-Attack / shove       A
-Drop item              D
-Move                      [arrow keys]
-
-
-"
-
-[node name="GamepadControls" type="Label" parent="UI/GameStartMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -597.0
-offset_top = -219.0
-offset_right = -6.0
-offset_bottom = 126.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameStartMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="TitleHBoxContainer" type="HBoxContainer" parent="UI/GameStartMenu/MarginContainer/VBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/TitleHBoxContainer"]
+layout_mode = 2
+text = "Entrénched"
+label_settings = SubResource("LabelSettings_20nlu")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/GameStartMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="LeftVBox" type="VBoxContainer" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Start" type="Button" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox"]
+layout_mode = 2
+text = "Start
+"
+
+[node name="ChangeMode" type="Button" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox"]
+layout_mode = 2
+text = "Change mode"
+
+[node name="ChangeMap" type="Button" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox"]
+layout_mode = 2
+text = "Change map"
+
+[node name="ShowControlsToggle" type="Button" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox"]
+layout_mode = 2
+text = "Hide controls"
+
+[node name="ControlsDisplay" type="Label" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
 text = "Gamepad controls:
 
 Attack / shove:                 X
 Drop item:                        B
 Move:                     [d-pad]
-Lock rotation (strafe):   R"
-label_settings = SubResource("LabelSettings_yvttv")
-horizontal_alignment = 1
+Lock rotation (strafe):   R
 
-[node name="MapSelect" type="Label" parent="UI/GameStartMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -220.0
-offset_right = 586.0
-offset_bottom = 125.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Map - Press B to change
 "
-label_settings = SubResource("LabelSettings_yvttv")
 horizontal_alignment = 1
 
-[node name="Map0Preview" type="Sprite2D" parent="UI/GameStartMenu/MapSelect"]
-position = Vector2(300, 244)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("7_6dbh2")
+[node name="RightVBox" type="VBoxContainer" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Map1Preview" type="Sprite2D" parent="UI/GameStartMenu/MapSelect"]
-visible = false
-position = Vector2(300, 244)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("8_gdfys")
+[node name="EmptySpace" type="Label" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/RightVBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 0
+text = "
+"
+
+[node name="ModeDisplay" type="Label" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/RightVBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Sequence mode"
+horizontal_alignment = 1
+
+[node name="MapNameDisplay" type="Label" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/RightVBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 0
+horizontal_alignment = 1
+
+[node name="MapPreviewDisplay" type="Control" parent="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="GameOverMenu" type="Control" parent="UI"]
 visible = false
@@ -477,6 +461,9 @@ visible = false
 [connection signal="wave_complete" from="." to="UI/WaveCompleteScreen" method="_on_main_wave_complete"]
 [connection signal="finished" from="Music/PartA" to="." method="_on_part_a_finished"]
 [connection signal="finished" from="Music/PartB" to="." method="_on_part_b_finished"]
-[connection signal="change_map" from="UI/GameStartMenu" to="." method="_on_game_start_menu_change_map"]
-[connection signal="game_start" from="UI/GameStartMenu" to="." method="_on_game_start_menu_game_start"]
+[connection signal="pressed" from="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox/Start" to="UI/GameStartMenu" method="_on_start_pressed"]
+[connection signal="pressed" from="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox/ChangeMode" to="." method="_on_change_mode_pressed"]
+[connection signal="pressed" from="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox/ChangeMap" to="." method="_on_change_map_pressed"]
+[connection signal="pressed" from="UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/LeftVBox/ShowControlsToggle" to="UI/GameStartMenu" method="_on_show_controls_toggle_pressed"]
 [connection signal="wave_advance" from="UI/WaveCompleteScreen" to="." method="_on_wave_complete_screen_wave_advance"]

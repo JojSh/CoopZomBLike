@@ -1,6 +1,5 @@
 extends Node
 
-
 var generated_items : Array
 var item_spawn_points : Array
 var all_item_types : Array = ["shield", "knife", "spear", "health"]
@@ -13,7 +12,6 @@ var all_enemy_types = [
 	{ "type": "fast", "heat_val": 2 }, { "type": "fast", "heat_val": 2 },
 	{ "type": "big", "heat_val": 5 }
 ]
-
 
 var generated_wave : Dictionary
 var heat : int

@@ -18,13 +18,18 @@ signal game_over
 @onready var phantom_camera = get_node("PhantomCamera3D")
 @onready var world_environment = get_node("WorldEnvironment")
 @onready var random_wave_generator = load("res://Scripts/RandomWaveGenerator.gd")
+@onready var game_mode_display : Label = $UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/RightVBox/ModeDisplay
+@onready var map_name_display : Label = $UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/RightVBox/MapNameDisplay
+@onready var map_preview_display : Control = $UI/GameStartMenu/MarginContainer/VBoxContainer/HSplitContainer/RightVBox/MapPreviewDisplay
+@onready var available_maps_count = available_maps.size()
 
 var wave_count : int = 0
 var player_count : int = 2
 var enemy_spawn_point_rotating_index : int = 0
 var music_part_b_queued : bool = false
-var rng_mode_on : bool = true
+var rng_mode_on : bool = false
 var spawn_point_modifier : float = 0.0
+var current_map_index : int = 0
 
 var enemy_wave_sequence : Array = [
 	["default", "default"], # 0
@@ -67,16 +72,33 @@ var item_wave_sequence : Array = [
 	],
 ]
 
+var available_maps : Array = [
+	{ "name": "Map 1", "path": "res://Maps/map_0/" },
+	{ "name": "Map 2", "path": "res://Maps/map_1/" },
+]
+
 var randomly_generated_wave : Dictionary
+var current_heat = 0
 
 func _ready ():
-	if (rng_mode_on): init_random_wave_generation()
 	load_map(0)
+	load_map_preview(0)
 
 func init_random_wave_generation ():
 	var rwg = random_wave_generator.new()
-	randomly_generated_wave = rwg.generate_wave(30)
-	print(str(randomly_generated_wave))
+	randomly_generated_wave = rwg.generate_wave(current_heat)
+	log_the_wave_config()
+
+func log_the_wave_config ():
+	var items_to_log = randomly_generated_wave.items.reduce(func(acc, item):
+		return acc + item.type + ", "
+	, "")
+	var enemies_to_log = randomly_generated_wave.enemies.reduce(func(acc, enemy):
+		return acc + enemy + ", "
+	, "")
+	print("Heat:  ", current_heat)
+	print("Items:  ", str(items_to_log))
+	print("Enemies:  ", str(enemies_to_log))
 
 func spawn_all_players ():
 	for i in player_count:
@@ -133,7 +155,6 @@ func update_enemy_counter ():
 		return enemy.is_dead == false
 	)
 	enemy_count = alive_enemies.size()
-
 	hud.update_enemy_counter(enemy_count)
 
 	if (enemy_count <= 0):
@@ -170,6 +191,7 @@ func generate_wave ():
 	var enemies : Array
 	
 	if (rng_mode_on):
+		print(str(randomly_generated_wave))
 		items = randomly_generated_wave.items
 		enemies = randomly_generated_wave.enemies
 	else:
@@ -197,10 +219,19 @@ func get_alive_players ():
 		return player.is_dead == false
 	)
 
-func load_map (map_num):
-	var map = load("res://Maps/map_" + str(map_num) + ".tscn")
+func load_map (map_index):
+	var full_path = str(available_maps[map_index].path, "map.tscn")
+	var map = load(full_path)
 	var map_scene = map.instantiate()
 	world_environment.add_child(map_scene)
+	map_name_display.text = available_maps[map_index].name
+
+func load_map_preview (map_index):
+	var full_path = str(available_maps[map_index].path, "map_preview.tscn")
+	var map_preview = load(full_path)
+	var preview_scene = map_preview.instantiate()
+	print(str(preview_scene))
+	map_preview_display.add_child(preview_scene)
 
 # _on signal functions:
 func _on_create_collectible (type, location):
@@ -227,15 +258,6 @@ func _on_player_player_death ():
 	if get_alive_players().size() < 1:
 		game_over.emit()
 
-func _on_game_start_menu_game_start():
-	spawn_all_players()
-	generate_wave()
-	music_part_b_queued = true
-
-func _on_game_start_menu_change_map(map_index):
-	world_environment.get_child(0).queue_free()
-	load_map(map_index)
-
 func _on_wave_complete_screen_wave_advance():
 	wave_count += 1
 	generate_wave()
@@ -248,3 +270,28 @@ func _on_part_a_finished():
 
 func _on_part_b_finished():
 	$Music/PartB.play()
+
+func _on_change_mode_pressed():
+	if (rng_mode_on):
+		rng_mode_on = false
+		game_mode_display.text = ("Sequence mode")
+	else:
+		rng_mode_on = true
+		init_random_wave_generation()
+		game_mode_display.text = ("Random wave generator mode")
+
+func _on_start_pressed():
+	spawn_all_players()
+	generate_wave()
+	music_part_b_queued = true
+
+func _on_change_map_pressed():
+	world_environment.get_child(0).queue_free()
+	map_preview_display.get_child(0).queue_free()
+	current_map_index += 1
+
+	if (current_map_index == available_maps_count):
+		current_map_index = 0
+
+	load_map(current_map_index)
+	load_map_preview(current_map_index)

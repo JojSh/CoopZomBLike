@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0m80w8cdduco"]
+
+[ext_resource type="Texture2D" uid="uid://dvpymmtwp4owa" path="res://Maps/map_0/map_0_preview.png" id="1_pqmxm"]
+
+[node name="Map0Preview" type="Sprite2D"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_pqmxm")
+centered = false
